@@ -13,7 +13,6 @@ public class CharacterController implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
@@ -23,9 +22,15 @@ public class CharacterController implements KeyListener {
         if(code == KeyEvent.VK_A){
             character.startWalking(-5);
         }
+
         if(code == KeyEvent.VK_D){
             character.startWalking(5);
         }
+
+        if(code == KeyEvent.VK_W || code == KeyEvent.VK_SPACE){
+            character.jump(10);
+        }
+
 
 
     }
