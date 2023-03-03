@@ -3,12 +3,13 @@ package game;
 import city.cs.engine.*;
 
 import javax.swing.JFrame;
+import javax.swing.plaf.basic.BasicTreeUI;
 
 public class Game{
     public Game(){
         GameWorld world = new GameWorld();
 
-        GameView view = new GameView(world, 1000, 500);
+        GameView view = new GameView(world, 1000, 562);
 
         CharacterController controller = new CharacterController(world.getCharacter());
         view.addKeyListener(controller);
@@ -26,6 +27,7 @@ public class Game{
         frame.setVisible(true);
 
         world.start();
+
         view.requestFocus();
     }
 

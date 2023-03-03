@@ -9,9 +9,9 @@ public class GameWorld  extends World{
         super();
 
         //ground platform
-        Shape shape = new BoxShape(10, 0.5f);
+        Shape shape = new BoxShape(15, 0);
         StaticBody ground = new StaticBody(this, shape);
-        ground.setPosition(new Vec2(0f, -11.5f));
+        ground.setPosition(new Vec2(-10f, -8.5f));
 
         //platform
         Shape platformShap = new BoxShape(3, 0.5f);
