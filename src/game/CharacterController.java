@@ -35,7 +35,7 @@ public class CharacterController implements KeyListener {
         }
 
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_SPACE){
-            character.jump(10);
+            character.jump(12);
         }
 
     }
