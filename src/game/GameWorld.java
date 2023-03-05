@@ -27,6 +27,9 @@ public class GameWorld  extends World{
         int height = 0;
         character.setPosition(new Vec2(4, height));
         character.setCredits(15);
+
+        GenericCollisionListener gcl = new GenericCollisionListener();
+        character.addCollisionListener(gcl);
     }
 
     public Character getCharacter(){
