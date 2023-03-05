@@ -8,8 +8,6 @@ import java.awt.event.KeyListener;
 public class CharacterController implements KeyListener {
 
     private final Character character;
-    private String direction;
-
     public CharacterController(Character sprite1){
         this.character = sprite1;
     }
@@ -27,7 +25,6 @@ public class CharacterController implements KeyListener {
             character.removeAllImages();
             character.addImage(image);
             character.startWalking(-5);
-            direction = "left";
         }
 
         if(code == KeyEvent.VK_D){
@@ -35,7 +32,6 @@ public class CharacterController implements KeyListener {
             character.removeAllImages();
             character.addImage(image);
             character.startWalking(5);
-            direction = "right";
         }
 
         if(code == KeyEvent.VK_W || code == KeyEvent.VK_SPACE){
