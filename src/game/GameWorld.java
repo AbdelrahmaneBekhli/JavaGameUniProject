@@ -44,8 +44,7 @@ public class GameWorld  extends World{
         //character
 
         character = new Character(this);
-        int height = 0;
-        character.setPosition(new Vec2(4, height));
+        character.setPosition(new Vec2(-14,-10 ));
         character.setCredits(15);
 
         GenericCollisionListener gcl = new GenericCollisionListener();
