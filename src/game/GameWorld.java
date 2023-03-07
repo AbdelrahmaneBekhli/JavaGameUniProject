@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class GameWorld  extends World{
     private Character character;
+    private Slime slime;
 
     public GameWorld(){
         super();
@@ -49,9 +50,15 @@ public class GameWorld  extends World{
 
         GenericCollisionListener gcl = new GenericCollisionListener();
         character.addCollisionListener(gcl);
+
+        slime = new Slime(this, 4, "left");
+        slime.setPosition(new Vec2(-19, 5.5f));
+        slime.setRange();
     }
 
     public Character getCharacter(){
         return character;
     }
+
+    public Slime getSlime(){return slime;}
 }
