@@ -5,13 +5,17 @@ import city.cs.engine.CollisionListener;
 
 public class GenericCollisionListener implements CollisionListener {
 
-    private int counter;
-
     @Override
     public void collide(CollisionEvent collisionEvent) {
-        counter++;
-        System.out.print("Collision " + counter + ":\n" +
-                "  rep. body:" + collisionEvent.getReportingBody() + "\n" +
-                "  oth. body:" + collisionEvent.getOtherBody() + "\n");
+        //check if the collision is with a slime
+        if(collisionEvent.getOtherBody() instanceof Slime){
+            //check if the character collides with the slime from the top
+            if (collisionEvent.getReportingBody().getPosition().y > collisionEvent.getOtherBody().getPosition().y + 1.5f){
+                collisionEvent.getOtherBody().destroy();
+            } else {
+                collisionEvent.getReportingBody().destroy();
+            }
+        }
     }
+
 }
