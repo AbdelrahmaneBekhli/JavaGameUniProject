@@ -45,15 +45,32 @@ public class GameWorld  extends World{
         //character
 
         character = new Character(this);
-        character.setPosition(new Vec2(-14,-10 ));
+        character.setPosition(new Vec2(-14,-12));
+        character.setGravityScale(3);
         character.setCredits(15);
 
         GenericCollisionListener gcl = new GenericCollisionListener();
         character.addCollisionListener(gcl);
 
-        slime = new Slime(this, 4, "left");
-        slime.setPosition(new Vec2(-19, 5.5f));
-        slime.setRange();
+        //Slime
+        Slime slime1 = new Slime(this, 4, "left");
+        slime1.setPosition(new Vec2(-19, 5.5f));
+        slime1.setRange();
+
+        Slime slime2 = new Slime(this, 5, "left");
+        slime2.setPosition(new Vec2(19, -1));
+        slime2.setRange();
+
+        Slime slime3 = new Slime(this, 5, "right");
+        slime3.setPosition(new Vec2(0, 1f));
+        slime3.setRange();
+
+        Slime slime4 = new Slime(this, 12, "left");
+        slime4.setPosition(new Vec2(10, -12f));
+        slime4.setRange();
+
+
+
     }
 
     public Character getCharacter(){
