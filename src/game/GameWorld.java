@@ -11,11 +11,16 @@ public class GameWorld  extends World{
 
     public GameWorld(){
         super();
+        BodyImage GroundImage = new BodyImage("data/GroundPlatform.png", 1f);
+        BodyImage ShortPlatformImage = new BodyImage("data/ShortPlatform.png", 1f);
+        BodyImage MediumPlatformImage = new BodyImage("data/MediumPlatform.png", 1f);
 
         //ground platform
         Shape shape = new BoxShape(25, 0.5f);
         StaticBody ground = new StaticBody(this, shape);
-        ground.setPosition(new Vec2(-0f, -13.5f));
+        ground.setPosition(new Vec2(-0f, -13.6f));
+        ground.setClipped(true);
+        ground.addImage(GroundImage);
 
         //platform
         Shape ShortplatformShape = new BoxShape(3, 0.5f);
@@ -23,27 +28,41 @@ public class GameWorld  extends World{
 
         StaticBody platform1 = new StaticBody(this, ShortplatformShape);
         platform1.setPosition(new Vec2(-7, -7));
+        platform1.setClipped(true);
+        platform1.addImage(ShortPlatformImage);
 
         StaticBody platform2 = new StaticBody(this, ShortplatformShape);
         platform2.setPosition(new Vec2(4, -7f));
+        platform2.setClipped(true);
+        platform2.addImage(ShortPlatformImage);
 
         StaticBody platform3 = new StaticBody(this, MediumPlatformShape);
         platform3.setPosition(new Vec2(19, -2f));
+        platform3.setClipped(true);
+        platform3.addImage(MediumPlatformImage);
+
 
         StaticBody platform4 = new StaticBody(this, MediumPlatformShape);
         platform4.setPosition(new Vec2(0, 0f));
+        platform4.setClipped(true);
+        platform4.addImage(MediumPlatformImage);
 
         StaticBody platform5 = new StaticBody(this, MediumPlatformShape);
         platform5.setPosition(new Vec2(-20, -3f));
+        platform5.setClipped(true);
+        platform5.addImage(MediumPlatformImage);
 
         StaticBody platform6 = new StaticBody(this, ShortplatformShape);
+        platform6.setClipped(true);
+        platform6.addImage(ShortPlatformImage);
         platform6.setPosition(new Vec2(10, 5f));
 
         StaticBody platform7 = new StaticBody(this, MediumPlatformShape);
         platform7.setPosition(new Vec2(-20, 5f));
+        platform7.setClipped(true);
+        platform7.addImage(MediumPlatformImage);
 
         //character
-
         character = new Character(this);
         character.setPosition(new Vec2(-14,-12));
         character.setGravityScale(3);
