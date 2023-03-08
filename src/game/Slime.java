@@ -16,13 +16,15 @@ public class Slime extends Walker implements StepListener{
     public Slime(World world, float range, String facing) {
         super(world, SlimeShape);
         world.addStepListener(this);
-        this.startWalking(-3);
+
         this.range = range;
 
         if (facing.equals("right")){
             this.addImage(rightImage);
+            this.startWalking(3);
         } else {
             this.addImage(leftImage);
+            this.startWalking(-3);
         }
     }
 
