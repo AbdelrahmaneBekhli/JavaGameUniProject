@@ -16,6 +16,10 @@ public class GenericCollisionListener implements CollisionListener {
                 collisionEvent.getReportingBody().destroy();
             }
         }
+        //check if the collision is with a coin
+        if(collisionEvent.getOtherBody() instanceof Coin){
+            collisionEvent.getOtherBody().destroy();
+        }
     }
 
 }
