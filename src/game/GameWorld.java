@@ -87,26 +87,33 @@ public class GameWorld  extends World{
         slime4.setRange();
 
         //coins
-        Coin coin1 = new Coin(this);
+        Coin coin1 = new Coin(this, "down");
         coin1.setPosition(new Vec2(-20, 9));
+        coin1.setRange();
 
-        Coin coin2 = new Coin(this);
+        Coin coin2 = new Coin(this, "up");
         coin2.setPosition(new Vec2(10, 7));
+        coin2.setRange();
 
-        Coin coin3 = new Coin(this);
+        Coin coin3 = new Coin(this, "up");
         coin3.setPosition(new Vec2(-20, 1));
+        coin3.setRange();
 
-        Coin coin4 = new Coin(this);
+        Coin coin4 = new Coin(this, "down");
         coin4.setPosition(new Vec2(0, 5));
+        coin4.setRange();
 
-        Coin coin5 = new Coin(this);
+        Coin coin5 = new Coin(this, "down");
         coin5.setPosition(new Vec2(16, 3));
+        coin5.setRange();
 
-        Coin coin6 = new Coin(this);
+        Coin coin6 = new Coin(this, "up");
         coin6.setPosition(new Vec2(20, -10));
+        coin6.setRange();
 
-        Coin coin7 = new Coin(this);
+        Coin coin7 = new Coin(this, "down");
         coin7.setPosition(new Vec2(-1.4f, -3));
+        coin7.setRange();
     }
 
     public Character getCharacter(){
