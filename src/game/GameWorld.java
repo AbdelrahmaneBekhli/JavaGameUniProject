@@ -41,7 +41,6 @@ public class GameWorld  extends World{
         platform3.setClipped(true);
         platform3.addImage(MediumPlatformImage);
 
-
         StaticBody platform4 = new StaticBody(this, MediumPlatformShape);
         platform4.setPosition(new Vec2(0, 0f));
         platform4.setClipped(true);
@@ -66,9 +65,8 @@ public class GameWorld  extends World{
         character = new Character(this);
         character.setPosition(new Vec2(-14,-12));
         character.setGravityScale(3);
-        character.setCredits(15);
 
-        GenericCollisionListener gcl = new GenericCollisionListener();
+        GenericCollisionListener gcl = new GenericCollisionListener(character);
         character.addCollisionListener(gcl);
 
         //Slime
