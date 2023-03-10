@@ -10,7 +10,7 @@ public class Game{
         //creating the world
         GameWorld world = new GameWorld();
         //creating the world view
-        GameView view = new GameView(world, 1000, 562);
+        GameView view = new GameView(world, world.getCharacter(), 1000, 562);
 
         //controlling the character
         CharacterController controller = new CharacterController(world.getCharacter());
