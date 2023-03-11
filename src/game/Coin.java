@@ -11,12 +11,12 @@ public class Coin extends DynamicBody implements StepListener{
     private float maxHeight;
     private float minHeight;
     private float speed = 0.03f;
-    public Coin(GameWorld world, String direction){
+    public Coin(GameWorld world, String direction, Character character){
         super(world);
         this.addImage(CoinImage);
         this.setGravityScale(0);
         Fixture fixture = new GhostlyFixture(this, CoinShape);
-        Sensor sensor = new CoinSensor(this, CoinShape, this);
+        Sensor sensor = new CoinSensor(this, CoinShape, this, character);
         world.addStepListener(this);
         if (direction.equals("down")){
             this.speed = this.speed * -1;
