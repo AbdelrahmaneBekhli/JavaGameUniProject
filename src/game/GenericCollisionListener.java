@@ -16,10 +16,14 @@ public class GenericCollisionListener implements CollisionListener {
         if(collisionEvent.getOtherBody() instanceof Slime){
             //check if the character collides with the slime from the top
             if (collisionEvent.getReportingBody().getPosition().y > collisionEvent.getOtherBody().getPosition().y + 1.5f){
-                collisionEvent.getOtherBody().destroy();
+                //collisionEvent.getOtherBody().destroy();
+                ((Slime) collisionEvent.getOtherBody()).die();
                 character.setBounce(true);
+
             } else {
+            if (((Slime) collisionEvent.getOtherBody()).isAlive()) {
                 character.die();
+                }
             }
         }
     }
