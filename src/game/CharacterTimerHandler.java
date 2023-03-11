@@ -2,10 +2,10 @@ package game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class TimerHandler implements ActionListener {
+public class CharacterTimerHandler implements ActionListener {
     private final Character character;
 
-    public TimerHandler(Character character) {
+    public CharacterTimerHandler(Character character) {
         this.character = character;
     }
 
