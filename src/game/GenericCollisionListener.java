@@ -19,14 +19,13 @@ public class GenericCollisionListener implements CollisionListener {
                 collisionEvent.getOtherBody().destroy();
                 character.setBounce(true);
             } else {
-                collisionEvent.getReportingBody().destroy();
+                character.die();
             }
         }
         //check if the collision is with a coin
         if(collisionEvent.getOtherBody() instanceof Coin){
             collisionEvent.getOtherBody().destroy();
             character.incrementcredits();
-            System.out.println(character.getCredits());
         }
     }
 
