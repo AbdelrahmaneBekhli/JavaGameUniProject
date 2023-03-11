@@ -1,7 +1,9 @@
-package game;
+package game.snowball;
 
 import city.cs.engine.CollisionEvent;
 import city.cs.engine.CollisionListener;
+import game.platform.Platform;
+import game.slime.Slime;
 
 public class SnowCollisionListener implements CollisionListener {
     @Override

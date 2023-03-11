@@ -1,8 +1,11 @@
-package game;
+package game.coin.sensor;
 
 import city.cs.engine.SensorEvent;
+import game.character.Character;
+import game.coin.Coin;
+import city.cs.engine.SensorListener;
 
-public class CoinSensorListener implements city.cs.engine.SensorListener {
+public class CoinSensorListener implements SensorListener {
 
     private final Coin coin;
     private final Character character;

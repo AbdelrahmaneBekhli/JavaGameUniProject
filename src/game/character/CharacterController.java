@@ -1,6 +1,7 @@
-package game;
+package game.character;
 
 import city.cs.engine.*;
+import game.character.Character;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

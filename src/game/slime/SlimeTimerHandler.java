@@ -1,4 +1,6 @@
-package game;
+package game.slime;
+
+import game.slime.Slime;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
