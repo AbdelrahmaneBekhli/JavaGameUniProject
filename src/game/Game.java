@@ -1,9 +1,8 @@
 package game;
 
-import city.cs.engine.*;
+import game.character.CharacterController;
 
 import javax.swing.JFrame;
-import javax.swing.plaf.basic.BasicTreeUI;
 
 public class Game{
     public Game(){
