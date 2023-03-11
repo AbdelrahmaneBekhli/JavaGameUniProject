@@ -3,7 +3,12 @@ package game;
 import city.cs.engine.*;
 import org.jbox2d.common.Vec2;
 
-public class Character extends Walker implements StepListener{
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
+public class Character extends Walker implements StepListener, ActionListener{
     private static final Shape CharaterShape = new BoxShape(1,1.2f);
     private static final BodyImage image = new BodyImage("data/player/idle_right.gif", 2.35f);
     private int credits;
@@ -11,7 +16,9 @@ public class Character extends Walker implements StepListener{
     private int counter;
     private boolean bounce;
 
-    private String facing;
+    private String facing = "right";
+
+    private boolean alive = true;
 
     public Character(World world){
         super(world, CharaterShape);
@@ -42,8 +49,24 @@ public class Character extends Walker implements StepListener{
         }
 
     }
-
-
+    public void die(){
+        this.alive = false;
+        if(facing.equals("right")) {
+            BodyImage image = new BodyImage("data/player/die_right.gif", 2.55f);
+            this.removeAllImages();
+            this.addImage(image);
+        } else{
+            BodyImage image = new BodyImage("data/player/die_left.gif", 2.55f);
+            this.removeAllImages();
+            this.addImage(image);
+        }
+        this.startWalking(0);
+        Timer timer = new Timer(1000, new TimerHandler(this));
+        timer.start();
+    }
+    public boolean isAlive() {
+        return alive;
+    }
     public int getCredits(){
         return credits;
     }
@@ -77,5 +100,9 @@ public class Character extends Walker implements StepListener{
 
     @Override
     public void postStep(StepEvent stepEvent) {
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
     }
 }
