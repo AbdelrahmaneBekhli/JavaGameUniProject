@@ -1,6 +1,8 @@
-package game;
+package game.character;
 
 import city.cs.engine.*;
+import game.snowball.SnowCollisionListener;
+import game.snowball.Snowball;
 import org.jbox2d.common.Vec2;
 
 import java.awt.event.ActionEvent;
@@ -31,14 +33,7 @@ public class Character extends Walker implements StepListener, ActionListener{
     public void shoot(){
         //setting up the shape of the snowball
         Shape snowballshape = new CircleShape(0.3f);
-        DynamicBody snowball = new DynamicBody(world, snowballshape);
-        BodyImage snowballImage = new BodyImage("data/snowball.png", 0.7f);
-        //adding a collision listener to snowball
-        SnowCollisionListener SnowCollisions = new SnowCollisionListener();
-        snowball.addCollisionListener(SnowCollisions);
-        //setting the physics of the snowball
-        snowball.addImage(snowballImage);
-
+        Snowball snowball = new Snowball(world, snowballshape);
 
         if(this.facing.equals("right")) {
             snowball.setPosition(this.getPosition());
@@ -88,7 +83,7 @@ public class Character extends Walker implements StepListener, ActionListener{
         if(bounce) {
             if (counter == 0) {
                 counter ++;
-                this.setGravityScale(-50);
+                this.setGravityScale(-180);
             }
             else{
                 this.setGravityScale(3);

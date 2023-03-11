@@ -1,4 +1,6 @@
-package game;
+package game.character;
+
+import game.character.Character;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

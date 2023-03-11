@@ -1,12 +1,12 @@
-package game;
+package game.character;
 
 import city.cs.engine.CollisionEvent;
 import city.cs.engine.CollisionListener;
-import org.jbox2d.common.Vec2;
+import game.slime.Slime;
 
-public class GenericCollisionListener implements CollisionListener {
+public class CharacterCollisionListener implements CollisionListener {
     private final Character character;
-    public GenericCollisionListener(Character character) {
+    public CharacterCollisionListener(Character character) {
         this.character = character;
     }
 
