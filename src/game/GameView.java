@@ -5,6 +5,7 @@ import game.character.Character;
 
 import javax.swing.*;
 import java.awt.*;
+
 public class GameView extends UserView{
 
     private final Image background;
@@ -23,13 +24,22 @@ public class GameView extends UserView{
     }
 
     @Override
-    protected void paintForeground(Graphics2D image){
-        Font font = new Font("Arial", Font.BOLD, 30);
-        image.setFont(font);
-        image.setColor(Color.BLACK);
+    protected void paintForeground(Graphics2D g){
+        Font coinsFont = new Font("Arial", Font.BOLD, 25);
+        g.setFont(coinsFont);
+        g.setColor(Color.BLACK);
 
         //Coins information
-        String coins = "Coins: " + character.getCredits();
-        image.drawString(coins, 0,30);
+        Image coinImage = new ImageIcon("data/coin.png").getImage();
+        String coins = ": " + character.getCredits();
+        g.drawImage(coinImage,10,10,null, this);
+        g.drawString(coins, 40,33);
+        //Game update
+        Font endFont = new Font("Arial", Font.BOLD, 100);
+        g.setFont(endFont);
+        String gameOver = "Game Over!";
+        if (!(character.isAlive())) {
+            g.drawString(gameOver, 200, 290);
+        }
     }
 }
