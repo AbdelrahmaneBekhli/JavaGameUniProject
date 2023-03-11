@@ -61,7 +61,7 @@ public class Character extends Walker implements StepListener, ActionListener{
             this.addImage(image);
         }
         this.startWalking(0);
-        Timer timer = new Timer(1000, new TimerHandler(this));
+        Timer timer = new Timer(1000, new CharacterTimerHandler(this));
         timer.start();
     }
     public boolean isAlive() {
