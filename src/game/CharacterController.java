@@ -25,6 +25,7 @@ public class CharacterController implements KeyListener {
             character.removeAllImages();
             character.addImage(image);
             character.startWalking(-5);
+            character.setFacing("left");
         }
 
         if(code == KeyEvent.VK_D){
@@ -32,10 +33,15 @@ public class CharacterController implements KeyListener {
             character.removeAllImages();
             character.addImage(image);
             character.startWalking(5);
+            character.setFacing("right");
         }
 
-        if(code == KeyEvent.VK_W || code == KeyEvent.VK_SPACE){
+        if(code == KeyEvent.VK_W){
             character.jump(22);
+        }
+
+        if(code == KeyEvent.VK_SPACE){
+            character.shoot();
         }
 
     }
@@ -49,12 +55,14 @@ public class CharacterController implements KeyListener {
             character.removeAllImages();
             character.addImage(image);
             character.startWalking(0);
+            character.setFacing("left");
         }
         if (code == KeyEvent.VK_D){
             BodyImage image = new BodyImage("data/player/idle_right.gif", 2.35f);
             character.removeAllImages();
             character.addImage(image);
             character.startWalking(0);
+            character.setFacing("right");
         }
 
     }
