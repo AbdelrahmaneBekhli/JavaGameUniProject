@@ -1,9 +1,10 @@
 package game;
 
 import city.cs.engine.*;
+import city.cs.engine.Sensor;
 import org.jbox2d.common.Vec2;
 
-public class Coin extends StaticBody implements StepListener{
+public class Coin extends DynamicBody implements StepListener{
     private static final Shape CoinShape = new BoxShape(0.5f,0.5f);
     private static final BodyImage CoinImage = new BodyImage("data/coin.gif", 1);
 
@@ -11,9 +12,11 @@ public class Coin extends StaticBody implements StepListener{
     private float minHeight;
     private float speed = 0.03f;
     public Coin(GameWorld world, String direction){
-        super(world, CoinShape);
-        GhostlyFixture fixture = new GhostlyFixture(this, CoinShape);
+        super(world);
         this.addImage(CoinImage);
+        this.setGravityScale(0);
+        Fixture fixture = new GhostlyFixture(this, CoinShape);
+        Sensor sensor = new CoinSensor(this, CoinShape, this);
         world.addStepListener(this);
         if (direction.equals("down")){
             this.speed = this.speed * -1;
