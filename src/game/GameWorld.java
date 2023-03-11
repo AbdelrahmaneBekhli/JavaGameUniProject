@@ -1,9 +1,12 @@
 package game;
 
 import city.cs.engine.*;
+import game.character.Character;
+import game.character.CharacterCollisionListener;
+import game.coin.Coin;
+import game.platform.Platform;
+import game.slime.Slime;
 import org.jbox2d.common.Vec2;
-
-import javax.swing.*;
 
 public class GameWorld  extends World{
     private final Character character;
@@ -34,24 +37,24 @@ public class GameWorld  extends World{
         character.setPosition(new Vec2(-14,-12));
         character.setGravityScale(3);
 
-        GenericCollisionListener gcl = new GenericCollisionListener(character);
+        CharacterCollisionListener gcl = new CharacterCollisionListener(character);
         character.addCollisionListener(gcl);
 
         //Slime
-        Slime slime1 = new Slime(this, 4, "left");
-        slime1.setPosition(new Vec2(-19, 5.5f));
+        Slime slime1 = new Slime(this, 4, "left", character);
+        slime1.setPosition(new Vec2(-19, 6.3f));
         slime1.setRange();
 
-        Slime slime2 = new Slime(this, 5, "left");
-        slime2.setPosition(new Vec2(19, -1));
+        Slime slime2 = new Slime(this, 5, "left", character);
+        slime2.setPosition(new Vec2(19, -0.7f));
         slime2.setRange();
 
-        Slime slime3 = new Slime(this, 5, "right");
-        slime3.setPosition(new Vec2(0, 1f));
+        Slime slime3 = new Slime(this, 5, "right", character);
+        slime3.setPosition(new Vec2(0, 1.3f));
         slime3.setRange();
 
-        Slime slime4 = new Slime(this, 12, "left");
-        slime4.setPosition(new Vec2(10, -12f));
+        Slime slime4 = new Slime(this, 12, "left", character);
+        slime4.setPosition(new Vec2(10, -12.3f));
         slime4.setRange();
 
         //coins
