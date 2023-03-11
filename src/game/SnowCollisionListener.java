@@ -10,7 +10,7 @@ public class SnowCollisionListener implements CollisionListener {
             collisionEvent.getReportingBody().destroy();
         }
         if(collisionEvent.getOtherBody() instanceof Slime){
-            collisionEvent.getOtherBody().destroy();
+            ((Slime) collisionEvent.getOtherBody()).die();
             collisionEvent.getReportingBody().destroy();
         }
     }
