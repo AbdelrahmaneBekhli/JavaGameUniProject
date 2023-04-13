@@ -2,7 +2,6 @@ package game;
 
 import city.cs.engine.*;
 import game.character.Character;
-import game.character.CharacterCollisionListener;
 import game.coin.Coin;
 import game.platform.Platform;
 import game.slime.Slime;
@@ -36,9 +35,6 @@ public class GameWorld  extends World{
         character = new Character(this);
         character.setPosition(new Vec2(-14,-12));
         character.setGravityScale(3);
-
-        CharacterCollisionListener gcl = new CharacterCollisionListener(character);
-        character.addCollisionListener(gcl);
 
         //Slime
         Slime slime1 = new Slime(this, 4, "left", character);
