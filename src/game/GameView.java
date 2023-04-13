@@ -31,9 +31,14 @@ public class GameView extends UserView{
 
         //Coins information
         Image coinImage = new ImageIcon("data/coin.png").getImage();
+        Image slimeImage = new ImageIcon("data/enemy/slime.png").getImage();
+
         String coins = ": " + character.getCredits();
+        String kills = ": " + character.getKills();
         g.drawImage(coinImage,10,10,null, this);
+        g.drawImage(slimeImage, 12, 42, null, this);
         g.drawString(coins, 40,33);
+        g.drawString(kills, 40,64);
         //Game update
         Font endFont = new Font("Arial", Font.BOLD, 100);
         g.setFont(endFont);

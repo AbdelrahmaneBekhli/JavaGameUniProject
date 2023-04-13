@@ -18,6 +18,8 @@ public class Character extends Walker implements StepListener, ActionListener{
     private int counter;
     private boolean bounce;
 
+    private int kills = 0;
+
     private String facing = "right";
 
     private boolean alive = true;
@@ -67,6 +69,13 @@ public class Character extends Walker implements StepListener, ActionListener{
     }
     public void incrementcredits(){
         this.credits = this.credits + 1;
+    }
+
+    public int getKills(){
+        return kills;
+    }
+    public void incrementKills(){
+        this.kills = this.kills + 1;
     }
 
     public void setBounce(boolean bounce) {
