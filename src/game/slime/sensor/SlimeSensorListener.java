@@ -23,6 +23,7 @@ public class SlimeSensorListener implements SensorListener {
             if (character.getPosition().y > slime.getPosition().y + 0.75f) {
                 if(slime.isBounce()){
                     character.setBounce(true);
+                    character.incrementKills();
                 }
                 slime.die();
 
@@ -34,6 +35,9 @@ public class SlimeSensorListener implements SensorListener {
         }
         if (sensorEvent.getContactBody() instanceof Snowball){
             sensorEvent.getContactBody().destroy();
+            if (slime.isAlive()) {
+                character.incrementKills();
+            }
             slime.die();
         }
     }
