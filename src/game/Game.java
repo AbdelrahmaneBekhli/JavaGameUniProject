@@ -44,17 +44,19 @@ public class Game{
     }
 
     public void goToNextLevel(){
-        if (level instanceof Level1){
+        if (level instanceof Level1 && level.isComplete()){
+            System.out.println("level 2 loading");
             level.stop();
             level = new Level2(this);
+
             //level now refer to the new level
             view.setWorld(level);
             controller.updateCharacter(level.getCharacter());
             level.start();
         }
-        else if (level instanceof Level2){
-            System.out.println("level complete");
-            System.exit(0);
+        else if (level instanceof Level2 && level.isComplete()){
+            System.out.println("level 3 loading");
+            //System.exit(0);
         }
     }
 
