@@ -2,7 +2,6 @@ package game.coin;
 
 import city.cs.engine.*;
 import city.cs.engine.Sensor;
-import game.GameWorld;
 import game.character.Character;
 import game.coin.sensor.CoinSensor;
 import org.jbox2d.common.Vec2;
@@ -14,7 +13,7 @@ public class Coin extends DynamicBody implements StepListener{
     private float maxHeight;
     private float minHeight;
     private float speed = 0.03f;
-    public Coin(GameWorld world, String direction, Character character){
+    public Coin(World world, String direction, Character character){
         super(world);
         this.addImage(CoinImage);
         this.setGravityScale(0);

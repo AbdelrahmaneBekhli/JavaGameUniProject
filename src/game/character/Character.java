@@ -30,6 +30,7 @@ public class Character extends Walker implements StepListener, ActionListener{
         credits = 0;
         world.addStepListener(this);
         this.world = world;
+        this.setGravityScale(3);
     }
 
     public void shoot(){

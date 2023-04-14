@@ -8,9 +8,13 @@ import java.awt.event.KeyListener;
 
 public class CharacterController implements KeyListener {
 
-    private final Character character;
+    private Character character;
     public CharacterController(Character sprite1){
         this.character = sprite1;
+    }
+
+    public void updateCharacter(Character c){
+        character = c;
     }
 
     @Override

@@ -2,17 +2,25 @@ package game.slime.sensor;
 
 import city.cs.engine.SensorEvent;
 import city.cs.engine.SensorListener;
+import game.Game;
+import game.portal.Portal;
 import game.character.Character;
+import game.levels.GameLevel;
 import game.slime.Slime;
 import game.snowball.Snowball;
 
 public class SlimeSensorListener implements SensorListener {
     private final Character character;
     private final Slime slime;
+    private GameLevel world;
+    private Game game;
 
-    public SlimeSensorListener(Character character, Slime slime) {
+    public SlimeSensorListener(Character character, Slime slime, GameLevel world, Game game) {
         this.character = character;
         this.slime = slime;
+        this.world = world;
+        this.game = game;
+
     }
 
 
@@ -26,6 +34,9 @@ public class SlimeSensorListener implements SensorListener {
                     character.incrementKills();
                 }
                 slime.die();
+                if(world.isComplete()){
+                    Portal portal = new Portal(world, 10,10, character, game);
+                }
 
             } else {
                 if (slime.isAlive()) {
@@ -39,6 +50,9 @@ public class SlimeSensorListener implements SensorListener {
                 character.incrementKills();
             }
             slime.die();
+            if(world.isComplete()){
+                Portal portal = new Portal(world, 10,10, character, game);
+            }
         }
     }
 

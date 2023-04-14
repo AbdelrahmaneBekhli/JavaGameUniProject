@@ -1,11 +1,12 @@
 package game.slime;
 
 import city.cs.engine.*;
+import game.Game;
 import game.character.Character;
+import game.levels.GameLevel;
 import game.slime.sensor.SlimeSensor;
 
 import javax.swing.*;
-import java.awt.desktop.AboutEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,13 +22,13 @@ public class Slime extends Walker implements StepListener, ActionListener {
     private String facing;
 
     private boolean bounce = true;
-    public Slime(World world, float range, String initial_facing, Character character) {
+    public Slime(World world, float range, String initial_facing, Character character, GameLevel level, Game game) {
         super(world);
         world.addStepListener(this);
         this.range = range;
         this.setGravityScale(0);
         Fixture fixture = new GhostlyFixture(this, SlimeShape);
-        Sensor sensor = new SlimeSensor(this, SlimeShape, character);
+        Sensor sensor = new SlimeSensor(this, SlimeShape, character, level, game);
 
         if (initial_facing.equals("right")){
             this.addImage(rightImage);
