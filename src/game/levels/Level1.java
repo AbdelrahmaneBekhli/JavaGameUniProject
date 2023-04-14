@@ -1,16 +1,21 @@
-package game;
+package game.levels;
 
-import city.cs.engine.*;
+import city.cs.engine.BoxShape;
+import city.cs.engine.Shape;
+import game.Game;
 import game.character.Character;
 import game.coin.Coin;
 import game.platform.Platform;
 import game.slime.Slime;
 import org.jbox2d.common.Vec2;
 
-public class GameWorld  extends World{
-    private final Character character;
-    public GameWorld(){
-        super();
+public class Level1  extends GameLevel {
+    private final int slimeCount = 4;
+
+    private final Game game;
+    public Level1(Game game) {
+        super(game);
+        this.game = game;
 
         //ground platform
         Shape Groundshape = new BoxShape(25, 0.5f);
@@ -32,59 +37,61 @@ public class GameWorld  extends World{
 
 
         //character
-        character = new Character(this);
-        character.setPosition(new Vec2(-14,-12));
-        character.setGravityScale(3);
+        getCharacter().setPosition(new Vec2(-14,-12));
 
         //Slime
-        Slime slime1 = new Slime(this, 4, "left", character);
+        Slime slime1 = new Slime(this, 4, "left", getCharacter(), this, game);
         slime1.setPosition(new Vec2(-19, 6.3f));
         slime1.setRange();
 
-        Slime slime2 = new Slime(this, 5, "left", character);
+        Slime slime2 = new Slime(this, 5, "left", getCharacter(), this, game);
         slime2.setPosition(new Vec2(19, -0.7f));
         slime2.setRange();
 
-        Slime slime3 = new Slime(this, 5, "right", character);
+        Slime slime3 = new Slime(this, 5, "right", getCharacter(), this, game);
         slime3.setPosition(new Vec2(0, 1.3f));
         slime3.setRange();
 
-        Slime slime4 = new Slime(this, 12, "left", character);
+        Slime slime4 = new Slime(this, 12, "left", getCharacter(), this, game);
         slime4.setPosition(new Vec2(10, -12.3f));
         slime4.setRange();
 
         //coins
-        Coin coin1 = new Coin(this, "down", character);
+        Coin coin1 = new Coin(this, "down", getCharacter());
         coin1.setPosition(new Vec2(-20, 9));
         coin1.setRange();
 
-        Coin coin2 = new Coin(this, "up", character);
+        Coin coin2 = new Coin(this, "up", getCharacter());
         coin2.setPosition(new Vec2(10, 7));
         coin2.setRange();
 
-        Coin coin3 = new Coin(this, "up", character);
+        Coin coin3 = new Coin(this, "up", getCharacter());
         coin3.setPosition(new Vec2(-20, 1));
         coin3.setRange();
 
-        Coin coin4 = new Coin(this, "down", character);
+        Coin coin4 = new Coin(this, "down", getCharacter());
         coin4.setPosition(new Vec2(0, 5));
         coin4.setRange();
 
-        Coin coin5 = new Coin(this, "down", character);
+        Coin coin5 = new Coin(this, "down", getCharacter());
         coin5.setPosition(new Vec2(16, 3));
         coin5.setRange();
 
-        Coin coin6 = new Coin(this, "up", character);
+        Coin coin6 = new Coin(this, "up", getCharacter());
         coin6.setPosition(new Vec2(20, -10));
         coin6.setRange();
 
-        Coin coin7 = new Coin(this, "down", character);
+        Coin coin7 = new Coin(this, "down", getCharacter());
         coin7.setPosition(new Vec2(-1.4f, -3));
         coin7.setRange();
     }
 
-    public Character getCharacter(){
-        return character;
+    public int getSlimeCount() {
+        return slimeCount;
     }
 
+    @Override
+    public boolean isComplete() {
+        return getCharacter().getKills() == slimeCount;
+    }
 }

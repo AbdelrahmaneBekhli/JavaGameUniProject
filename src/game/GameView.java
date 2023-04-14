@@ -1,6 +1,6 @@
 package game;
 
-import city.cs.engine.UserView;
+import city.cs.engine.*;
 import game.character.Character;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ public class GameView extends UserView{
 
     private final Image background;
     private final Character character;
-    public GameView(GameWorld world,Character character, int width, int height) {
+    public GameView(World world,Character character, int width, int height) {
 
         super(world, width, height);
         background = new ImageIcon("data/background.jpg").getImage();
