@@ -13,6 +13,8 @@ public class PortalSensorListener implements SensorListener {
 
     private Portal portal;
 
+    private boolean contact = false;
+
     public PortalSensorListener(Character character, Portal portal, Game game) {
         this.character = character;
         this.game = game;
@@ -22,6 +24,7 @@ public class PortalSensorListener implements SensorListener {
     @Override
     public void beginContact(SensorEvent sensorEvent) {
         if(sensorEvent.getContactBody() instanceof Character){
+            portal.destroy();
             game.goToNextLevel();
         }
     }
