@@ -83,7 +83,9 @@ public class Slime extends Walker implements StepListener, ActionListener {
     }
 
     public void die(){
-        slimeDeathSound.play();
+        if(this.alive){
+            slimeDeathSound.play();
+        }
         this.bounce = false;
         this.alive = false;
         if (this.facing.equals("right")) {

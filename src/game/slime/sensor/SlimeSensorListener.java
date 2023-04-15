@@ -12,15 +12,16 @@ import game.snowball.Snowball;
 public class SlimeSensorListener implements SensorListener {
     private final Character character;
     private final Slime slime;
-    private GameLevel world;
-    private Game game;
+    private final GameLevel world;
+    private final Game game;
+
+    private boolean portalCreated = false;
 
     public SlimeSensorListener(Character character, Slime slime, GameLevel world, Game game) {
         this.character = character;
         this.slime = slime;
         this.world = world;
         this.game = game;
-
     }
 
 
@@ -34,8 +35,9 @@ public class SlimeSensorListener implements SensorListener {
                     character.incrementKills();
                 }
                 slime.die();
-                if(world.isComplete()){
+                if(world.isComplete() && !(portalCreated)){
                     Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y(), character, game);
+                    portalCreated = true;
                 }
 
             } else {
@@ -50,8 +52,9 @@ public class SlimeSensorListener implements SensorListener {
                 character.incrementKills();
             }
             slime.die();
-            if(world.isComplete()){
+            if(world.isComplete() && !(portalCreated)){
                 Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y(), character, game);
+                portalCreated = true;
             }
         }
     }
