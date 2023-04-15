@@ -10,12 +10,8 @@ import game.slime.Slime;
 import org.jbox2d.common.Vec2;
 
 public class Level1  extends GameLevel {
-    private final int slimeCount = 4;
-
-    private final Game game;
     public Level1(Game game) {
         super(game);
-        this.game = game;
 
         //ground platform
         Shape Groundshape = new BoxShape(25, 0.5f);
@@ -86,12 +82,16 @@ public class Level1  extends GameLevel {
         coin7.setRange();
     }
 
-    public int getSlimeCount() {
-        return slimeCount;
-    }
-
     @Override
     public boolean isComplete() {
-        return getCharacter().getKills() == slimeCount;
+        return getCharacter().getKills() == 4;
+    }
+
+    public float getPortal_x() {
+        return 23;
+    }
+
+    public float getPortal_y() {
+        return 1;
     }
 }

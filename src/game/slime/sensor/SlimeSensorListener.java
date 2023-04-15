@@ -35,7 +35,7 @@ public class SlimeSensorListener implements SensorListener {
                 }
                 slime.die();
                 if(world.isComplete()){
-                    Portal portal = new Portal(world, 10,10, character, game);
+                    Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y(), character, game);
                 }
 
             } else {
@@ -51,7 +51,7 @@ public class SlimeSensorListener implements SensorListener {
             }
             slime.die();
             if(world.isComplete()){
-                Portal portal = new Portal(world, 10,10, character, game);
+                Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y(), character, game);
             }
         }
     }
