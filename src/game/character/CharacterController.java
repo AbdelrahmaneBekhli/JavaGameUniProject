@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 public class CharacterController implements KeyListener {
 
     private Character character;
+    private boolean shoot = true;
     public CharacterController(Character sprite1){
         this.character = sprite1;
     }
@@ -25,7 +26,6 @@ public class CharacterController implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if(character.isAlive()) {
-
             if (code == KeyEvent.VK_A) {
                 BodyImage image = new BodyImage("data/player/run_left.gif", 2.35f);
                 character.removeAllImages();
@@ -33,7 +33,6 @@ public class CharacterController implements KeyListener {
                 character.startWalking(-5);
                 character.setFacing("left");
             }
-
             if (code == KeyEvent.VK_D) {
                 if (character.isAlive()) {
                     BodyImage image = new BodyImage("data/player/run_right.gif", 2.35f);
@@ -43,13 +42,15 @@ public class CharacterController implements KeyListener {
                     character.setFacing("right");
                 }
             }
-
             if (code == KeyEvent.VK_W) {
                 character.jump(22);
             }
 
             if (code == KeyEvent.VK_SPACE) {
-                character.shoot();
+                if(shoot) {
+                    character.shoot();
+                    shoot = false;
+                }
             }
         }
 
@@ -72,6 +73,9 @@ public class CharacterController implements KeyListener {
                 character.addImage(image);
                 character.startWalking(0);
                 character.setFacing("right");
+            }
+            if (code == KeyEvent.VK_SPACE){
+                shoot = true;
             }
         }
     }
