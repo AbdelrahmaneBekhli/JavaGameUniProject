@@ -6,6 +6,10 @@ import game.character.Character;
 import game.coin.sensor.CoinSensor;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Coin extends DynamicBody implements StepListener{
     private static final Shape CoinShape = new BoxShape(0.5f,0.5f);
     private static final BodyImage CoinImage = new BodyImage("data/coinAnimation.gif", 1);
@@ -13,6 +17,17 @@ public class Coin extends DynamicBody implements StepListener{
     private float maxHeight;
     private float minHeight;
     private float speed = 0.03f;
+
+    private static SoundClip coinSound;
+
+    static {
+        try {
+            coinSound = new SoundClip("data/audio/coin.wav");
+        }catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
+
     public Coin(World world, String direction, Character character){
         super(world);
         this.addImage(CoinImage);
@@ -42,6 +57,11 @@ public class Coin extends DynamicBody implements StepListener{
 
     @Override
     public void postStep(StepEvent stepEvent) {
+    }
 
+    @Override
+    public void destroy(){
+        coinSound.play();
+        super.destroy();
     }
 }

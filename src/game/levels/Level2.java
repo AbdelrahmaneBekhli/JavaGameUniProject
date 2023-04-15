@@ -20,4 +20,14 @@ public class Level2 extends GameLevel{
     public boolean isComplete() {
         return getCharacter().getKills() == 5;
     }
+
+    @Override
+    public float getPortal_x() {
+        return 0;
+    }
+
+    @Override
+    public float getPortal_y() {
+        return 0;
+    }
 }

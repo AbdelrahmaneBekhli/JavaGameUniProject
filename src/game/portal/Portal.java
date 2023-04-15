@@ -6,9 +6,23 @@ import game.character.Character;
 import game.portal.sensor.PortalSensor;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Portal extends StaticBody{
     private static final Shape portalShape = new CircleShape(1.5f);
     private static final BodyImage PortalImage = new BodyImage("data/Portal.gif", 3.2f);
+
+    private static SoundClip portalSound;
+
+    static {
+        try {
+            portalSound = new SoundClip("data/audio/portal.wav");
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
     public Portal(World world, float x, float y, Character character, Game game) {
         super(world);
         this.addImage(PortalImage);
@@ -16,6 +30,8 @@ public class Portal extends StaticBody{
 
         Fixture fixture = new GhostlyFixture(this, portalShape);
         Sensor sensor = new PortalSensor(this, portalShape, character, game);
+
+        portalSound.play();
     }
 
 }

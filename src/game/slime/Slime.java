@@ -6,9 +6,12 @@ import game.character.Character;
 import game.levels.GameLevel;
 import game.slime.sensor.SlimeSensor;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Slime extends Walker implements StepListener, ActionListener {
     private static final Shape SlimeShape = new BoxShape(1,0.75f);
@@ -20,8 +23,18 @@ public class Slime extends Walker implements StepListener, ActionListener {
     private final float range;
     private boolean alive = true;
     private String facing;
-
     private boolean bounce = true;
+
+    private static SoundClip slimeDeathSound;
+
+    static {
+        try {
+            slimeDeathSound = new SoundClip("data/audio/slime.wav");
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
+
     public Slime(World world, float range, String initial_facing, Character character, GameLevel level, Game game) {
         super(world);
         world.addStepListener(this);
@@ -70,6 +83,7 @@ public class Slime extends Walker implements StepListener, ActionListener {
     }
 
     public void die(){
+        slimeDeathSound.play();
         this.bounce = false;
         this.alive = false;
         if (this.facing.equals("right")) {

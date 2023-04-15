@@ -14,4 +14,8 @@ public abstract class GameLevel extends World {
         return character;
     }
     public abstract boolean isComplete();
+
+    public abstract float getPortal_x();
+
+    public abstract float getPortal_y();
 }
