@@ -45,11 +45,11 @@ public class Slime extends Walker implements StepListener, ActionListener {
 
         if (initial_facing.equals("right")){
             this.addImage(rightImage);
-            this.startWalking(3);
+            this.startWalking(4);
             this.facing = "right";
         } else {
             this.addImage(leftImage);
-            this.startWalking(-3);
+            this.startWalking(-4);
             this.facing = "left";
         }
     }
