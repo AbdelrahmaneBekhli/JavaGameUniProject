@@ -14,5 +14,6 @@ public class Snowball extends DynamicBody {
 
         BodyImage snowballImage = new BodyImage("data/snowball.png", 0.7f);
         this.addImage(snowballImage);
+        this.setGravityScale(3);
     }
 }
