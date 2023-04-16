@@ -30,7 +30,7 @@ public class CharacterController implements KeyListener {
                 BodyImage image = new BodyImage("data/player/run_left.gif", 2.35f);
                 character.removeAllImages();
                 character.addImage(image);
-                character.startWalking(-5);
+                character.startWalking(-8);
                 character.setFacing("left");
             }
             if (code == KeyEvent.VK_D) {
@@ -38,12 +38,12 @@ public class CharacterController implements KeyListener {
                     BodyImage image = new BodyImage("data/player/run_right.gif", 2.35f);
                     character.removeAllImages();
                     character.addImage(image);
-                    character.startWalking(5);
+                    character.startWalking(8);
                     character.setFacing("right");
                 }
             }
             if (code == KeyEvent.VK_W) {
-                character.jump(22);
+                character.jump(30);
             }
 
             if (code == KeyEvent.VK_SPACE) {

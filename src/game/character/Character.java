@@ -30,7 +30,7 @@ public class Character extends Walker implements StepListener, ActionListener{
         credits = 0;
         world.addStepListener(this);
         this.world = world;
-        this.setGravityScale(3);
+        this.setGravityScale(5);
     }
 
     public void shoot(){
@@ -40,7 +40,7 @@ public class Character extends Walker implements StepListener, ActionListener{
 
         if(this.facing.equals("right")) {
             snowball.setPosition(this.getPosition());
-            snowball.setLinearVelocity(new Vec2(10, 4));
+            snowball.setLinearVelocity(new Vec2(15, 6));
         } else if (this.facing.equals("left")) {
             snowball.setPosition(new Vec2(this.getPosition().x -1, this.getPosition().y));
             snowball.setLinearVelocity(new Vec2(-10, 4));
@@ -93,10 +93,10 @@ public class Character extends Walker implements StepListener, ActionListener{
         if(bounce) {
             if (counter == 0) {
                 counter ++;
-                this.setGravityScale(-180);
+                this.setGravityScale(-220);
             }
             else{
-                this.setGravityScale(3);
+                this.setGravityScale(5);
                 bounce = false;
                 this.counter = 0;
             }
