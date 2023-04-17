@@ -2,6 +2,7 @@ package game;
 
 import city.cs.engine.SoundClip;
 import game.character.CharacterController;
+import game.character.Tracker;
 import game.levels.*;
 import javax.swing.JFrame;
 import java.io.IOException;
@@ -13,22 +14,14 @@ public class Game{
     private GameView view;
     private CharacterController controller;
 
-    private SoundClip gameMusic;
-
     public Game(){
         level = new Level1(this);
 
         //creating the world view
         view = new GameView(level, level.getCharacter(), 1000, 562);
-
-        //adding the music background
-        try{
-            gameMusic = new SoundClip("data/audio/MusicTrack.wav");
-            gameMusic.setVolume(0.2);
-            gameMusic.loop();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
-            System.out.println(e);
-        }
+        view.setBackground(level);
+        //Tracker tr = new Tracker(view, level.getCharacter());
+        //level.addStepListener(tr);
 
         //controlling the character
         controller = new CharacterController(level.getCharacter());
@@ -60,9 +53,12 @@ public class Game{
 
     public void goToNextLevel(){
         if (level instanceof Level1 && level.isComplete()){
+            level.stopMusic();
             level.stop();
             level = new Level2(this);
-
+            view.setBackground(level);
+            Tracker tr = new Tracker(view, level.getCharacter());
+            level.addStepListener(tr);
             //level now refer to the new level
             view.setWorld(level);
             controller.updateCharacter(level.getCharacter());
