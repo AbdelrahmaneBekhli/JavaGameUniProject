@@ -2,20 +2,28 @@ package game;
 
 import city.cs.engine.*;
 import game.character.Character;
+import game.levels.GameLevel;
+import game.levels.Level1;
+import game.levels.Level2;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends UserView{
 
-    private final Image background;
+    private Image background;
     private final Character character;
-    public GameView(World world,Character character, int width, int height) {
+
+    private GameLevel world;
+    public GameView(GameLevel world, Character character, int width, int height) {
 
         super(world, width, height);
-        background = new ImageIcon("data/background.jpg").getImage();
         this.character = character;
+        this.world = world;
 
+    }
+    public void setBackground(GameLevel level){
+        background = new ImageIcon(level.getBackground()).getImage();
     }
 
     @Override

@@ -6,6 +6,7 @@ import game.character.Character;
 
 public abstract class GameLevel extends World {
     private Character character;
+
     public GameLevel(Game game){
         super(60);
         character = new Character(this);
@@ -19,4 +20,13 @@ public abstract class GameLevel extends World {
     public abstract float getPortal_x();
 
     public abstract float getPortal_y();
+
+    public abstract void stopMusic();
+
+    public abstract String getLongTiles();
+
+    public abstract String getMediumTiles();
+
+    public abstract String getShortTiles();
+    public abstract String getBackground();
 }

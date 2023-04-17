@@ -17,7 +17,6 @@ public class Character extends Walker implements StepListener, ActionListener{
     private final World world;
     private int counter;
     private boolean bounce;
-
     private int kills = 0;
 
     private String facing = "right";
