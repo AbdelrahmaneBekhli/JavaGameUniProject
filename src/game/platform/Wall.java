@@ -3,7 +3,6 @@ package game.platform;
 import city.cs.engine.BodyImage;
 import city.cs.engine.Shape;
 import city.cs.engine.StaticBody;
-import city.cs.engine.World;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
 

@@ -1,8 +1,11 @@
 package game.character;
 
 import city.cs.engine.*;
-import game.snowball.SnowCollisionListener;
-import game.snowball.Snowball;
+import game.levels.GameLevel;
+import game.levels.Level1;
+import game.levels.Level2;
+import game.weapon.snowball.Snowball;
+import game.weapon.stone.Stone;
 import org.jbox2d.common.Vec2;
 
 import java.awt.event.ActionEvent;
@@ -23,7 +26,7 @@ public class Character extends Walker implements StepListener, ActionListener{
 
     private boolean alive = true;
 
-    public Character(World world){
+    public Character(GameLevel world){
         super(world, CharaterShape);
         this.addImage(image);
         credits = 0;
@@ -33,16 +36,22 @@ public class Character extends Walker implements StepListener, ActionListener{
     }
 
     public void shoot(){
-        //setting up the shape of the snowball
-        Shape snowballshape = new CircleShape(0.3f);
-        Snowball snowball = new Snowball(world, snowballshape);
+        DynamicBody weapon;
+        //setting up the shape of the weapon
+        Shape weaponShape = new CircleShape(0.3f);
+        if(world instanceof Level1){
+            weapon = new Snowball(world, weaponShape);
+        } else{
+            weapon = new Stone(world, weaponShape);
+        }
+
 
         if(this.facing.equals("right")) {
-            snowball.setPosition(this.getPosition());
-            snowball.setLinearVelocity(new Vec2(15, 6));
+            weapon.setPosition(this.getPosition());
+            weapon.setLinearVelocity(new Vec2(15, 6));
         } else if (this.facing.equals("left")) {
-            snowball.setPosition(new Vec2(this.getPosition().x -1, this.getPosition().y));
-            snowball.setLinearVelocity(new Vec2(-10, 4));
+            weapon.setPosition(new Vec2(this.getPosition().x -1, this.getPosition().y));
+            weapon.setLinearVelocity(new Vec2(-10, 4));
         }
 
     }
@@ -98,6 +107,11 @@ public class Character extends Walker implements StepListener, ActionListener{
                 this.setGravityScale(5);
                 bounce = false;
                 this.counter = 0;
+            }
+        }
+        if(world instanceof Level2){
+            if(this.getPosition().y < -20){
+                this.setPosition(new Vec2(-10, 0));
             }
         }
     }

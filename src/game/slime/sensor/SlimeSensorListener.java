@@ -7,7 +7,8 @@ import game.portal.Portal;
 import game.character.Character;
 import game.levels.GameLevel;
 import game.slime.Slime;
-import game.snowball.Snowball;
+import game.weapon.snowball.Snowball;
+import game.weapon.stone.Stone;
 
 public class SlimeSensorListener implements SensorListener {
     private final Character character;
@@ -46,9 +47,9 @@ public class SlimeSensorListener implements SensorListener {
                 }
             }
         }
-        if (sensorEvent.getContactBody() instanceof Snowball){
-            sensorEvent.getContactBody().destroy();
+        if (sensorEvent.getContactBody() instanceof Snowball || sensorEvent.getContactBody() instanceof Stone){
             if (slime.isAlive()) {
+                sensorEvent.getContactBody().destroy();
                 character.incrementKills();
             }
             slime.die();
