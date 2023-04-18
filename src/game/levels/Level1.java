@@ -4,7 +4,6 @@ import city.cs.engine.BoxShape;
 import city.cs.engine.Shape;
 import city.cs.engine.SoundClip;
 import game.Game;
-import game.character.Character;
 import game.coin.Coin;
 import game.platform.Platform;
 import game.slime.Slime;

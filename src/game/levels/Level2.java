@@ -22,7 +22,7 @@ public class Level2 extends GameLevel{
     public Level2(Game game){
         //base class will create the student, professor
         super(game);
-        getCharacter().setPosition(new Vec2(8, -10));
+        getCharacter().setPosition(new Vec2(-10, 0));
 
         //adding the music background
         try{
@@ -35,7 +35,6 @@ public class Level2 extends GameLevel{
 
         //ground platform
         Shape Groundshape = new BoxShape(25, 0.5f);
-        Platform ground = new Platform(this, Groundshape, 0, -13.6f, "ground");
 
         //platform
         Shape ShortplatformShape = new BoxShape(3, 0.5f);
@@ -125,4 +124,5 @@ public class Level2 extends GameLevel{
 
     @Override
     public String getBackground(){ return background; }
+
 }
