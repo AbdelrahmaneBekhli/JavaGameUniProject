@@ -11,17 +11,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Game{
     private GameLevel level;
-    private GameView view;
-    private CharacterController controller;
+    private final GameView view;
+    private final CharacterController controller;
 
     public Game(){
-        level = new Level1(this);
+        level = new Level2(this);
 
         //creating the world view
         view = new GameView(level, level.getCharacter(), 1000, 562);
         view.setBackground(level);
-        //Tracker tr = new Tracker(view, level.getCharacter());
-        //level.addStepListener(tr);
+        Tracker tr = new Tracker(view, level.getCharacter());
+        level.addStepListener(tr);
 
         //controlling the character
         controller = new CharacterController(level.getCharacter());
@@ -55,6 +55,7 @@ public class Game{
         if (level instanceof Level1 && level.isComplete()){
             level.stopMusic();
             level.stop();
+            int credits = level.getCharacter().getCredits();
             level = new Level2(this);
             view.setBackground(level);
             Tracker tr = new Tracker(view, level.getCharacter());
@@ -62,6 +63,8 @@ public class Game{
             //level now refer to the new level
             view.setWorld(level);
             controller.updateCharacter(level.getCharacter());
+            view.updateCharacter(level.getCharacter());
+            level.getCharacter().setCredits(credits);
             level.start();
         }
         else if (level instanceof Level2 && level.isComplete()){
