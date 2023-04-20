@@ -1,22 +1,22 @@
-package game.slime;
+package game.enemies;
 
 import city.cs.engine.*;
 import game.Game;
-import game.character.Character;
+import game.enemies.Enemy;
 import game.levels.GameLevel;
-import game.slime.sensor.SlimeSensor;
+import game.enemies.sensor.EnemySensor;
+import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class Slime extends Walker implements StepListener, ActionListener {
+public class Slime extends Enemy {
     private static final Shape SlimeShape = new BoxShape(1,0.75f);
-    private static final BodyImage rightImage = new BodyImage("data/enemy/slime_right.gif", 1.5f);
-    private static final BodyImage leftImage = new BodyImage("data/enemy/slime_left.gif", 1.5f);
+    private static final BodyImage rightImage = new BodyImage("data/enemy/slime/slime_right.gif", 1.5f);
+    private static final BodyImage leftImage = new BodyImage("data/enemy/slime/slime_left.gif", 1.5f);
 
     private float left;
     private float right;
@@ -26,7 +26,6 @@ public class Slime extends Walker implements StepListener, ActionListener {
     private boolean bounce = true;
 
     private static SoundClip slimeDeathSound;
-
     static {
         try {
             slimeDeathSound = new SoundClip("data/audio/slime.wav");
@@ -35,13 +34,13 @@ public class Slime extends Walker implements StepListener, ActionListener {
         }
     }
 
-    public Slime(World world, float range, String initial_facing, Character character, GameLevel level, Game game) {
+    public Slime(GameLevel world, float range, String initial_facing, float posX, float posY, Game game) {
         super(world);
         world.addStepListener(this);
         this.range = range;
         this.setGravityScale(0);
         Fixture fixture = new GhostlyFixture(this, SlimeShape);
-        Sensor sensor = new SlimeSensor(this, SlimeShape, character, level, game);
+        Sensor sensor = new EnemySensor(this, SlimeShape, world.getCharacter(), world, game);
 
         if (initial_facing.equals("right")){
             this.addImage(rightImage);
@@ -52,8 +51,11 @@ public class Slime extends Walker implements StepListener, ActionListener {
             this.startWalking(-4);
             this.facing = "left";
         }
+        this.setPosition(new Vec2(posX, posY));
+        this.setRange();
     }
 
+    @Override
     public void setRange(){
         //setting up the range for each direction
         this.left = this.getPosition().x - range;
@@ -81,7 +83,7 @@ public class Slime extends Walker implements StepListener, ActionListener {
             this.startWalking(0);
         }
     }
-
+    @Override
     public void die(){
         if(this.alive){
             slimeDeathSound.play();
@@ -89,23 +91,23 @@ public class Slime extends Walker implements StepListener, ActionListener {
         this.bounce = false;
         this.alive = false;
         if (this.facing.equals("right")) {
-            BodyImage image = new BodyImage("data/enemy/die_right.gif", 1.5f);
+            BodyImage image = new BodyImage("data/enemy/slime/die_right.gif", 1.5f);
             this.removeAllImages();
             this.addImage(image);
         } else{
-            BodyImage image = new BodyImage("data/enemy/die_left.gif", 1.5f);
+            BodyImage image = new BodyImage("data/enemy/slime/die_left.gif", 1.5f);
             this.removeAllImages();
             this.addImage(image);
         }
-        Timer timer = new Timer(1000, new SlimeTimerHandler(this));
+        Timer timer = new Timer(1000, this);
         timer.start();
 
     }
-
+    @Override
     public boolean isAlive() {
         return alive;
     }
-
+    @Override
     public boolean isBounce() {
         return bounce;
     }
@@ -117,6 +119,6 @@ public class Slime extends Walker implements StepListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        this.destroy();
     }
 }
