@@ -15,20 +15,28 @@ import javax.swing.Timer;
 
 public class Character extends Walker implements StepListener, ActionListener{
     private static final Shape CharaterShape = new BoxShape(1,1.2f);
-    private static final BodyImage image = new BodyImage("data/player/idle_right.gif", 2.35f);
+
+    private final BodyImage idle_right = new BodyImage("data/player/idle_right.gif", 2.35f);
+    private final BodyImage idle_left = new BodyImage("data/player/idle_left.gif", 2.35f);
+    private final BodyImage die_right = new BodyImage("data/player/die_right.gif", 2.55f);
+    private final BodyImage die_left = new BodyImage("data/player/die_left.gif", 2.55f);
+    private final BodyImage run_right = new BodyImage("data/player/run_right.gif", 2.35f);
+    private final BodyImage run_left = new BodyImage("data/player/run_left.gif", 2.35f);
+
+
+
+
     private int credits;
     private final World world;
     private int counter;
     private boolean bounce;
     private int kills = 0;
-
     private String facing = "right";
-
     private boolean alive = true;
 
     public Character(GameLevel world){
         super(world, CharaterShape);
-        this.addImage(image);
+        this.addImage(idle_right);
         credits = 0;
         world.addStepListener(this);
         this.world = world;
@@ -58,13 +66,11 @@ public class Character extends Walker implements StepListener, ActionListener{
     public void die(){
         this.alive = false;
         if(facing.equals("right")) {
-            BodyImage image = new BodyImage("data/player/die_right.gif", 2.55f);
             this.removeAllImages();
-            this.addImage(image);
+            this.addImage(die_right);
         } else{
-            BodyImage image = new BodyImage("data/player/die_left.gif", 2.55f);
             this.removeAllImages();
-            this.addImage(image);
+            this.addImage(die_left);
         }
         this.startWalking(0);
         Timer timer = new Timer(1000, new CharacterTimerHandler(this));
@@ -80,6 +86,10 @@ public class Character extends Walker implements StepListener, ActionListener{
         this.credits = this.credits + 1;
     }
 
+    public void setCredits(int credits){
+        this.credits = credits;
+    }
+
     public int getKills(){
         return kills;
     }
@@ -93,6 +103,22 @@ public class Character extends Walker implements StepListener, ActionListener{
 
     public void setFacing(String facing) {
         this.facing = facing;
+    }
+
+    public BodyImage getIdle_right() {
+        return idle_right;
+    }
+
+    public BodyImage getIdle_left() {
+        return idle_left;
+    }
+
+    public BodyImage getRun_left() {
+        return run_left;
+    }
+
+    public BodyImage getRun_right() {
+        return run_right;
     }
 
 
