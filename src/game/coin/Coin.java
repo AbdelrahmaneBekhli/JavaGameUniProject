@@ -4,6 +4,7 @@ import city.cs.engine.*;
 import city.cs.engine.Sensor;
 import game.character.Character;
 import game.coin.sensor.CoinSensor;
+import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -23,18 +24,21 @@ public class Coin extends DynamicBody implements StepListener{
     static {
         try {
             coinSound = new SoundClip("data/audio/coin.wav");
+            coinSound.setVolume(0.05);
         }catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
         }
     }
 
-    public Coin(World world, String direction, Character character){
+    public Coin(GameLevel world, String direction, float posX, float posY){
         super(world);
         this.addImage(CoinImage);
         this.setGravityScale(0);
         Fixture fixture = new GhostlyFixture(this, CoinShape);
-        Sensor sensor = new CoinSensor(this, CoinShape, character);
+        Sensor sensor = new CoinSensor(this, CoinShape, world.getCharacter());
         world.addStepListener(this);
+        this.setPosition(new Vec2(posX, posY));
+        this.setRange();
         if (direction.equals("down")){
             this.speed = this.speed * -1;
         }
