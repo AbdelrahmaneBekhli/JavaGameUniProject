@@ -2,6 +2,8 @@ package game.levels;
 
 import city.cs.engine.*;
 import game.Game;
+import game.coin.Coin;
+import game.enemies.Wolf;
 import game.platform.Platform;
 import game.platform.Wall;
 import org.jbox2d.common.Vec2;
@@ -19,6 +21,7 @@ public class Level2 extends GameLevel{
     private final String shortTiles = "data/tiles/level2/ShortPlatform.png";
 
     private final String background = "data/tiles/level2/background.jpg";
+    private final int platform_number = (int) Math.floor(Math.random() *(8 - 1 + 1) + 1);
     public Level2(Game game){
         //base class will create the student, professor
         super(game);
@@ -33,72 +36,101 @@ public class Level2 extends GameLevel{
             System.out.println(e);
         }
 
-        //ground platform
-        Shape Groundshape = new BoxShape(25, 0.5f);
 
-        //platform
-        Shape ShortplatformShape = new BoxShape(3, 0.5f);
-        Shape MediumPlatformShape = new BoxShape(6, 0.5f);
+        //platforms
+        Platform p1 = new Platform(this, getShortplatformShape(), -10, 0, "short");
+        Platform p2 = new Platform(this, getShortplatformShape(), -17, 5, "short");
+        Platform p3 = new Platform(this, getShortplatformShape(), -5, -5, "short");
+        Platform p4 = new Platform(this, getShortplatformShape(), 0, 7, "short");
+        Platform p5 = new Platform(this, getShortplatformShape(), 3, 0, "short");
+        Platform p6 = new Platform(this, getShortplatformShape(), 10, 10, "short");
+        Platform p7 = new Platform(this, getShortplatformShape(), 13, -4, "short");
+        Platform p8 = new Platform(this, getShortplatformShape(), -10, 15, "short");
+        Platform p9 = new Platform(this, getShortplatformShape(), -4, 22, "short");
+        Platform p10 = new Platform(this, getShortplatformShape(), 15, 23, "short");
+        Platform p11 = new Platform(this, getShortplatformShape(), 7, 28, "short");
+        Platform p12 = new Platform(this, getShortplatformShape(), -16, 24, "short");
+        Platform p13 = new Platform(this, getShortplatformShape(), -10, 30, "short");
+        Platform p14 = new Platform(this, getShortplatformShape(), 0, 35, "short");
+        Platform p15 = new Platform(this, getShortplatformShape(), -10, 40, "short");
+        Platform p16 = new Platform(this, getShortplatformShape(), 0, 45, "short");
+        Platform p17 = new Platform(this, getShortplatformShape(), -10, 50, "short");
+        Platform p18 = new Platform(this, getShortplatformShape(), 0, 55, "short");
+        Platform p19 = new Platform(this, getShortplatformShape(), -10, 60, "short");
+        Platform p20 = new Platform(this, getShortplatformShape(), 0, 65, "short");
+        Platform p21 = new Platform(this, getShortplatformShape(), -10, 70, "short");
+        Platform p22 = new Platform(this, getShortplatformShape(), 0, 75, "short");
+        Platform p23 = new Platform(this, getShortplatformShape(), -10, 80, "short");
+        Platform p24 = new Platform(this, getShortplatformShape(), 0, 85, "short");
+        Platform p25 = new Platform(this, getShortplatformShape(), -10, 90, "short");
+        Platform p26 = new Platform(this, getShortplatformShape(), 0, 95, "short");
+        Platform p27 = new Platform(this, getShortplatformShape(), -10, 100, "short");
+        Platform p28 = new Platform(this, getShortplatformShape(), 0, 105, "short");
+        Platform p29 = new Platform(this, getMediumPlatformShape(), -20, -7, "medium");
+        Platform p30 = new Platform(this, getMediumPlatformShape(), -26, 12, "medium");
+        Platform p31 = new Platform(this, getMediumPlatformShape(), 16, 6, "medium");
+        Platform p32 = new Platform(this, getMediumPlatformShape(), 6, 17, "medium");
+        Platform p33 = new Platform(this, getLongPlatformShape(), 35, 40, "long");
+        Platform p34 = new Platform(this, getLongPlatformShape(), 35, 50, "long");
+        Platform p35 = new Platform(this, getLongPlatformShape(), 35, 60, "long");
+        Platform p36 = new Platform(this, getLongPlatformShape(), 35, 70, "long");
+        Platform p37 = new Platform(this, getLongPlatformShape(), 35, 80, "long");
+        Platform p38 = new Platform(this, getLongPlatformShape(), 35, 90, "long");
+        Platform p39 = new Platform(this, getLongPlatformShape(), 35, 100, "long");
+        Platform p40 = new Platform(this, getLongPlatformShape(), 35, 110, "long");
 
-
-        Platform p1 = new Platform(this, ShortplatformShape, -20, -7, "short");
-        Platform p2 = new Platform(this, ShortplatformShape, -10, 0, "short");
-        Platform p3 = new Platform(this, ShortplatformShape, -17, 5, "short");
-        Platform p4 = new Platform(this, ShortplatformShape, -5, -5, "short");
-        Platform p5 = new Platform(this, ShortplatformShape, 0, 7, "short");
-        Platform p6 = new Platform(this, ShortplatformShape, 3, 0, "short");
-        Platform p7 = new Platform(this, ShortplatformShape, -22, 12, "short");
-        Platform p8 = new Platform(this, ShortplatformShape, 10, 10, "short");
-        Platform p9 = new Platform(this, ShortplatformShape, 16, 6, "short");
-        Platform p10 = new Platform(this, ShortplatformShape, 13, -4, "short");
-        Platform p11 = new Platform(this, ShortplatformShape, -10, 15, "short");
-        Platform p12 = new Platform(this, ShortplatformShape, 6, 17, "short");
-        Platform p13 = new Platform(this, ShortplatformShape, -4, 22, "short");
-        Platform p14 = new Platform(this, ShortplatformShape, 15, 23, "short");
-        Platform p15 = new Platform(this, ShortplatformShape, 7, 28, "short");
-        Platform p16 = new Platform(this, ShortplatformShape, -16, 24, "short");
-        Platform p17 = new Platform(this, ShortplatformShape, -10, 30, "short");
-        Platform p18 = new Platform(this, ShortplatformShape, 0, 35, "short");
-        Platform p19 = new Platform(this, ShortplatformShape, -10, 40, "short");
-        Platform p20 = new Platform(this, ShortplatformShape, 0, 45, "short");
-        Platform p21 = new Platform(this, ShortplatformShape, -10, 50, "short");
-        Platform p22 = new Platform(this, ShortplatformShape, 0, 55, "short");
-        Platform p23 = new Platform(this, ShortplatformShape, -10, 60, "short");
-        Platform p24 = new Platform(this, ShortplatformShape, 0, 65, "short");
-        Platform p25 = new Platform(this, ShortplatformShape, -10, 70, "short");
-        Platform p26 = new Platform(this, ShortplatformShape, 0, 75, "short");
-        Platform p27 = new Platform(this, ShortplatformShape, -10, 80, "short");
-        Platform p28 = new Platform(this, ShortplatformShape, 0, 85, "short");
-        Platform p29 = new Platform(this, ShortplatformShape, -10, 90, "short");
-        Platform p30 = new Platform(this, ShortplatformShape, 0, 95, "short");
-        Platform p31 = new Platform(this, ShortplatformShape, -10, 100, "short");
-        Platform p32 = new Platform(this, ShortplatformShape, 0, 105, "short");
-        Platform p33 = new Platform(this, Groundshape, 35, 40, "ground");
-        Platform p34 = new Platform(this, Groundshape, 35, 50, "ground");
-        Platform p35 = new Platform(this, Groundshape, 35, 60, "ground");
-        Platform p36 = new Platform(this, Groundshape, 35, 70, "ground");
-        Platform p37 = new Platform(this, Groundshape, 35, 80, "ground");
-        Platform p38 = new Platform(this, Groundshape, 35, 90, "ground");
-        Platform p39 = new Platform(this, Groundshape, 35, 100, "ground");
-        Platform p40 = new Platform(this, Groundshape, 35, 110, "ground");
+        //wall
         Shape wallShape = new BoxShape(0.5f,40);
         Wall wall = new Wall(this, wallShape, 60.5f, 79.53f);
+
+        //coins
+        Coin coin1 = new Coin(this, "up", -17, 9);
+        Coin coin2 = new Coin(this, "down", 3, 4);
+        Coin coin3 = new Coin(this, "down",-20, -3);
+        Coin coin4 = new Coin(this, "up", 13, 0);
+        Coin coin5 = new Coin(this, "down",-10, 18);
+        Coin coin6 = new Coin(this, "down", 15, 26);
+        Coin coin7 = new Coin(this, "down", 6, 20);
+        Coin coin8 = new Coin(this, "down", -10, 33);
+
+        //enemies
+        Wolf wolf1 = new Wolf(this,"black" ,5, "left", 16, 7.35f, game);
+        Wolf wolf2 = new Wolf(this,"brown" ,5, "right", -20, -5.65f, game);
+        Wolf wolf3 = new Wolf(this,"grey" ,4.5f, "left", -26, 13.35f, game);
+        Wolf wolf4 = new Wolf(this,"white" ,4.57f, "right", 6, 18.35f, game);
+        Wolf wolf5 = new Wolf(this,"brown" ,13, "left", 35, 41.35f, game);
+        Wolf wolf6 = new Wolf(this,"white" ,13, "right", 35, 51.35f, game);
+        Wolf wolf7 = new Wolf(this,"black" ,13, "left", 35, 61.35f, game);
+        Wolf wolf8 = new Wolf(this,"grey" ,13, "right", 35, 71.35f, game);
+        Wolf wolf9 = new Wolf(this,"black" ,13, "left", 35, 81.35f, game);
+        Wolf wolf10 = new Wolf(this,"white" ,13, "right", 35, 91.35f, game);
+        Wolf wolf11 = new Wolf(this,"grey" ,13, "left", 35, 101.35f, game);
+        Wolf wolf12 = new Wolf(this,"brown" ,13, "right", 35, 111.35f, game);
 
 
     }
     @Override
     public boolean isComplete() {
-        return getCharacter().getKills() == 5;
+        return getCharacter().getKills() == 12;
     }
 
     @Override
     public float getPortal_x() {
-        return 0;
+        return 55;
     }
 
     @Override
     public float getPortal_y() {
-        return 0;
+        return switch (platform_number) {
+            case 1 -> 42.5f;
+            case 2 -> 52.5f;
+            case 3 -> 62.5f;
+            case 4 -> 72.5f;
+            case 5 -> 82.5f;
+            case 6 -> 92.5f;
+            case 7 -> 102.5f;
+            default -> 112.5f;
+        };
     }
 
     @Override
