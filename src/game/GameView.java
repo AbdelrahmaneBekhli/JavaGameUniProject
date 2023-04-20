@@ -12,7 +12,7 @@ import java.awt.*;
 public class GameView extends UserView{
 
     private Image background;
-    private final Character character;
+    private Character character;
 
     private GameLevel world;
     public GameView(GameLevel world, Character character, int width, int height) {
@@ -39,7 +39,7 @@ public class GameView extends UserView{
 
         //Coins information
         Image coinImage = new ImageIcon("data/coin.png").getImage();
-        Image slimeImage = new ImageIcon("data/enemy/slime.png").getImage();
+        Image slimeImage = new ImageIcon("data/enemy/slime/slime.png").getImage();
 
         String coins = ": " + character.getCredits();
         String kills = ": " + character.getKills();
@@ -54,5 +54,8 @@ public class GameView extends UserView{
         if (!(character.isAlive())) {
             g.drawString(gameOver, 200, 290);
         }
+    }
+    public void updateCharacter(Character character){
+        this.character = character;
     }
 }
