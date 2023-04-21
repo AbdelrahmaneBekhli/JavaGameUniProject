@@ -60,6 +60,7 @@ public class Game{
             level.addStepListener(tr);
             //level now refer to the new level
             view.setWorld(level);
+            view.updateLevel(level);
             controller.updateCharacter(level.getCharacter());
             view.updateCharacter(level.getCharacter());
             level.getCharacter().setCredits(credits);

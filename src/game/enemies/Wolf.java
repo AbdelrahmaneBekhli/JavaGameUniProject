@@ -31,7 +31,7 @@ public class Wolf  extends Enemy {
     static {
         try {
             wolfDeathSound = new SoundClip("data/audio/wolf.wav");
-            wolfDeathSound.setVolume(0.1);
+            wolfDeathSound.setVolume(0.5);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
         }

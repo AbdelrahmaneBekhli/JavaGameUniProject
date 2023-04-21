@@ -1,8 +1,10 @@
 package game.levels;
 
 import city.cs.engine.*;
+import city.cs.engine.Shape;
 import game.Game;
-import game.coin.Coin;
+import game.collectables.coin.Coin;
+import game.collectables.speed.SpeedBoost;
 import game.enemies.Wolf;
 import game.platform.Platform;
 import game.platform.Wall;
@@ -10,32 +12,28 @@ import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 
 public class Level2 extends GameLevel{
     private SoundClip gameMusic;
-
-    private final String longTiles = "data/tiles/level2/GroundPlatform.png";
-    private final String mediumTiles = "data/tiles/level2/MediumPlatform.png";
-    private final String shortTiles = "data/tiles/level2/ShortPlatform.png";
-
-    private final String background = "data/tiles/level2/background.jpg";
     private final int platform_number = (int) Math.floor(Math.random() *(8 - 1 + 1) + 1);
     public Level2(Game game){
         //base class will create the student, professor
         super(game);
+        getCharacter().setSpeed(11);
         getCharacter().setPosition(new Vec2(-10, 0));
 
         //adding the music background
         try{
-            gameMusic = new SoundClip("data/audio/MusicTrack.wav");
-            gameMusic.setVolume(0.2);
+            gameMusic = new SoundClip("data/audio/level2MusicTrack.wav");
+            gameMusic.setVolume(0.1);
             gameMusic.loop();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
             System.out.println(e);
         }
-
 
         //platforms
         Platform p1 = new Platform(this, getShortplatformShape(), -10, 0, "short");
@@ -50,34 +48,19 @@ public class Level2 extends GameLevel{
         Platform p10 = new Platform(this, getShortplatformShape(), 15, 23, "short");
         Platform p11 = new Platform(this, getShortplatformShape(), 7, 28, "short");
         Platform p12 = new Platform(this, getShortplatformShape(), -16, 24, "short");
-        Platform p13 = new Platform(this, getShortplatformShape(), -10, 30, "short");
-        Platform p14 = new Platform(this, getShortplatformShape(), 0, 35, "short");
-        Platform p15 = new Platform(this, getShortplatformShape(), -10, 40, "short");
-        Platform p16 = new Platform(this, getShortplatformShape(), 0, 45, "short");
-        Platform p17 = new Platform(this, getShortplatformShape(), -10, 50, "short");
-        Platform p18 = new Platform(this, getShortplatformShape(), 0, 55, "short");
-        Platform p19 = new Platform(this, getShortplatformShape(), -10, 60, "short");
-        Platform p20 = new Platform(this, getShortplatformShape(), 0, 65, "short");
-        Platform p21 = new Platform(this, getShortplatformShape(), -10, 70, "short");
-        Platform p22 = new Platform(this, getShortplatformShape(), 0, 75, "short");
-        Platform p23 = new Platform(this, getShortplatformShape(), -10, 80, "short");
-        Platform p24 = new Platform(this, getShortplatformShape(), 0, 85, "short");
-        Platform p25 = new Platform(this, getShortplatformShape(), -10, 90, "short");
-        Platform p26 = new Platform(this, getShortplatformShape(), 0, 95, "short");
-        Platform p27 = new Platform(this, getShortplatformShape(), -10, 100, "short");
-        Platform p28 = new Platform(this, getShortplatformShape(), 0, 105, "short");
-        Platform p29 = new Platform(this, getMediumPlatformShape(), -20, -7, "medium");
-        Platform p30 = new Platform(this, getMediumPlatformShape(), -26, 12, "medium");
-        Platform p31 = new Platform(this, getMediumPlatformShape(), 16, 6, "medium");
-        Platform p32 = new Platform(this, getMediumPlatformShape(), 6, 17, "medium");
-        Platform p33 = new Platform(this, getLongPlatformShape(), 35, 40, "long");
-        Platform p34 = new Platform(this, getLongPlatformShape(), 35, 50, "long");
-        Platform p35 = new Platform(this, getLongPlatformShape(), 35, 60, "long");
-        Platform p36 = new Platform(this, getLongPlatformShape(), 35, 70, "long");
-        Platform p37 = new Platform(this, getLongPlatformShape(), 35, 80, "long");
-        Platform p38 = new Platform(this, getLongPlatformShape(), 35, 90, "long");
-        Platform p39 = new Platform(this, getLongPlatformShape(), 35, 100, "long");
-        Platform p40 = new Platform(this, getLongPlatformShape(), 35, 110, "long");
+        Platform p13 = new Platform(this, getMediumPlatformShape(), -20, -7, "medium");
+        Platform p14 = new Platform(this, getMediumPlatformShape(), -26, 12, "medium");
+        Platform p15 = new Platform(this, getMediumPlatformShape(), 16, 6, "medium");
+        Platform p16 = new Platform(this, getMediumPlatformShape(), 6, 17, "medium");
+
+        for(int i = 35; i <= 105; i = i + 10){
+            Platform stair1 = new Platform(this, getShortplatformShape(), 0, i, "short");
+            Platform stair2 = new Platform(this, getShortplatformShape(), -10, i -5, "short");
+        }
+
+        for(int i = 40; i <= 110; i = i + 10){
+            Platform longplatforms = new Platform(this, getLongPlatformShape(), 35, i, "long");
+        }
 
         //wall
         Shape wallShape = new BoxShape(0.5f,40);
@@ -111,7 +94,13 @@ public class Level2 extends GameLevel{
     }
     @Override
     public boolean isComplete() {
-        return getCharacter().getKills() == 12;
+        boolean complete = getCharacter().getKills() == 12;
+        if(complete) {
+            for (float i = 42.5f; i < 113; i = i + 10) {
+                SpeedBoost speed8 = new SpeedBoost(this, 13, i);
+            }
+        }
+        return complete;
     }
 
     @Override
@@ -141,20 +130,30 @@ public class Level2 extends GameLevel{
 
     @Override
     public String getLongTiles() {
-        return longTiles;
+        return "data/tiles/level2/GroundPlatform.png";
     }
 
     @Override
     public String getMediumTiles() {
-        return mediumTiles;
+        return "data/tiles/level2/MediumPlatform.png";
     }
 
     @Override
     public String getShortTiles() {
-        return shortTiles;
+        return "data/tiles/level2/ShortPlatform.png";
     }
 
     @Override
-    public String getBackground(){ return background; }
+    public String getBackground() {
+        return "data/tiles/level2/background.jpg";
+    }
 
+    @Override
+    public Image getEnemyPic(){
+        return new ImageIcon("data/enemy/wolf/wolf.png").getImage();
+    }
+    @Override
+    public int getEnemyPicX(){
+        return 9;
+    }
 }
