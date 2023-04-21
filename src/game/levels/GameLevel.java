@@ -1,8 +1,11 @@
 package game.levels;
 
 import city.cs.engine.*;
+import city.cs.engine.Shape;
 import game.Game;
 import game.character.Character;
+
+import java.awt.*;
 
 public abstract class GameLevel extends World {
     private Character character;
@@ -37,4 +40,8 @@ public abstract class GameLevel extends World {
 
     public abstract String getShortTiles();
     public abstract String getBackground();
+
+    public abstract Image getEnemyPic();
+
+    public abstract int getEnemyPicX();
 }

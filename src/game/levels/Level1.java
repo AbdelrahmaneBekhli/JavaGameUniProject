@@ -1,32 +1,26 @@
 package game.levels;
 
-import city.cs.engine.BoxShape;
-import city.cs.engine.Shape;
 import city.cs.engine.SoundClip;
 import game.Game;
-import game.coin.Coin;
+import game.collectables.coin.Coin;
 import game.platform.Platform;
 import game.enemies.Slime;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 public class Level1  extends GameLevel {
     private SoundClip gameMusic;
-
-    private final String longTiles = "data/tiles/level1/GroundPlatform.png";
-    private final String mediumTiles = "data/tiles/level1/MediumPlatform.png";
-    private final String shortTiles = "data/tiles/level1/ShortPlatform.png";
-
-    private final String background = "data/tiles/level1/background.jpg";
     public Level1(Game game) {
         super(game);
 
         //adding the music background
         try{
-            gameMusic = new SoundClip("data/audio/MusicTrack.wav");
+            gameMusic = new SoundClip("data/audio/level1MusicTrack.wav");
             gameMusic.setVolume(0.2);
             gameMusic.loop();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
@@ -46,6 +40,7 @@ public class Level1  extends GameLevel {
         Platform p7 = new Platform(this, getMediumPlatformShape(), -20, 5, "medium");
 
         //character
+        getCharacter().setSpeed(8);
         getCharacter().setPosition(new Vec2(-14,-12));
 
         //enemies
@@ -83,22 +78,31 @@ public class Level1  extends GameLevel {
     }
     @Override
     public String getLongTiles() {
-        return longTiles;
+        return "data/tiles/level1/GroundPlatform.png";
     }
 
     @Override
     public String getMediumTiles() {
-        return mediumTiles;
+        return "data/tiles/level1/MediumPlatform.png";
     }
 
     @Override
     public String getShortTiles() {
-        return shortTiles;
+        return "data/tiles/level1/ShortPlatform.png";
     }
 
     @Override
     public String getBackground(){
-        return background;
+        return "data/tiles/level1/background.jpg";
+    }
+
+    @Override
+    public Image getEnemyPic(){
+        return new ImageIcon("data/enemy/slime/slime.png").getImage();
+    }
+    @Override
+    public int getEnemyPicX(){
+        return 11;
     }
 
 }

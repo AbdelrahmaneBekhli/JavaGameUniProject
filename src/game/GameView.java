@@ -38,15 +38,14 @@ public class GameView extends UserView{
         g.setColor(Color.BLACK);
 
         //Coins information
-        Image coinImage = new ImageIcon("data/coin.png").getImage();
-        Image slimeImage = new ImageIcon("data/enemy/slime/slime.png").getImage();
+        Image coinImage = new ImageIcon("data/collectables/coin/coin.png").getImage();
 
         String coins = ": " + character.getCredits();
         String kills = ": " + character.getKills();
         g.drawImage(coinImage,10,10,null, this);
-        g.drawImage(slimeImage, 12, 42, null, this);
-        g.drawString(coins, 40,33);
-        g.drawString(kills, 40,64);
+        g.drawImage(world.getEnemyPic(), world.getEnemyPicX(), 42, null, this);
+        g.drawString(coins, 44,33);
+        g.drawString(kills, 44,64);
         //Game update
         Font endFont = new Font("Arial", Font.BOLD, 100);
         g.setFont(endFont);
@@ -57,5 +56,9 @@ public class GameView extends UserView{
     }
     public void updateCharacter(Character character){
         this.character = character;
+    }
+
+    public void updateLevel(GameLevel level){
+        this.world = level;
     }
 }
