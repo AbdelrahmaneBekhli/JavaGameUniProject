@@ -1,9 +1,8 @@
-package game.coin;
+package game.collectables.coin;
 
 import city.cs.engine.*;
 import city.cs.engine.Sensor;
-import game.character.Character;
-import game.coin.sensor.CoinSensor;
+import game.collectables.coin.sensor.CoinSensor;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
 
@@ -13,7 +12,7 @@ import java.io.IOException;
 
 public class Coin extends DynamicBody implements StepListener{
     private static final Shape CoinShape = new BoxShape(0.5f,0.5f);
-    private static final BodyImage CoinImage = new BodyImage("data/coinAnimation.gif", 1);
+    private static final BodyImage CoinImage = new BodyImage("data/collectables/coin/coinAnimation.gif", 1);
 
     private float maxHeight;
     private float minHeight;
@@ -24,7 +23,7 @@ public class Coin extends DynamicBody implements StepListener{
     static {
         try {
             coinSound = new SoundClip("data/audio/coin.wav");
-            coinSound.setVolume(0.05);
+            coinSound.setVolume(0.1);
         }catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             System.out.println(e);
         }
