@@ -30,14 +30,14 @@ public class CharacterController implements KeyListener {
             if (code == KeyEvent.VK_A) {
                 character.removeAllImages();
                 character.addImage(character.getRun_left());
-                character.startWalking(-8);
+                character.startWalking(character.getSpeed() * -1);
                 character.setFacing("left");
             }
             if (code == KeyEvent.VK_D) {
                 if (character.isAlive()) {
                     character.removeAllImages();
                     character.addImage(character.getRun_right());
-                    character.startWalking(8);
+                    character.startWalking(character.getSpeed());
                     character.setFacing("right");
                 }
             }

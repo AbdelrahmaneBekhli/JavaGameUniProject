@@ -22,12 +22,10 @@ public class Character extends Walker implements StepListener, ActionListener{
     private final BodyImage die_left = new BodyImage("data/player/die_left.gif", 2.55f);
     private final BodyImage run_right = new BodyImage("data/player/run_right.gif", 2.35f);
     private final BodyImage run_left = new BodyImage("data/player/run_left.gif", 2.35f);
+    private int speed;
 
-
-
-
+    private int speedBoostCollected;
     private int credits;
-    private final World world;
     private int counter;
     private boolean bounce;
     private int kills = 0;
@@ -39,7 +37,6 @@ public class Character extends Walker implements StepListener, ActionListener{
         this.addImage(idle_right);
         credits = 0;
         world.addStepListener(this);
-        this.world = world;
         this.setGravityScale(5);
     }
 
@@ -47,10 +44,10 @@ public class Character extends Walker implements StepListener, ActionListener{
         DynamicBody weapon;
         //setting up the shape of the weapon
         Shape weaponShape = new CircleShape(0.3f);
-        if(world instanceof Level1){
-            weapon = new Snowball(world, weaponShape);
+        if(this.getWorld() instanceof Level1){
+            weapon = new Snowball(this.getWorld(), weaponShape);
         } else{
-            weapon = new Stone(world, weaponShape);
+            weapon = new Stone(this.getWorld(), weaponShape);
         }
 
 
@@ -105,6 +102,22 @@ public class Character extends Walker implements StepListener, ActionListener{
         this.facing = facing;
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getSpeedBoostCollected() {
+        return speedBoostCollected;
+    }
+
+    public void setSpeedBoostCollected(int speedBoostCollected) {
+        this.speedBoostCollected = speedBoostCollected;
+    }
+
     public BodyImage getIdle_right() {
         return idle_right;
     }
@@ -135,7 +148,7 @@ public class Character extends Walker implements StepListener, ActionListener{
                 this.counter = 0;
             }
         }
-        if(world instanceof Level2){
+        if(this.getWorld() instanceof Level2){
             if(this.getPosition().y < -20){
                 this.setPosition(new Vec2(-10, 0));
             }
