@@ -10,6 +10,7 @@ import game.enemies.Wolf;
 import game.portal.Portal;
 import game.character.Character;
 import game.levels.GameLevel;
+import game.weapon.laser.Laser;
 import game.weapon.snowball.Snowball;
 import game.weapon.stone.Stone;
 import org.jbox2d.common.Vec2;
@@ -59,7 +60,7 @@ public class EnemySensorListener implements SensorListener {
                 }
             }
         }
-        if (sensorEvent.getContactBody() instanceof Snowball || sensorEvent.getContactBody() instanceof Stone) {
+        if (sensorEvent.getContactBody() instanceof Snowball || sensorEvent.getContactBody() instanceof Stone || sensorEvent.getContactBody() instanceof Laser) {
             sensorEvent.getContactBody().destroy();
             if (enemy.isAlive()) {
                 if (enemy instanceof Golem) {
