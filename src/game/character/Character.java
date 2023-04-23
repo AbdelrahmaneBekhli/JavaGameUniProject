@@ -4,6 +4,7 @@ import city.cs.engine.*;
 import game.levels.GameLevel;
 import game.levels.Level1;
 import game.levels.Level2;
+import game.weapon.laser.Laser;
 import game.weapon.snowball.Snowball;
 import game.weapon.stone.Stone;
 import org.jbox2d.common.Vec2;
@@ -23,7 +24,7 @@ public class Character extends Walker implements StepListener, ActionListener{
     private final BodyImage run_right = new BodyImage("data/player/run_right.gif", 2.35f);
     private final BodyImage run_left = new BodyImage("data/player/run_left.gif", 2.35f);
     private int speed;
-
+    private GameLevel world;
     private int speedBoostCollected;
     private int credits;
     private int counter;
@@ -35,6 +36,7 @@ public class Character extends Walker implements StepListener, ActionListener{
         super(world, CharaterShape);
         this.addImage(idle_right);
         credits = 0;
+        this.world = world;
         world.addStepListener(this);
         this.setGravityScale(5);
         this.addCollisionListener(new CharacterCollisionListener());
@@ -43,22 +45,24 @@ public class Character extends Walker implements StepListener, ActionListener{
     }
 
     public void shoot(){
-        DynamicBody weapon;
-        //setting up the shape of the weapon
-        Shape weaponShape = new CircleShape(0.3f);
-        if(this.getWorld() instanceof Level1){
-            weapon = new Snowball(this.getWorld(), weaponShape);
-        } else{
-            weapon = new Stone(this.getWorld(), weaponShape);
-        }
-
-
-        if(this.facing.equals("right")) {
-            weapon.setPosition(this.getPosition());
-            weapon.setLinearVelocity(new Vec2(15, 6));
-        } else if (this.facing.equals("left")) {
-            weapon.setPosition(new Vec2(this.getPosition().x -1, this.getPosition().y));
-            weapon.setLinearVelocity(new Vec2(-10, 4));
+        DynamicBody weapon = this.world.getWeapon();
+        if(weapon instanceof Laser){
+            if(this.facing.equals("right")){
+                weapon.setPosition(new Vec2(this.getPosition().x + 1, this.getPosition().y + 0.5f));
+                weapon.setLinearVelocity(new Vec2(25, 0));
+            } else{
+                weapon.setPosition(new Vec2(this.getPosition().x - 1, this.getPosition().y + 0.5f));
+                weapon.setLinearVelocity(new Vec2(-25, 0));
+            }
+        } else {
+            //setting up the shape of the weapon
+            if (this.facing.equals("right")) {
+                weapon.setPosition(this.getPosition());
+                weapon.setLinearVelocity(new Vec2(15, 6));
+            } else if (this.facing.equals("left")) {
+                weapon.setPosition(new Vec2(this.getPosition().x - 1, this.getPosition().y));
+                weapon.setLinearVelocity(new Vec2(-10, 4));
+            }
         }
 
     }
