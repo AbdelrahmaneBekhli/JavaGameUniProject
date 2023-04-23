@@ -28,16 +28,17 @@ public class Level1  extends GameLevel {
         }
 
         //ground platform
-        Platform ground = new Platform(this, getLongPlatformShape(), 0, -13.6f, "ground");
+        Platform ground = new Platform(this, getLongPlatformShape(), 0, -13.6f, "long");
 
 
-        Platform p1 = new Platform(this, getShortplatformShape(), -7, -7, "short");
-        Platform p2 = new Platform(this, getShortplatformShape(), 4, -7, "short");
-        Platform p3 = new Platform(this, getMediumPlatformShape(), 19, -2, "medium");
-        Platform p4 = new Platform(this, getMediumPlatformShape(), 0, 0, "medium");
-        Platform p5 = new Platform(this, getMediumPlatformShape(), -20, -3, "medium");
-        Platform p6 = new Platform(this, getShortplatformShape(), 10, 5, "short");
-        Platform p7 = new Platform(this, getMediumPlatformShape(), -20, 5, "medium");
+        Platform p1 = new Platform(this, getShortPlatformShape(), -7, -7, "short");
+        Platform p2 = new Platform(this, getShortPlatformShape(), 4, -7, "short");
+        Platform p3 = new Platform(this, getShortPlatformShape(), 10, 5, "short");
+
+        Platform p4 = new Platform(this, getMediumPlatformShape(), -20, 5, "medium");
+        Platform p5 = new Platform(this, getMediumPlatformShape(), 19, -2, "medium");
+        Platform p6 = new Platform(this, getMediumPlatformShape(), 0, 0, "medium");
+        Platform p7 = new Platform(this, getMediumPlatformShape(), -20, -3, "medium");
 
         //character
         getCharacter().setSpeed(8);
@@ -76,9 +77,14 @@ public class Level1  extends GameLevel {
     public float getPortal_y() {
         return 1;
     }
+
+    @Override
+    public String getExtraLongTiles() {
+        return null;
+    }
     @Override
     public String getLongTiles() {
-        return "data/tiles/level1/GroundPlatform.png";
+        return "data/tiles/level1/LongPlatform.png";
     }
 
     @Override
@@ -100,7 +106,7 @@ public class Level1  extends GameLevel {
     public Image getEnemyPic(){
         return new ImageIcon("data/enemy/slime/slime.png").getImage();
     }
-    @Override
+
     public int getEnemyPicX(){
         return 11;
     }
