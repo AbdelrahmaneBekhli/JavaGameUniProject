@@ -12,6 +12,7 @@ import game.character.Character;
 import game.levels.GameLevel;
 import game.weapon.snowball.Snowball;
 import game.weapon.stone.Stone;
+import org.jbox2d.common.Vec2;
 
 public class EnemySensorListener implements SensorListener {
     private final Character character;
@@ -35,7 +36,8 @@ public class EnemySensorListener implements SensorListener {
                 //check if the character collides with the slime from the top
                 if (character.getPosition().y > enemy.getPosition().y + 0.75f) {
                     if (enemy.isBounce()) {
-                        character.setBounce(true);
+                        //make the character bounce
+                        character.applyImpulse(new Vec2(0, 1200));
                         character.incrementKills();
                     }
                     enemy.die();
