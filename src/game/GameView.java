@@ -5,6 +5,7 @@ import game.character.Character;
 import game.levels.GameLevel;
 import game.levels.Level1;
 import game.levels.Level2;
+import game.levels.Level3;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,6 @@ public class GameView extends UserView{
 
     private GameLevel world;
     public GameView(GameLevel world, Character character, int width, int height) {
-
         super(world, width, height);
         this.character = character;
         this.world = world;
@@ -35,7 +35,11 @@ public class GameView extends UserView{
     protected void paintForeground(Graphics2D g){
         Font coinsFont = new Font("Arial", Font.BOLD, 25);
         g.setFont(coinsFont);
-        g.setColor(Color.BLACK);
+        if(world instanceof Level3){
+            g.setColor(Color.WHITE);
+        }else {
+            g.setColor(Color.BLACK);
+        }
 
         //Coins information
         Image coinImage = new ImageIcon("data/collectables/coin/coin.png").getImage();
