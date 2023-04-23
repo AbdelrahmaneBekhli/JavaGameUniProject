@@ -8,6 +8,7 @@ import game.collectables.coin.Coin;
 import game.enemies.Golem;
 import game.platform.MovingPlatform;
 import game.platform.Platform;
+import game.weapon.laser.Laser;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -173,5 +174,9 @@ public class Level3 extends GameLevel{
     @Override
     public int getEnemyPicX() {
         return 12;
+    }
+    @Override
+    public DynamicBody getWeapon() {
+        return new Laser(this);
     }
 }
