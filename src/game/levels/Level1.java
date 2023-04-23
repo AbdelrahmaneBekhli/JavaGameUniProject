@@ -1,10 +1,14 @@
 package game.levels;
 
+import city.cs.engine.CircleShape;
+import city.cs.engine.DynamicBody;
+import city.cs.engine.Shape;
 import city.cs.engine.SoundClip;
 import game.Game;
 import game.collectables.coin.Coin;
 import game.platform.Platform;
 import game.enemies.Slime;
+import game.weapon.snowball.Snowball;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -109,6 +113,12 @@ public class Level1  extends GameLevel {
 
     public int getEnemyPicX(){
         return 11;
+    }
+
+    @Override
+    public DynamicBody getWeapon() {
+        Shape weaponShape = new CircleShape(0.3f);
+        return new Snowball(this, weaponShape);
     }
 
 }

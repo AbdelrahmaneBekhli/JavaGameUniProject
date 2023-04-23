@@ -47,4 +47,6 @@ public abstract class GameLevel extends World {
     public abstract Image getEnemyPic();
 
     public abstract int getEnemyPicX();
+
+    public abstract DynamicBody getWeapon();
 }

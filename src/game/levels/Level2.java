@@ -8,6 +8,7 @@ import game.collectables.speed.SpeedBoost;
 import game.enemies.Wolf;
 import game.platform.Platform;
 import game.platform.Wall;
+import game.weapon.stone.Stone;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -151,5 +152,10 @@ public class Level2 extends GameLevel{
     @Override
     public int getEnemyPicX(){
         return 9;
+    }
+    @Override
+    public DynamicBody getWeapon() {
+        Shape weaponShape = new CircleShape(0.3f);
+        return new Stone(this, weaponShape);
     }
 }
