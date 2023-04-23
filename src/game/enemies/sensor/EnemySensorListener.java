@@ -29,6 +29,13 @@ public class EnemySensorListener implements SensorListener {
         this.game = game;
     }
 
+    private void checkComplete(){
+        if (world.isComplete() && !(portalCreated)) {
+            this.portalCreated = true;
+            Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y(), character, game);
+        }
+    }
+
     @Override
     public void beginContact(SensorEvent sensorEvent) {
         if (sensorEvent.getContactBody() instanceof Character) {
@@ -41,6 +48,7 @@ public class EnemySensorListener implements SensorListener {
                         character.incrementKills();
                     }
                     enemy.die();
+                    this.checkComplete();
                 } else {
                     if (enemy.isAlive()) {
                         character.die();
@@ -55,10 +63,10 @@ public class EnemySensorListener implements SensorListener {
         if (sensorEvent.getContactBody() instanceof Snowball || sensorEvent.getContactBody() instanceof Stone) {
             sensorEvent.getContactBody().destroy();
             if (enemy.isAlive()) {
-                if(enemy instanceof Golem){
-                    if(((Golem) enemy).getArmor()) {
+                if (enemy instanceof Golem) {
+                    if (((Golem) enemy).getArmor()) {
                         ((Golem) enemy).destroyArmor();
-                    } else{
+                    } else {
                         character.incrementKills();
                         enemy.die();
                     }
@@ -67,11 +75,7 @@ public class EnemySensorListener implements SensorListener {
                     enemy.die();
                 }
             }
-        }
-
-        if (world.isComplete() && !(portalCreated)) {
-            this.portalCreated = true;
-            Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y(), character, game);
+            this.checkComplete();
         }
     }
 
