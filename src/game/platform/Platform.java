@@ -17,9 +17,12 @@ public class Platform extends StaticBody {
             BodyImage mediumPlatformImage = new BodyImage(level.getMediumTiles(), 1f);
             this.addImage(mediumPlatformImage);
         }
-        else{
-            BodyImage LongPlatformImage = new BodyImage(level.getLongTiles(), 1f);
-            this.addImage(LongPlatformImage);
+        else if(type.equals("long")){
+            BodyImage longPlatformImage = new BodyImage(level.getLongTiles(), 1f);
+            this.addImage(longPlatformImage);
+        } else{
+            BodyImage extraLongPlatformImage = new BodyImage(level.getExtraLongTiles(), 1f);
+            this.addImage(extraLongPlatformImage);
         }
     }
 }
