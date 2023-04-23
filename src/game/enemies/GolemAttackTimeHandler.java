@@ -23,7 +23,8 @@ public class GolemAttackTimeHandler implements ActionListener {
     public void startAttack(){
         if(golem.getArmor()) {
             //random time for the golem to attack
-            animationTimer = new Timer((int) Math.floor(Math.random() * (1000 - 500 + 1) + 500), this);
+            int delay = (int) Math.floor(Math.random() * (6000 - 1000 + 1) + 1000);
+            animationTimer = new Timer(delay, this);
             animationTimer.start();
         }
 }
@@ -32,7 +33,8 @@ public class GolemAttackTimeHandler implements ActionListener {
         spikeTimer.stop();
         spike.destroy();
         //cooldown time for the next random attack
-        cooldownTimer = new Timer(5000, this::attackCooldown);
+        int delay = (int) Math.floor(Math.random() * (8000 - 5000 + 1) + 5000);
+        cooldownTimer = new Timer(delay, this::attackCooldown);
         cooldownTimer.start();
     }
 
