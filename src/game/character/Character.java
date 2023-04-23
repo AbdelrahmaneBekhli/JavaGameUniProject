@@ -38,6 +38,7 @@ public class Character extends Walker implements StepListener, ActionListener{
         credits = 0;
         world.addStepListener(this);
         this.setGravityScale(5);
+        this.addCollisionListener(new CharacterCollisionListener());
         SolidFixture fixture = new SolidFixture(this, CharaterShape);
         fixture.setFriction(0);
     }
