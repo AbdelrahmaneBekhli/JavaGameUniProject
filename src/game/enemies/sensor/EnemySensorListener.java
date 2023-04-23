@@ -44,9 +44,7 @@ public class EnemySensorListener implements SensorListener {
                         character.die();
                     }
                 }
-            }
-
-            if (enemy instanceof Wolf){
+            } else {
                 if (enemy.isAlive()) {
                     character.die();
                 }
@@ -58,8 +56,8 @@ public class EnemySensorListener implements SensorListener {
                 if(enemy instanceof Golem){
                     if(((Golem) enemy).getArmor()) {
                         ((Golem) enemy).destroyArmor();
-                        System.out.println("hit");
                     } else{
+                        character.incrementKills();
                         enemy.die();
                     }
                 } else {
