@@ -4,6 +4,7 @@ import city.cs.engine.SensorEvent;
 import city.cs.engine.SensorListener;
 import game.Game;
 import game.enemies.Enemy;
+import game.enemies.Golem;
 import game.enemies.Slime;
 import game.enemies.Wolf;
 import game.portal.Portal;
@@ -52,10 +53,19 @@ public class EnemySensorListener implements SensorListener {
             }
         }
         if (sensorEvent.getContactBody() instanceof Snowball || sensorEvent.getContactBody() instanceof Stone) {
+            sensorEvent.getContactBody().destroy();
             if (enemy.isAlive()) {
-                sensorEvent.getContactBody().destroy();
-                character.incrementKills();
-                enemy.die();
+                if(enemy instanceof Golem){
+                    if(((Golem) enemy).getArmor()) {
+                        ((Golem) enemy).destroyArmor();
+                        System.out.println("hit");
+                    } else{
+                        enemy.die();
+                    }
+                } else {
+                    character.incrementKills();
+                    enemy.die();
+                }
             }
         }
 
