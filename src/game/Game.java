@@ -1,13 +1,10 @@
 package game;
 
-import city.cs.engine.SoundClip;
 import game.character.CharacterController;
 import game.character.Tracker;
 import game.levels.*;
 import javax.swing.JFrame;
-import java.io.IOException;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
 
 public class Game{
     private GameLevel level;
@@ -31,7 +28,7 @@ public class Game{
         final JFrame frame = new JFrame("2D platformer");
         frame.add(view);
 
-        //set the X button to terminante the program
+        //set the X button to terminate the program
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
         frame.setResizable((false));
@@ -56,7 +53,7 @@ public class Game{
             int credits = level.getCharacter().getCredits();
             level = new Level2(this);
             view.setBackground(level);
-            Tracker tr = new Tracker(view, level.getCharacter());
+            Tracker tr = new Tracker(view, level);
             level.addStepListener(tr);
             //level now refer to the new level
             view.setWorld(level);
@@ -66,9 +63,20 @@ public class Game{
             level.getCharacter().setCredits(credits);
             level.start();
         }
-        else if (level instanceof Level2 && level.isComplete()){
+        if (level instanceof Level2 && level.isComplete()){
+            level.stop();
             System.out.println("level 3 loading");
-            System.exit(0);
+            int credits = level.getCharacter().getCredits();
+            level = new Level3(this);
+            Tracker tr2 = new Tracker(view, level);
+            level.addStepListener(tr2);
+            view.setBackground(level);
+            view.setWorld(level);
+            view.updateLevel(level);
+            view.updateCharacter(level.getCharacter());
+            controller.updateCharacter(level.getCharacter());
+            level.getCharacter().setCredits(credits);
+            level.start();
         }
     }
 
