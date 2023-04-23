@@ -17,6 +17,7 @@ public class CharacterCollisionListener implements CollisionListener {
             JumpPad jumpPad = (JumpPad) collisionEvent.getOtherBody();
             if(((int) character.getPosition().y >= ((int) jumpPad.getPosition().y + 2))){
                 character.applyImpulse(new Vec2(0,700));
+                jumpPad.playSound();
             }
         }
     }
