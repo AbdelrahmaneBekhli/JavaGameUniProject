@@ -19,7 +19,6 @@ public class EnemySensorListener implements SensorListener {
     private final Enemy enemy;
     private final GameLevel world;
     private final Game game;
-
     private boolean portalCreated = false;
 
     public EnemySensorListener(Character character, Enemy enemy, GameLevel world, Game game) {

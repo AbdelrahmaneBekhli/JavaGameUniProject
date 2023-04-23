@@ -8,6 +8,7 @@ import game.levels.GameLevel;
 
 import java.awt.event.ActionListener;
 
+
 public abstract class Enemy extends Walker implements StepListener, ActionListener {
     public Enemy(GameLevel world) {
         super(world);

@@ -6,9 +6,12 @@ import game.enemies.sensor.EnemySensor;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Golem extends Enemy {
     private final Shape golemShape = new BoxShape(0.8f,1);
@@ -33,6 +36,25 @@ public class Golem extends Enemy {
     private Boolean attacking = false;
     private Boolean armor = true;
     private Boolean animation = false;
+
+    private static SoundClip golemDeathSound;
+    static {
+        try {
+            golemDeathSound = new SoundClip("data/audio/golemDeath.wav");
+            golemDeathSound.setVolume(0.1);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
+    private static SoundClip golemArmorBreakSound;
+    static {
+        try {
+            golemArmorBreakSound = new SoundClip("data/audio/golemArmorBreak.wav");
+            golemArmorBreakSound.setVolume(0.5);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
 
 
     public Golem(GameLevel world, float range, String initial_facing, float posX, float posY, Game game) {
@@ -88,6 +110,7 @@ public class Golem extends Enemy {
     }
 
     public void destroyArmor(){
+        golemArmorBreakSound.play();
         this.armor = false;
         this.animation = true;
         this.removeAllImages();
@@ -124,6 +147,7 @@ public class Golem extends Enemy {
             this.addImage(this.noArmorDeath_left);
         }
         //death animation time
+        golemDeathSound.play();
         deathTimer = new Timer(800, this);
         deathTimer.start();
     }
