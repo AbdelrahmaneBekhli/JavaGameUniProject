@@ -27,7 +27,6 @@ public class Character extends Walker implements StepListener, ActionListener{
     private int speedBoostCollected;
     private int credits;
     private int counter;
-    private boolean bounce;
     private int kills = 0;
     private String facing = "right";
     private boolean alive = true;
@@ -73,7 +72,7 @@ public class Character extends Walker implements StepListener, ActionListener{
             this.addImage(die_left);
         }
         this.startWalking(0);
-        Timer timer = new Timer(1000, new CharacterTimerHandler(this));
+        Timer timer = new Timer(1000, this);
         timer.start();
     }
     public boolean isAlive() {
@@ -95,10 +94,6 @@ public class Character extends Walker implements StepListener, ActionListener{
     }
     public void incrementKills(){
         this.kills = this.kills + 1;
-    }
-
-    public void setBounce(boolean bounce) {
-        this.bounce = bounce;
     }
 
     public void setFacing(String facing) {
@@ -140,17 +135,6 @@ public class Character extends Walker implements StepListener, ActionListener{
 
     @Override
     public void preStep(StepEvent stepEvent) {
-        if(bounce) {
-            if (counter == 0) {
-                counter ++;
-                this.setGravityScale(-220);
-            }
-            else{
-                this.setGravityScale(5);
-                bounce = false;
-                this.counter = 0;
-            }
-        }
         if(this.getWorld() instanceof Level2){
             if(this.getPosition().y < -20){
                 this.setPosition(new Vec2(-10, 0));
@@ -164,5 +148,6 @@ public class Character extends Walker implements StepListener, ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.destroy();
     }
 }
