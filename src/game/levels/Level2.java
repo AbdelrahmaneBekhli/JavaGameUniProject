@@ -19,12 +19,13 @@ import java.io.IOException;
 
 public class Level2 extends GameLevel{
     private SoundClip gameMusic;
-    private final int platform_number = (int) Math.floor(Math.random() *(8 - 1 + 1) + 1);
+    private final int platform_number = (int) Math.floor(Math.random() *(4 - 1 + 1) + 1);
     public Level2(Game game){
         //base class will create the student, professor
         super(game);
         getCharacter().setSpeed(11);
         getCharacter().setPosition(new Vec2(-10, 0));
+
 
         //adding the music background
         try{
@@ -36,30 +37,30 @@ public class Level2 extends GameLevel{
         }
 
         //platforms
-        Platform p1 = new Platform(this, getShortplatformShape(), -10, 0, "short");
-        Platform p2 = new Platform(this, getShortplatformShape(), -17, 5, "short");
-        Platform p3 = new Platform(this, getShortplatformShape(), -5, -5, "short");
-        Platform p4 = new Platform(this, getShortplatformShape(), 0, 7, "short");
-        Platform p5 = new Platform(this, getShortplatformShape(), 3, 0, "short");
-        Platform p6 = new Platform(this, getShortplatformShape(), 10, 10, "short");
-        Platform p7 = new Platform(this, getShortplatformShape(), 13, -4, "short");
-        Platform p8 = new Platform(this, getShortplatformShape(), -10, 15, "short");
-        Platform p9 = new Platform(this, getShortplatformShape(), -4, 22, "short");
-        Platform p10 = new Platform(this, getShortplatformShape(), 15, 23, "short");
-        Platform p11 = new Platform(this, getShortplatformShape(), 7, 28, "short");
-        Platform p12 = new Platform(this, getShortplatformShape(), -16, 24, "short");
+        Platform p1 = new Platform(this, getShortPlatformShape(), -10, 0, "short");
+        Platform p2 = new Platform(this, getShortPlatformShape(), -17, 5, "short");
+        Platform p3 = new Platform(this, getShortPlatformShape(), -5, -5, "short");
+        Platform p4 = new Platform(this, getShortPlatformShape(), 0, 7, "short");
+        Platform p5 = new Platform(this, getShortPlatformShape(), 3, 0, "short");
+        Platform p6 = new Platform(this, getShortPlatformShape(), 10, 10, "short");
+        Platform p7 = new Platform(this, getShortPlatformShape(), 13, -4, "short");
+        Platform p8 = new Platform(this, getShortPlatformShape(), -10, 15, "short");
+        Platform p9 = new Platform(this, getShortPlatformShape(), -4, 22, "short");
+        Platform p10 = new Platform(this, getShortPlatformShape(), 15, 23, "short");
+        Platform p11 = new Platform(this, getShortPlatformShape(), 7, 28, "short");
+        Platform p12 = new Platform(this, getShortPlatformShape(), -16, 24, "short");
         Platform p13 = new Platform(this, getMediumPlatformShape(), -20, -7, "medium");
         Platform p14 = new Platform(this, getMediumPlatformShape(), -26, 12, "medium");
         Platform p15 = new Platform(this, getMediumPlatformShape(), 16, 6, "medium");
         Platform p16 = new Platform(this, getMediumPlatformShape(), 6, 17, "medium");
 
         for(int i = 35; i <= 105; i = i + 10){
-            Platform stair1 = new Platform(this, getShortplatformShape(), 0, i, "short");
-            Platform stair2 = new Platform(this, getShortplatformShape(), -10, i -5, "short");
+            Platform stair1 = new Platform(this, getShortPlatformShape(), 0, i, "short");
+            Platform stair2 = new Platform(this, getShortPlatformShape(), -10, i -5, "short");
         }
 
-        for(int i = 40; i <= 110; i = i + 10){
-            Platform longplatforms = new Platform(this, getLongPlatformShape(), 35, i, "long");
+        for(int i = 40; i <= 100; i = i + 20){
+            Platform longPlatforms = new Platform(this, getLongPlatformShape(), 35, i, "long");
         }
 
         //wall
@@ -82,22 +83,18 @@ public class Level2 extends GameLevel{
         Wolf wolf3 = new Wolf(this,"grey" ,4.5f, "left", -26, 13.35f, game);
         Wolf wolf4 = new Wolf(this,"white" ,4.57f, "right", 6, 18.35f, game);
         Wolf wolf5 = new Wolf(this,"brown" ,13, "left", 35, 41.35f, game);
-        Wolf wolf6 = new Wolf(this,"white" ,13, "right", 35, 51.35f, game);
-        Wolf wolf7 = new Wolf(this,"black" ,13, "left", 35, 61.35f, game);
-        Wolf wolf8 = new Wolf(this,"grey" ,13, "right", 35, 71.35f, game);
-        Wolf wolf9 = new Wolf(this,"black" ,13, "left", 35, 81.35f, game);
-        Wolf wolf10 = new Wolf(this,"white" ,13, "right", 35, 91.35f, game);
-        Wolf wolf11 = new Wolf(this,"grey" ,13, "left", 35, 101.35f, game);
-        Wolf wolf12 = new Wolf(this,"brown" ,13, "right", 35, 111.35f, game);
+        Wolf wolf6 = new Wolf(this,"black" ,13, "left", 35, 61.35f, game);
+        Wolf wolf7 = new Wolf(this,"white" ,13, "left", 35, 81.35f, game);
+        Wolf wolf8 = new Wolf(this,"grey" ,13, "left", 35, 101.35f, game);
 
 
     }
     @Override
     public boolean isComplete() {
-        boolean complete = getCharacter().getKills() == 12;
+        boolean complete = getCharacter().getKills() == 8;
         if(complete) {
-            for (float i = 42.5f; i < 113; i = i + 10) {
-                SpeedBoost speed8 = new SpeedBoost(this, 13, i);
+            for (float i = 42.5f; i < 110; i = i + 20) {
+                SpeedBoost speed = new SpeedBoost(this, 13, i);
             }
         }
         return complete;
@@ -112,13 +109,9 @@ public class Level2 extends GameLevel{
     public float getPortal_y() {
         return switch (platform_number) {
             case 1 -> 42.5f;
-            case 2 -> 52.5f;
-            case 3 -> 62.5f;
-            case 4 -> 72.5f;
-            case 5 -> 82.5f;
-            case 6 -> 92.5f;
-            case 7 -> 102.5f;
-            default -> 112.5f;
+            case 2 -> 62.5f;
+            case 3 -> 82.5f;
+            default -> 102.5f;
         };
     }
 
@@ -127,10 +120,13 @@ public class Level2 extends GameLevel{
         gameMusic.stop();
     }
 
-
+    @Override
+    public String getExtraLongTiles() {
+        return null;
+    }
     @Override
     public String getLongTiles() {
-        return "data/tiles/level2/GroundPlatform.png";
+        return "data/tiles/level2/LongPlatform.png";
     }
 
     @Override
