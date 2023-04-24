@@ -23,7 +23,10 @@ public class Tracker implements StepListener {
         this.character = level.getCharacter();
         this.centre = character.getPosition().x + xForwardRange;
     }
+    @Override
     public void preStep(StepEvent e) {}
+
+    @Override
     public void postStep(StepEvent e) {
         if(level instanceof Level2) {
             view.setCentre(new Vec2(character.getPosition()));

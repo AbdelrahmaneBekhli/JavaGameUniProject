@@ -4,8 +4,9 @@ import city.cs.engine.BodyImage;
 import city.cs.engine.DynamicBody;
 import city.cs.engine.Shape;
 import city.cs.engine.World;
+import game.weapon.Weapon;
 
-public class Snowball extends DynamicBody {
+public class Snowball extends Weapon {
     public Snowball(World world, Shape shape) {
         super(world, shape);
         SnowCollisionListener SnowCollisions = new SnowCollisionListener();

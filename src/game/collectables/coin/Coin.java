@@ -43,7 +43,7 @@ public class Coin extends DynamicBody implements StepListener{
         }
     }
 
-    public void setRange(){
+    private void setRange(){
         this.maxHeight = this.getPosition().y + 0.5f;
         this.minHeight = this.getPosition().y - 0.5f;
     }
