@@ -12,9 +12,8 @@ public class CharacterCollisionListener implements CollisionListener {
         if(collisionEvent.getOtherBody() instanceof Spike){
             ((Character) collisionEvent.getReportingBody()).die();
         }
-        if(collisionEvent.getOtherBody() instanceof JumpPad){
+        if(collisionEvent.getOtherBody() instanceof JumpPad jumpPad){
             Character character = (Character) collisionEvent.getReportingBody();
-            JumpPad jumpPad = (JumpPad) collisionEvent.getOtherBody();
             if(((int) character.getPosition().y >= ((int) jumpPad.getPosition().y + 2))){
                 character.applyImpulse(new Vec2(0,700));
                 jumpPad.playSound();
