@@ -6,14 +6,10 @@ import game.Game;
 import game.enemies.Enemy;
 import game.enemies.Golem;
 import game.enemies.Slime;
-import game.enemies.Wolf;
 import game.portal.Portal;
 import game.character.Character;
 import game.levels.GameLevel;
 import game.weapon.Weapon;
-import game.weapon.laser.Laser;
-import game.weapon.snowball.Snowball;
-import game.weapon.stone.Stone;
 import org.jbox2d.common.Vec2;
 
 public class EnemySensorListener implements SensorListener {
