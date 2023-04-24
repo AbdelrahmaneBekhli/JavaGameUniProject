@@ -124,7 +124,7 @@ public class Golem extends Enemy {
         animationTimer.start();
     }
 
-    public void animationTimer (ActionEvent e){
+    private void animationTimer (ActionEvent e){
         this.animation = false;
         animationTimer.stop();
     }

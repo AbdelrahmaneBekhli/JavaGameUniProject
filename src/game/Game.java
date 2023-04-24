@@ -12,13 +12,11 @@ public class Game{
     private final CharacterController controller;
 
     public Game(){
-        level = new Level3(this);
+        level = new Level1(this);
 
         //creating the world view
         view = new GameView(level, level.getCharacter(), 1000, 562);
         view.setBackground(level);
-        Tracker tr2 = new Tracker(view, level);
-        level.addStepListener(tr2);
 
         //controlling the character
         controller = new CharacterController(level.getCharacter());

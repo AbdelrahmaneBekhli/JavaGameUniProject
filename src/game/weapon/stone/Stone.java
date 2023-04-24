@@ -1,8 +1,9 @@
 package game.weapon.stone;
 
 import city.cs.engine.*;
+import game.weapon.Weapon;
 
-public class Stone extends DynamicBody {
+public class Stone extends Weapon {
 
     private boolean collided;
     public Stone(World world, Shape shape) {

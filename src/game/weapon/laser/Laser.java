@@ -2,13 +2,14 @@ package game.weapon.laser;
 
 import city.cs.engine.*;
 import city.cs.engine.Shape;
+import game.weapon.Weapon;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class Laser extends DynamicBody implements ActionListener {
+public class Laser extends Weapon implements ActionListener {
     Timer timer;
     public Laser(World w) {
         super(w, new BoxShape(0.3f, 0.08f));
