@@ -17,6 +17,8 @@ public class EnemySensorListener implements SensorListener {
     private final Enemy enemy;
     private final GameLevel world;
     private final Game game;
+
+    boolean damagePlayer = true;
     private boolean portalCreated = false;
 
     public EnemySensorListener(Character character, Enemy enemy, GameLevel world, Game game) {
@@ -47,25 +49,36 @@ public class EnemySensorListener implements SensorListener {
                     enemy.die();
                     this.checkComplete();
                 } else {
-                    if (enemy.isAlive()) {
-                        character.die();
+                    if (enemy.isAlive() && damagePlayer) {
+                        character.decreaseHealth();
+                        this.damagePlayer = false;
                     }
                 }
             } else {
-                if (enemy.isAlive()) {
-                    character.die();
+                if (enemy.isAlive() && damagePlayer) {
+                    if(!(enemy instanceof Golem golem)) {
+                        character.decreaseHealth();
+                        this.damagePlayer = false;
+                    } else{
+                        if(!(golem.getAttacking())){
+                            character.decreaseHealth();
+                            this.damagePlayer = false;
+                        }
+                    }
                 }
             }
         }
         if (sensorEvent.getContactBody() instanceof Weapon) {
             sensorEvent.getContactBody().destroy();
             if (enemy.isAlive()) {
-                if (enemy instanceof Golem) {
-                    if (((Golem) enemy).getArmor()) {
-                        ((Golem) enemy).destroyArmor();
-                    } else {
-                        character.incrementKills();
-                        enemy.die();
+                if (enemy instanceof Golem golem) {
+                    if(!(golem.getAttacking())) {
+                        if (golem.getArmor()) {
+                            golem.destroyArmor();
+                        } else {
+                            character.incrementKills();
+                            golem.die();
+                        }
                     }
                 } else {
                     character.incrementKills();
@@ -78,6 +91,8 @@ public class EnemySensorListener implements SensorListener {
 
     @Override
     public void endContact(SensorEvent sensorEvent) {
-
+        if(sensorEvent.getContactBody() instanceof Character){
+            this.damagePlayer = true;
+        }
     }
 }
