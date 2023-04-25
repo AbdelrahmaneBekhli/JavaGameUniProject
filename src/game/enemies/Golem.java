@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Golem extends Enemy {
-    private final Shape golemShape = new BoxShape(0.8f,1);
+    private final Shape golemShape = new BoxShape(0.7f,1);
     private final BodyImage armor_run_right = new BodyImage("data/enemy/Golem/armorRun_right.gif", 2);
     private final BodyImage armor_run_left = new BodyImage("data/enemy/Golem/armorRun_Left.gif", 2);
     private final BodyImage armor_break_right = new BodyImage("data/enemy/Golem/armorBreak_right.gif", 2);
@@ -128,6 +128,11 @@ public class Golem extends Enemy {
         this.animation = false;
         animationTimer.stop();
     }
+
+    public Boolean getAttacking() {
+        return attacking;
+    }
+
 
     @Override
     public void setRange() {
