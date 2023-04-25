@@ -18,12 +18,13 @@ import java.awt.*;
 import java.io.IOException;
 
 
-public class Level2 extends GameLevel{
+public class Level2 extends GameLevel implements StepListener{
     private SoundClip gameMusic;
     private final int platform_number = (int) Math.floor(Math.random() *(4 - 1 + 1) + 1);
     public Level2(Game game){
         //base class will create the student, professor
         super(game);
+        this.addStepListener(this);
         getCharacter().setSpeed(11);
         getCharacter().setPosition(new Vec2(-10, 0));
 
@@ -157,5 +158,17 @@ public class Level2 extends GameLevel{
     public DynamicBody getWeapon() {
         Shape weaponShape = new CircleShape(0.3f);
         return new Stone(this, weaponShape);
+    }
+
+    @Override
+    public void preStep(StepEvent stepEvent) {
+        if(this.getCharacter().getPosition().y < -20){
+            this.getCharacter().setPosition(new Vec2(-10, 0));
+        }
+    }
+
+    @Override
+    public void postStep(StepEvent stepEvent) {
+
     }
 }
