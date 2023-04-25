@@ -17,11 +17,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class Level3 extends GameLevel{
+public class Level3 extends GameLevel implements StepListener{
     private SoundClip gameMusic;
 
     public Level3(Game game) {
         super(game);
+        this.addStepListener(this);
         float blockX = 60;
         float blockY = -12.6f;
         float blockHeight = 0.5f;
@@ -178,5 +179,17 @@ public class Level3 extends GameLevel{
     @Override
     public DynamicBody getWeapon() {
         return new Laser(this);
+    }
+
+    @Override
+    public void preStep(StepEvent stepEvent) {
+        if(this.getCharacter().getPosition().y < -20){
+            this.getCharacter().decreaseHealth();
+        }
+    }
+
+    @Override
+    public void postStep(StepEvent stepEvent) {
+
     }
 }
