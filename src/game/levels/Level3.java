@@ -102,6 +102,7 @@ public class Level3 extends GameLevel implements StepListener{
 
         //jump pad
         JumpPad jumpPad1 = new JumpPad(this, 302,-12.5f);
+        getCharacter().setPosition(new Vec2(300, -11));
 
         //coins
         Coin coin1 = new Coin(this, "up", 0, 0);
