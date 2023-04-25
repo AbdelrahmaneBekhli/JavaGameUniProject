@@ -5,10 +5,10 @@ import city.cs.engine.DynamicBody;
 import city.cs.engine.Shape;
 import city.cs.engine.SoundClip;
 import game.Game;
-import game.collectables.coin.Coin;
-import game.platform.Platform;
-import game.enemies.Slime;
-import game.weapon.snowball.Snowball;
+import collectables.coin.Coin;
+import platform.Platform;
+import enemies.Slime;
+import weapon.snowball.Snowball;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;

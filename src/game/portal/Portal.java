@@ -2,7 +2,7 @@ package game.portal;
 
 import city.cs.engine.*;
 import game.Game;
-import game.character.Character;
+import character.Character;
 import game.portal.sensor.PortalSensor;
 import org.jbox2d.common.Vec2;
 

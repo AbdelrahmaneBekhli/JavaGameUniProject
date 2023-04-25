@@ -4,11 +4,11 @@ import city.cs.engine.*;
 import city.cs.engine.Shape;
 import game.Game;
 import game.JumpPad;
-import game.collectables.coin.Coin;
-import game.enemies.Golem;
-import game.platform.MovingPlatform;
-import game.platform.Platform;
-import game.weapon.laser.Laser;
+import collectables.coin.Coin;
+import enemies.Golem;
+import platform.MovingPlatform;
+import platform.Platform;
+import weapon.laser.Laser;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;

@@ -1,7 +1,6 @@
 package game;
 
 import city.cs.engine.*;
-import game.character.Character;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
