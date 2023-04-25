@@ -1,10 +1,8 @@
 package game;
 
 import city.cs.engine.*;
-import game.character.Character;
+import character.Character;
 import game.levels.GameLevel;
-import game.levels.Level1;
-import game.levels.Level2;
 import game.levels.Level3;
 
 import javax.swing.*;

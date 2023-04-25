@@ -3,7 +3,7 @@ package game.levels;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import game.Game;
-import game.character.Character;
+import character.Character;
 
 import java.awt.*;
 

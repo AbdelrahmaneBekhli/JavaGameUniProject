@@ -3,12 +3,12 @@ package game.levels;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import game.Game;
-import game.collectables.coin.Coin;
-import game.collectables.speed.SpeedBoost;
-import game.enemies.Wolf;
-import game.platform.Platform;
-import game.platform.Wall;
-import game.weapon.stone.Stone;
+import collectables.coin.Coin;
+import collectables.speed.SpeedBoost;
+import enemies.Wolf;
+import platform.Platform;
+import platform.Wall;
+import weapon.stone.Stone;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;

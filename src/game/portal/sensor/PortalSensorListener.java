@@ -4,8 +4,7 @@ import city.cs.engine.SensorEvent;
 import city.cs.engine.SensorListener;
 import city.cs.engine.SoundClip;
 import game.Game;
-import game.character.Character;
-import game.levels.GameLevel;
+import character.Character;
 import game.portal.Portal;
 
 import javax.sound.sampled.LineUnavailableException;
