@@ -18,7 +18,7 @@ public class CoinSensorListener implements SensorListener {
     public void beginContact(SensorEvent sensorEvent) {
         if(sensorEvent.getContactBody() instanceof Character){
             coin.destroy();
-            character.incrementcredits();
+            character.incrementCredits();
         }
     }
 

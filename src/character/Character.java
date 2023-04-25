@@ -7,12 +7,14 @@ import org.jbox2d.common.Vec2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 
 public class Character extends Walker implements ActionListener{
     private static final Shape CharaterShape = new BoxShape(0.8f,1.2f);
-
     private final BodyImage idle_right = new BodyImage("data/player/idle_right.gif", 2.35f);
     private final BodyImage idle_left = new BodyImage("data/player/idle_left.gif", 2.35f);
     private final BodyImage die_right = new BodyImage("data/player/die_right.gif", 2.55f);
@@ -27,6 +29,17 @@ public class Character extends Walker implements ActionListener{
     private int kills = 0;
     private String facing = "right";
     private boolean alive = true;
+
+    private static SoundClip damageSound;
+
+    static {
+        try {
+            damageSound = new SoundClip("data/audio/characterDamage.wav");
+            damageSound.setVolume(0.1);
+        }catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println(e);
+        }
+    }
 
     public Character(GameLevel world){
         super(world, CharaterShape);
@@ -62,6 +75,7 @@ public class Character extends Walker implements ActionListener{
 
     }
     public void decreaseHealth(){
+        damageSound.play();
         this.health = health - 1;
         if (this.health == 0){
             this.die();
@@ -87,7 +101,7 @@ public class Character extends Walker implements ActionListener{
     public int getCredits(){
         return credits;
     }
-    public void incrementcredits(){
+    public void incrementCredits(){
         this.credits = this.credits + 1;
     }
 
