@@ -39,26 +39,26 @@ public class Level1  extends GameLevel {
         Platform p2 = new Platform(this, getShortPlatformShape(), 4, -7, "short");
         Platform p3 = new Platform(this, getShortPlatformShape(), 10, 5, "short");
 
-        Platform p4 = new Platform(this, getMediumPlatformShape(), -20, 5, "medium");
+        Platform p4 = new Platform(this, getMediumPlatformShape(), -20, 3, "medium");
         Platform p5 = new Platform(this, getMediumPlatformShape(), 19, -2, "medium");
-        Platform p6 = new Platform(this, getMediumPlatformShape(), 0, 0, "medium");
-        Platform p7 = new Platform(this, getMediumPlatformShape(), -20, -3, "medium");
+        Platform p6 = new Platform(this, getMediumPlatformShape(), -1, 0, "medium");
+        Platform p7 = new Platform(this, getShortPlatformShape(), -23, -5, "short");
 
         //character
-        getCharacter().setSpeed(8);
+        getCharacter().setSpeed(10);
         getCharacter().setPosition(new Vec2(-14,-12));
 
         //enemies
-        Slime slime1 = new Slime(this, 4, "left",-19, 6.3f, game);
+        Slime slime1 = new Slime(this, 4, "left",-19, 4.3f, game);
         Slime slime2 = new Slime(this, 5, "left", 19, -0.7f, game);
-        Slime slime3 = new Slime(this, 5, "right",0, 1.3f, game);
+        Slime slime3 = new Slime(this, 5, "right",-1, 1.3f, game);
         Slime slime4 = new Slime(this, 12, "left", 10, -12.3f, game);
 
         //coins
-        Coin coin1 = new Coin(this, "down", -20, 9);
+        Coin coin1 = new Coin(this, "down", -20, 7);
         Coin coin2 = new Coin(this, "up", 10, 7);
         Coin coin3 = new Coin(this, "up", -20,1);
-        Coin coin4 = new Coin(this, "down", 0, 5);
+        Coin coin4 = new Coin(this, "down", -1, 5);
         Coin coin5 = new Coin(this, "down", 16, 3);
         Coin coin6 = new Coin(this, "up", 20, -10);
         Coin coin7 = new Coin(this, "down", -1.4f, -3);
