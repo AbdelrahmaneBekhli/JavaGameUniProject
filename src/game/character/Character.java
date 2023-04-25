@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-public class Character extends Walker implements StepListener, ActionListener{
-    private static final Shape CharaterShape = new BoxShape(1,1.2f);
+public class Character extends Walker implements ActionListener{
+    private static final Shape CharaterShape = new BoxShape(0.8f,1.2f);
 
     private final BodyImage idle_right = new BodyImage("data/player/idle_right.gif", 2.35f);
     private final BodyImage idle_left = new BodyImage("data/player/idle_left.gif", 2.35f);
@@ -24,10 +24,10 @@ public class Character extends Walker implements StepListener, ActionListener{
     private final BodyImage run_right = new BodyImage("data/player/run_right.gif", 2.35f);
     private final BodyImage run_left = new BodyImage("data/player/run_left.gif", 2.35f);
     private int speed;
-    private GameLevel world;
+    private final GameLevel world;
     private int speedBoostCollected;
     private int credits;
-    private int counter;
+    private int health = 4;
     private int kills = 0;
     private String facing = "right";
     private boolean alive = true;
@@ -37,7 +37,6 @@ public class Character extends Walker implements StepListener, ActionListener{
         this.addImage(idle_right);
         credits = 0;
         this.world = world;
-        world.addStepListener(this);
         this.setGravityScale(5);
         this.addCollisionListener(new CharacterCollisionListener());
         SolidFixture fixture = new SolidFixture(this, CharaterShape);
@@ -66,7 +65,14 @@ public class Character extends Walker implements StepListener, ActionListener{
         }
 
     }
-    public void die(){
+    public void decreaseHealth(){
+        this.health = health - 1;
+        if (this.health == 0){
+            this.die();
+        }
+    }
+    
+    private void die(){
         this.alive = false;
         if(facing.equals("right")) {
             this.removeAllImages();
@@ -136,18 +142,8 @@ public class Character extends Walker implements StepListener, ActionListener{
         return run_right;
     }
 
-
-    @Override
-    public void preStep(StepEvent stepEvent) {
-        if(this.getWorld() instanceof Level2){
-            if(this.getPosition().y < -20){
-                this.setPosition(new Vec2(-10, 0));
-            }
-        }
-    }
-
-    @Override
-    public void postStep(StepEvent stepEvent) {
+    public int getHealth(){
+        return health;
     }
 
     @Override

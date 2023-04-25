@@ -41,15 +41,27 @@ public class GameView extends UserView{
             g.setColor(Color.BLACK);
         }
 
-        //Coins information
+        //images
         Image coinImage = new ImageIcon("data/collectables/coin/coin.png").getImage();
+        Image healthImage = new ImageIcon("data/heart.png").getImage();
 
+        //coin display
+        g.drawImage(coinImage,10,35,null, this);
         String coins = ": " + character.getCredits();
+        g.drawString(coins, 44,58);
+
+        //kills display
+        g.drawImage(world.getEnemyPic(), world.getEnemyPicX(), 66, null, this);
         String kills = ": " + character.getKills();
-        g.drawImage(coinImage,10,10,null, this);
-        g.drawImage(world.getEnemyPic(), world.getEnemyPicX(), 42, null, this);
-        g.drawString(coins, 44,33);
-        g.drawString(kills, 44,64);
+        g.drawString(kills, 44,85);
+
+        //health display
+        int startingHealthPosX = 12;
+        for(int i = 0; i < character.getHealth(); i++){
+            g.drawImage(healthImage, startingHealthPosX, 10, null, null);
+            startingHealthPosX = startingHealthPosX + 25;
+        }
+
         //Game update
         Font endFont = new Font("Arial", Font.BOLD, 100);
         g.setFont(endFont);
