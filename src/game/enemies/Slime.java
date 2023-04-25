@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class Slime extends Enemy {
-    private static final Shape SlimeShape = new BoxShape(1,0.75f);
+    private static final Shape SlimeShape = new BoxShape(0.7f,0.75f);
     private static final BodyImage rightImage = new BodyImage("data/enemy/slime/slime_right.gif", 1.5f);
     private static final BodyImage leftImage = new BodyImage("data/enemy/slime/slime_left.gif", 1.5f);
 
