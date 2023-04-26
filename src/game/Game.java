@@ -1,49 +1,60 @@
 package game;
 
-import game.character.CharacterController;
-import game.character.Tracker;
+import GUI.MainMenu;
+import character.CharacterController;
+import character.Tracker;
+import com.sun.tools.javac.Main;
 import game.levels.*;
-import javax.swing.JFrame;
+
+import javax.swing.*;
+import java.awt.*;
 
 
 public class Game{
     private GameLevel level;
-    private final GameView view;
-    private final CharacterController controller;
+    private GameView view;
+    private CharacterController controller;
+
+    private final JFrame frame;
 
     public Game(){
-        level = new Level1(this);
-
-        //creating the world view
-        view = new GameView(level, level.getCharacter(), 1000, 562);
-        view.setBackground(level);
-
-        //controlling the character
-        controller = new CharacterController(level.getCharacter());
-        view.addKeyListener(controller);
-
-        level.start();
-
         //naming the game
-        final JFrame frame = new JFrame("2D platformer");
-        frame.add(view);
+        frame = new JFrame("2D platformer");
 
         //set the X button to terminate the program
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
         frame.setResizable((false));
 
+
+        MainMenu mainMenu = new MainMenu(this, 1000, 562);
+        frame.add(mainMenu);
+
         frame.pack();
 
         //display the game
         frame.setVisible(true);
+
+    }
+
+    public void startLevel(){
+        level = new Level1(this);
+
+        //creating the world view
+        view = new GameView(level, level.getCharacter(), 1000, 562);
+        view.setBackground(level);
+        //controlling the character
+        controller = new CharacterController(level.getCharacter());
+        view.addKeyListener(controller);
+
+        level.start();
 
         //give focus to the game when clicked on the window
         GiveFocus focus = new GiveFocus(view);
         view.addMouseListener(focus);
 
         view.requestFocus();
-
+        frame.add(view);
     }
 
     public void goToNextLevel(){
@@ -65,7 +76,7 @@ public class Game{
         }
         if (level instanceof Level2 && level.isComplete()){
             level.stop();
-            System.out.println("level 3 loading");
+            level.stopMusic();
             int credits = level.getCharacter().getCredits();
             level = new Level3(this);
             Tracker tr2 = new Tracker(view, level);
