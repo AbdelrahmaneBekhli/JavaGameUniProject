@@ -37,7 +37,9 @@ public class PortalSensorListener implements SensorListener {
     @Override
     public void beginContact(SensorEvent sensorEvent) {
         if(sensorEvent.getContactBody() instanceof Character){
-            teleportSound.play();
+            if(game.getfxButton().isSound()) {
+                teleportSound.play();
+            }
             portal.destroy();
             game.goToNextLevel();
         }

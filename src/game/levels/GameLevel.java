@@ -37,6 +37,10 @@ public abstract class GameLevel extends World {
 
     public abstract void stopMusic();
 
+    public abstract SoundClip getMusic();
+
+    public abstract Game getGame();
+
     public abstract String getExtraLongTiles();
     public abstract String getLongTiles();
     public abstract String getMediumTiles();

@@ -16,22 +16,19 @@ public class EnemySensorListener implements SensorListener {
     private final Character character;
     private final Enemy enemy;
     private final GameLevel world;
-    private final Game game;
-
-    boolean damagePlayer = true;
+    boolean damagePlayer = true; //state which damaging player is possible
     private boolean portalCreated = false;
 
-    public EnemySensorListener(Character character, Enemy enemy, GameLevel world, Game game) {
-        this.character = character;
+    public EnemySensorListener(Enemy enemy, GameLevel world) {
+        this.character = world.getCharacter();
         this.enemy = enemy;
         this.world = world;
-        this.game = game;
     }
 
     private void checkComplete(){
         if (world.isComplete() && !(portalCreated)) {
             this.portalCreated = true;
-            Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y(), character, game);
+            Portal portal = new Portal(world, world.getPortal_x(), world.getPortal_y());
         }
     }
 
@@ -45,8 +42,9 @@ public class EnemySensorListener implements SensorListener {
                         //make the character bounce
                         character.applyImpulse(new Vec2(0, 1200));
                         character.incrementKills();
+                    } if(enemy.isAlive()) {
+                        enemy.die();
                     }
-                    enemy.die();
                     this.checkComplete();
                 } else {
                     if (enemy.isAlive() && damagePlayer) {

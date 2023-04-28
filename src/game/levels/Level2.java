@@ -1,5 +1,6 @@
 package game.levels;
 
+import GUI.SoundControlButton;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import game.Game;
@@ -20,10 +21,12 @@ import java.io.IOException;
 
 public class Level2 extends GameLevel implements StepListener{
     private SoundClip gameMusic;
+    private final Game game;
     private final int platform_number = (int) Math.floor(Math.random() *(4 - 1 + 1) + 1);
     public Level2(Game game){
         //base class will create the student, professor
         super(game);
+        this.game = game;
         this.addStepListener(this);
         getCharacter().setSpeed(11);
         getCharacter().setPosition(new Vec2(-10, 0));
@@ -33,7 +36,6 @@ public class Level2 extends GameLevel implements StepListener{
         try{
             gameMusic = new SoundClip("data/audio/level2MusicTrack.wav");
             gameMusic.setVolume(0.1);
-            gameMusic.loop();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
             System.out.println(e);
         }
@@ -80,14 +82,14 @@ public class Level2 extends GameLevel implements StepListener{
         Coin coin8 = new Coin(this, "down", -10, 33);
 
         //enemies
-        Wolf wolf1 = new Wolf(this,"black" ,5, "left", 16, 7.35f, game);
-        Wolf wolf2 = new Wolf(this,"brown" ,5, "right", -20, -5.65f, game);
-        Wolf wolf3 = new Wolf(this,"grey" ,4.5f, "left", -26, 13.35f, game);
-        Wolf wolf4 = new Wolf(this,"white" ,4.57f, "right", 6, 18.35f, game);
-        Wolf wolf5 = new Wolf(this,"brown" ,13, "left", 35, 41.35f, game);
-        Wolf wolf6 = new Wolf(this,"black" ,13, "left", 35, 61.35f, game);
-        Wolf wolf7 = new Wolf(this,"white" ,13, "left", 35, 81.35f, game);
-        Wolf wolf8 = new Wolf(this,"grey" ,13, "left", 35, 101.35f, game);
+        Wolf wolf1 = new Wolf(this,"black" ,5, "left", 16, 7.35f);
+        Wolf wolf2 = new Wolf(this,"brown" ,5, "right", -20, -5.65f);
+        Wolf wolf3 = new Wolf(this,"grey" ,4.5f, "left", -26, 13.35f);
+        Wolf wolf4 = new Wolf(this,"white" ,4.57f, "right", 6, 18.35f);
+        Wolf wolf5 = new Wolf(this,"brown" ,13, "left", 35, 41.35f);
+        Wolf wolf6 = new Wolf(this,"black" ,13, "left", 35, 61.35f);
+        Wolf wolf7 = new Wolf(this,"white" ,13, "left", 35, 81.35f);
+        Wolf wolf8 = new Wolf(this,"grey" ,13, "left", 35, 101.35f);
 
 
     }
@@ -120,6 +122,16 @@ public class Level2 extends GameLevel implements StepListener{
     @Override
     public void stopMusic() {
         gameMusic.stop();
+    }
+
+    @Override
+    public SoundClip getMusic() {
+        return gameMusic;
+    }
+
+    @Override
+    public Game getGame() {
+        return this.game;
     }
 
     @Override

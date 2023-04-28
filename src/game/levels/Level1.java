@@ -1,5 +1,6 @@
 package game.levels;
 
+import GUI.SoundControlButton;
 import city.cs.engine.CircleShape;
 import city.cs.engine.DynamicBody;
 import city.cs.engine.Shape;
@@ -19,14 +20,15 @@ import java.io.IOException;
 
 public class Level1  extends GameLevel {
     private SoundClip gameMusic;
+    private Game game;
     public Level1(Game game) {
         super(game);
+        this.game = game;
 
         //adding the music background
         try{
             gameMusic = new SoundClip("data/audio/level1MusicTrack.wav");
             gameMusic.setVolume(0.2);
-            gameMusic.loop();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
             System.out.println(e);
         }
@@ -49,10 +51,10 @@ public class Level1  extends GameLevel {
         getCharacter().setPosition(new Vec2(-14,-12));
 
         //enemies
-        Slime slime1 = new Slime(this, 4, "left",-19, 4.3f, game);
-        Slime slime2 = new Slime(this, 5, "left", 19, -0.7f, game);
-        Slime slime3 = new Slime(this, 5, "right",-1, 1.3f, game);
-        Slime slime4 = new Slime(this, 12, "left", 10, -12.3f, game);
+        Slime slime1 = new Slime(this, 4, "left",-19, 4.3f);
+        Slime slime2 = new Slime(this, 5, "left", 19, -0.7f);
+        Slime slime3 = new Slime(this, 5, "right",-1, 1.3f);
+        Slime slime4 = new Slime(this, 12, "left", 10, -12.3f);
 
         //coins
         Coin coin1 = new Coin(this, "down", -20, 7);
@@ -67,6 +69,16 @@ public class Level1  extends GameLevel {
     @Override
     public void stopMusic(){
         gameMusic.stop();
+    }
+
+    @Override
+    public SoundClip getMusic() {
+        return gameMusic;
+    }
+
+    @Override
+    public Game getGame() {
+        return this.game;
     }
 
     @Override

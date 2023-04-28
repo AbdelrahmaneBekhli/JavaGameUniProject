@@ -20,8 +20,10 @@ public class SpeedBoost extends DynamicBody {
             System.out.println(e);
         }
     }
+    private final GameLevel level;
     public SpeedBoost(GameLevel level, float x, float y) {
         super(level);
+        this.level = level;
         Shape speedBoostShape = new BoxShape(1,1);
         BodyImage speedBoostImage = new BodyImage("data/collectables/speed boost/speed.gif", 3.5f);
         Fixture fixture = new GhostlyFixture(this, speedBoostShape);
@@ -34,7 +36,9 @@ public class SpeedBoost extends DynamicBody {
 
     @Override
     public void destroy(){
-        speedBoostSound.play();
+        if(level.getGame().getfxButton().isSound()) {
+            speedBoostSound.play();
+        }
         super.destroy();
     }
 }

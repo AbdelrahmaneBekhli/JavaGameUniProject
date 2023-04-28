@@ -18,13 +18,13 @@ public class Wolf  extends Enemy {
     private final BodyImage run_right;
     private final BodyImage die_left;
     private final BodyImage die_right;
-    private final String color;
-    private float range;
+    private final float range;
     private float right;
     private float left;
     private boolean alive = true;
     private String facing;
 
+    private final GameLevel level;
     private static SoundClip wolfDeathSound;
 
     static {
@@ -36,18 +36,18 @@ public class Wolf  extends Enemy {
         }
     }
 
-    public Wolf(GameLevel world, String color, float range, String initial_facing, float posX, float posY, Game game) {
+    public Wolf(GameLevel world, String color, float range, String initial_facing, float posX, float posY) {
         super(world);
         this.range = range;
         this.facing = initial_facing;
-        this.color = color;
+        this.level = world;
         this.run_left = new BodyImage("data/enemy/wolf/" + color + "/run_left.gif", 1.7f);
         this.run_right = new BodyImage("data/enemy/wolf/" + color + "/run_right.gif", 1.7f);
         this.die_left = new BodyImage("data/enemy/wolf/"+ color + "/die_left.gif", 1.7f);
         this.die_right =  new BodyImage("data/enemy/wolf/"+ color + "/die_right.gif", 1.7f);
 
         Fixture fixture = new GhostlyFixture(this, wolfShape);
-        Sensor sensor = new EnemySensor(this, wolfShape, world.getCharacter(), world, game);
+        Sensor sensor = new EnemySensor(this, wolfShape, world);
 
         if (initial_facing.equals("right")){
             this.addImage(run_right);
@@ -74,7 +74,9 @@ public class Wolf  extends Enemy {
 
     @Override
     public void die() {
-        wolfDeathSound.play();
+        if(this.level.getGame().getfxButton().isSound()) {
+            wolfDeathSound.play();
+        }
         this.startWalking(0);
         if (this.facing.equals("right")) {
             this.removeAllImages();
@@ -84,6 +86,7 @@ public class Wolf  extends Enemy {
             this.addImage(this.die_left);
         }
         this.alive = false;
+        //death animation timer
         Timer timer = new Timer(600, this);
         timer.start();
     }

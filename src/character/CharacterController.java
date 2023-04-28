@@ -24,12 +24,14 @@ public class CharacterController implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         if(character.isAlive()) {
+            //left
             if (code == KeyEvent.VK_A) {
                 character.removeAllImages();
                 character.addImage(character.getRun_left());
                 character.startWalking(character.getSpeed() * -1);
                 character.setFacing("left");
             }
+            //right
             if (code == KeyEvent.VK_D) {
                 if (character.isAlive()) {
                     character.removeAllImages();
@@ -38,10 +40,11 @@ public class CharacterController implements KeyListener {
                     character.setFacing("right");
                 }
             }
+            //jump
             if (code == KeyEvent.VK_W) {
                 character.jump(30);
             }
-
+            //shoot
             if (code == KeyEvent.VK_SPACE) {
                 if(shoot) {
                     character.shoot();

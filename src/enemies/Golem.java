@@ -13,7 +13,6 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class Golem extends Enemy {
-    private final Shape golemShape = new BoxShape(0.7f,1);
     private final BodyImage armor_run_right = new BodyImage("data/enemy/Golem/armorRun_right.gif", 2);
     private final BodyImage armor_run_left = new BodyImage("data/enemy/Golem/armorRun_Left.gif", 2);
     private final BodyImage armor_break_right = new BodyImage("data/enemy/Golem/armorBreak_right.gif", 2);
@@ -36,6 +35,8 @@ public class Golem extends Enemy {
     private Boolean armor = true;
     private Boolean animation = false;
 
+    private final GameLevel world;
+
     private static SoundClip golemDeathSound;
     static {
         try {
@@ -56,15 +57,17 @@ public class Golem extends Enemy {
     }
 
 
-    public Golem(GameLevel world, float range, String initial_facing, float posX, float posY, Game game) {
+    public Golem(GameLevel world, float range, String initial_facing, float posX, float posY) {
         super(world);
         this.range = range;
+        this.world = world;
         this.setPosition(new Vec2(posX, posY));
         this.setGravityScale(0);
         world.addStepListener(this);
 
+        Shape golemShape = new BoxShape(0.7f, 1);
         Fixture fixture = new GhostlyFixture(this, golemShape);
-        Sensor sensor = new EnemySensor(this, golemShape, world.getCharacter(), world, game);
+        Sensor sensor = new EnemySensor(this, golemShape, world);
 
         //makes the golem attack at random times
         GolemAttackTimeHandler time = new GolemAttackTimeHandler(this, world);
@@ -109,7 +112,9 @@ public class Golem extends Enemy {
     }
 
     public void destroyArmor(){
-        golemArmorBreakSound.play();
+        if(this.world.getGame().getfxButton().isSound()) {
+            golemArmorBreakSound.play();
+        }
         this.armor = false;
         this.animation = true;
         this.removeAllImages();
@@ -151,7 +156,9 @@ public class Golem extends Enemy {
             this.addImage(this.noArmorDeath_left);
         }
         //death animation time
-        golemDeathSound.play();
+        if(this.world.getGame().getfxButton().isSound()) {
+            golemDeathSound.play();
+        }
         deathTimer = new Timer(800, this);
         deathTimer.start();
     }

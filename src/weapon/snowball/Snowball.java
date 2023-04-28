@@ -2,11 +2,11 @@ package weapon.snowball;
 
 import city.cs.engine.BodyImage;
 import city.cs.engine.Shape;
-import city.cs.engine.World;
+import game.levels.GameLevel;
 import weapon.Weapon;
 
 public class Snowball extends Weapon {
-    public Snowball(World world, Shape shape) {
+    public Snowball(GameLevel world, Shape shape) {
         super(world, shape);
         SnowCollisionListener SnowCollisions = new SnowCollisionListener();
         this.addCollisionListener(SnowCollisions);

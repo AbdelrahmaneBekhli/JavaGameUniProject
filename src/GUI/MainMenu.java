@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu extends UserView {
-    public MainMenu(Game game, int width, int height) {
+    public MainMenu(Game game, int width, int height, SoundControlButton musicButton) {
         super(new World(), width, height);
         this.setLayout(null);
 
@@ -20,10 +20,14 @@ public class MainMenu extends UserView {
         CircularButton leaderboard = new CircularButton(10, 20, 50, "data/GUI/Main Menu/LeaderBoardButton.png", "data/GUI/Main Menu/LeaderBoardHoverButton.png");
         CircularButton help = new CircularButton(70, 20, 50, "data/GUI/Main Menu/HelpButton.png", "data/GUI/Main Menu/HelpHoverButton.png");
 
+        musicButton.setPosition(940, 10);
+
+
         this.add(start);
         this.add(leaderboard);
         this.add(help);
         this.add(exit);
+        this.add(musicButton);
 
         start.addActionListener(new ActionListener() {
             @Override

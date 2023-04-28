@@ -8,9 +8,9 @@ import character.Character;
 import game.levels.GameLevel;
 
 public class EnemySensor extends Sensor {
-    public EnemySensor(Enemy enemy, Shape shape, Character character, GameLevel world, Game game) {
+    public EnemySensor(Enemy enemy, Shape shape, GameLevel world) {
         super(enemy, shape);
-        EnemySensorListener sensorListener = new EnemySensorListener(character, enemy, world, game);
+        EnemySensorListener sensorListener = new EnemySensorListener(enemy, world);
         this.addSensorListener(sensorListener);
     }
 }

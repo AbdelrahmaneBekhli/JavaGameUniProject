@@ -1,16 +1,25 @@
 package game;
 
 import GUI.MainMenu;
+import GUI.SoundControlButton;
 import character.CharacterController;
 import character.Tracker;
+import city.cs.engine.SoundClip;
 import com.sun.tools.javac.Main;
 import game.levels.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 
 public class Game{
+    private SoundClip gameMusic;
+    private final SoundControlButton musicButton;
+
+    private final SoundControlButton fxButton = new SoundControlButton();
     private GameLevel level;
     private GameView view;
     private CharacterController controller;
@@ -18,6 +27,14 @@ public class Game{
     private final JFrame frame;
 
     public Game(){
+        try{
+            gameMusic = new SoundClip("data/audio/level3MusicTrack.wav");
+            gameMusic.setVolume(0.1);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
+            System.out.println(e);
+        }
+
+        musicButton = new SoundControlButton(gameMusic);
         //naming the game
         frame = new JFrame("2D platformer");
 
@@ -27,7 +44,7 @@ public class Game{
         frame.setResizable((false));
 
 
-        MainMenu mainMenu = new MainMenu(this, 1000, 562);
+        MainMenu mainMenu = new MainMenu(this, 1000, 562, musicButton);
         frame.add(mainMenu);
 
         frame.pack();
@@ -39,9 +56,9 @@ public class Game{
 
     public void startLevel(){
         level = new Level1(this);
-
+        musicButton.updateMusic(level.getMusic());
         //creating the world view
-        view = new GameView(level, level.getCharacter(), 1000, 562);
+        view = new GameView(level, 1000, 562, musicButton, fxButton);
         view.setBackground(level);
         //controlling the character
         controller = new CharacterController(level.getCharacter());
@@ -59,10 +76,10 @@ public class Game{
 
     public void goToNextLevel(){
         if (level instanceof Level1 && level.isComplete()){
-            level.stopMusic();
             level.stop();
             int credits = level.getCharacter().getCredits();
             level = new Level2(this);
+            musicButton.updateMusic(level.getMusic());
             view.setBackground(level);
             Tracker tr = new Tracker(view, level);
             level.addStepListener(tr);
@@ -76,9 +93,9 @@ public class Game{
         }
         if (level instanceof Level2 && level.isComplete()){
             level.stop();
-            level.stopMusic();
             int credits = level.getCharacter().getCredits();
             level = new Level3(this);
+            musicButton.updateMusic(level.getMusic());
             Tracker tr2 = new Tracker(view, level);
             level.addStepListener(tr2);
             view.setBackground(level);
@@ -89,6 +106,10 @@ public class Game{
             level.getCharacter().setCredits(credits);
             level.start();
         }
+    }
+
+    public SoundControlButton getfxButton(){
+        return fxButton;
     }
 
     public static void main(String[] args){

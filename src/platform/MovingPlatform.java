@@ -17,11 +17,11 @@ public class MovingPlatform extends Platform implements StepListener {
 
     @Override
     public void preStep(StepEvent stepEvent) {
+        //if platform is out of the screen
         if(this.getPosition().y > 20){
             this.setPosition(new Vec2(this.getPosition().x, -20));
-        } else if(this.getPosition().y < -25){
-            this.setPosition(new Vec2(this.getPosition().x, 20));
         }
+        //otherwise move up
         else {
             this.setPosition(new Vec2(this.getPosition().x, this.getPosition().y + 0.1f));
         }
