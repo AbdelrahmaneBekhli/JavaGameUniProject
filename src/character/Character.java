@@ -49,11 +49,13 @@ public class Character extends Walker implements ActionListener{
         this.setGravityScale(5);
         this.addCollisionListener(new CharacterCollisionListener());
         SolidFixture fixture = new SolidFixture(this, CharaterShape);
-        fixture.setFriction(0);
+        fixture.setFriction(0); //disable climbing
     }
 
     public void shoot(){
+        //getting the weapon
         DynamicBody weapon = this.world.getWeapon();
+        //setting the physics of the weapon
         if(weapon instanceof Laser){
             if(this.facing.equals("right")){
                 weapon.setPosition(new Vec2(this.getPosition().x + 1, this.getPosition().y + 0.5f));
@@ -63,7 +65,6 @@ public class Character extends Walker implements ActionListener{
                 weapon.setLinearVelocity(new Vec2(-25, 0));
             }
         } else {
-            //setting up the shape of the weapon
             if (this.facing.equals("right")) {
                 weapon.setPosition(this.getPosition());
                 weapon.setLinearVelocity(new Vec2(15, 6));
@@ -75,7 +76,9 @@ public class Character extends Walker implements ActionListener{
 
     }
     public void decreaseHealth(){
-        damageSound.play();
+        if(this.world.getGame().getfxButton().isSound()) {
+            damageSound.play();
+        }
         this.health = health - 1;
         if (this.health == 0){
             this.die();
@@ -92,6 +95,7 @@ public class Character extends Walker implements ActionListener{
             this.addImage(die_left);
         }
         this.startWalking(0);
+        //play the death animation
         Timer timer = new Timer(1000, this);
         timer.start();
     }
@@ -154,6 +158,11 @@ public class Character extends Walker implements ActionListener{
 
     public int getHealth(){
         return health;
+    }
+
+    @Override
+    public GameLevel getWorld(){
+        return world;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package game.levels;
 
+import GUI.SoundControlButton;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import game.Game;
@@ -19,9 +20,11 @@ import java.io.IOException;
 
 public class Level3 extends GameLevel implements StepListener{
     private SoundClip gameMusic;
+    private final Game game;
 
     public Level3(Game game) {
         super(game);
+        this.game = game;
         this.addStepListener(this);
         float blockX = 60;
         float blockY = -12.6f;
@@ -31,7 +34,6 @@ public class Level3 extends GameLevel implements StepListener{
         try{
             gameMusic = new SoundClip("data/audio/level3MusicTrack.wav");
             gameMusic.setVolume(0.1);
-            gameMusic.loop();
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
             System.out.println(e);
         }
@@ -91,14 +93,14 @@ public class Level3 extends GameLevel implements StepListener{
         }
 
         //enemies
-        Golem golem1 = new Golem(this, 5, "right", 0, -5.4f, game);
-        Golem golem2 = new Golem(this, 5, "left", 38, -5.4f, game);
-        Golem golem3 = new Golem(this, 5, "right", 105, 1.5f, game);
-        Golem golem4 = new Golem(this, 5, "left", 135, 5.6f, game);
-        Golem golem5 = new Golem(this, 5, "right", 200, 6.6f, game);
-        Golem golem6 = new Golem(this, 5, "left", 220, 1.6f, game);
-        Golem golem7 = new Golem(this, 15, "right", 340, 5.6f, game);
-        Golem golem8 = new Golem(this, 15, "left", 400, 5.6f, game);
+        Golem golem1 = new Golem(this, 5, "right", 0, -5.4f);
+        Golem golem2 = new Golem(this, 5, "left", 38, -5.4f);
+        Golem golem3 = new Golem(this, 5, "right", 105, 1.5f);
+        Golem golem4 = new Golem(this, 5, "left", 135, 5.6f);
+        Golem golem5 = new Golem(this, 5, "right", 200, 6.6f);
+        Golem golem6 = new Golem(this, 5, "left", 220, 1.6f);
+        Golem golem7 = new Golem(this, 15, "right", 340, 5.6f);
+        Golem golem8 = new Golem(this, 15, "left", 400, 5.6f);
 
         //jump pad
         JumpPad jumpPad1 = new JumpPad(this, 302,-12.5f);
@@ -140,6 +142,16 @@ public class Level3 extends GameLevel implements StepListener{
     @Override
     public void stopMusic() {
         gameMusic.stop();
+    }
+
+    @Override
+    public SoundClip getMusic() {
+        return gameMusic;
+    }
+
+    @Override
+    public Game getGame() {
+        return this.game;
     }
 
     @Override

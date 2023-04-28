@@ -1,5 +1,6 @@
 package game;
 
+import GUI.SoundControlButton;
 import city.cs.engine.*;
 import character.Character;
 import game.levels.GameLevel;
@@ -7,17 +8,27 @@ import game.levels.Level3;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class GameView extends UserView{
 
     private Image background;
     private Character character;
 
+    private final SoundControlButton musicButton;
+
+    private final SoundControlButton fxButton;
+
     private GameLevel world;
-    public GameView(GameLevel world, Character character, int width, int height) {
+    public GameView(GameLevel world, int width, int height, SoundControlButton musicButton, SoundControlButton fxButton) {
         super(world, width, height);
-        this.character = character;
+        this.character = world.getCharacter();
         this.world = world;
+        this.musicButton = musicButton;
+        this.musicButton.setPosition(940, 10);
+        this.fxButton = fxButton;
+        this.fxButton.setPosition(895, 10);
 
     }
     public void setBackground(GameLevel level){
@@ -31,6 +42,8 @@ public class GameView extends UserView{
 
     @Override
     protected void paintForeground(Graphics2D g){
+        this.add(musicButton);
+        this.add(fxButton);
         Font coinsFont = new Font("Arial", Font.BOLD, 25);
         g.setFont(coinsFont);
         if(world instanceof Level3){
@@ -42,6 +55,13 @@ public class GameView extends UserView{
         //images
         Image coinImage = new ImageIcon("data/collectables/coin/coin.png").getImage();
         Image healthImage = new ImageIcon("data/heart.png").getImage();
+
+        try {
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("data/fonts/Bubblegum.ttf")).deriveFont(25f);
+            g.setFont(customFont);
+        }catch (FontFormatException | IOException e){
+            e.printStackTrace();
+        }
 
         //coin display
         g.drawImage(coinImage,10,35,null, this);

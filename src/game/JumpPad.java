@@ -1,6 +1,7 @@
 package game;
 
 import city.cs.engine.*;
+import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -17,13 +18,17 @@ public class JumpPad extends StaticBody {
             System.out.println(e);
         }
     }
-    public JumpPad(World w, float xPos, float yPos) {
-        super(w, new BoxShape(0.7f, 0.5f));
+    private final GameLevel level;
+    public JumpPad(GameLevel level, float xPos, float yPos) {
+        super(level, new BoxShape(0.7f, 0.5f));
+        this.level = level;
         this.addImage(new BodyImage("data/jumpPad/jumpPad.png"));
         this.setPosition(new Vec2(xPos, yPos));
     }
 
     public void playSound(){
-        jumpPadSound.play();
+        if(level.getGame().getfxButton().isSound()) {
+            jumpPadSound.play();
+        }
     }
 }

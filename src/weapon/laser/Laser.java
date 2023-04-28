@@ -1,6 +1,7 @@
 package weapon.laser;
 
-import city.cs.engine.*;
+import city.cs.engine.BoxShape;
+import game.levels.GameLevel;
 import weapon.Weapon;
 
 import java.awt.*;
@@ -10,8 +11,8 @@ import javax.swing.Timer;
 
 public class Laser extends Weapon implements ActionListener {
     Timer timer;
-    public Laser(World w) {
-        super(w, new BoxShape(0.3f, 0.08f));
+    public Laser(GameLevel world) {
+        super(world, new BoxShape(0.3f, 0.08f));
         this.setFillColor(Color.white);
         this.setLineColor(Color.WHITE);
         this.setGravityScale(0);

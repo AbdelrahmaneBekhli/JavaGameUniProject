@@ -24,6 +24,8 @@ public class Slime extends Enemy {
     private String facing;
     private boolean bounce = true;
 
+    private final GameLevel level;
+
     private static SoundClip slimeDeathSound;
     static {
         try {
@@ -33,13 +35,14 @@ public class Slime extends Enemy {
         }
     }
 
-    public Slime(GameLevel world, float range, String initial_facing, float posX, float posY, Game game) {
+    public Slime(GameLevel world, float range, String initial_facing, float posX, float posY) {
         super(world);
         world.addStepListener(this);
         this.range = range;
+        this.level = world;
         this.setGravityScale(0);
         Fixture fixture = new GhostlyFixture(this, SlimeShape);
-        Sensor sensor = new EnemySensor(this, SlimeShape, world.getCharacter(), world, game);
+        Sensor sensor = new EnemySensor(this, SlimeShape, world);
 
         if (initial_facing.equals("right")){
             this.addImage(rightImage);
@@ -84,7 +87,7 @@ public class Slime extends Enemy {
     }
     @Override
     public void die(){
-        if(this.alive){
+        if(this.level.getGame().getfxButton().isSound()){
             slimeDeathSound.play();
         }
         this.bounce = false;
@@ -98,6 +101,7 @@ public class Slime extends Enemy {
             this.removeAllImages();
             this.addImage(image);
         }
+        //death animation timer
         Timer timer = new Timer(1000, this);
         timer.start();
 

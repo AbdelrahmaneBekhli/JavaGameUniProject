@@ -1,12 +1,15 @@
 package weapon.stone;
 
-import city.cs.engine.*;
+import city.cs.engine.BodyImage;
+import city.cs.engine.Shape;
+import city.cs.engine.SolidFixture;
+import game.levels.GameLevel;
 import weapon.Weapon;
 
 public class Stone extends Weapon {
 
     private boolean collided;
-    public Stone(World world, Shape shape) {
+    public Stone(GameLevel world, Shape shape) {
         super(world, shape);
         StoneCollisionListener stoneCollisions = new StoneCollisionListener();
         this.addCollisionListener(stoneCollisions);

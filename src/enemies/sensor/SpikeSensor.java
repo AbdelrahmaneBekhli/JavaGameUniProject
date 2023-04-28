@@ -4,7 +4,7 @@ import city.cs.engine.*;
 import character.Character;
 
 public class SpikeSensor extends Sensor implements SensorListener {
-    private boolean damagePlayer = true;
+    private boolean damagePlayer = true; //state which damaging player is possible
     public SpikeSensor(Body body, Shape shape) {
         super(body, shape);
         this.addSensorListener(this);
