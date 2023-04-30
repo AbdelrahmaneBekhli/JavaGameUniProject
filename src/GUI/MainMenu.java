@@ -1,5 +1,8 @@
 package GUI;
 
+import GUI.tools.CircularButton;
+import GUI.tools.RectangularButton;
+import GUI.tools.SoundControlButton;
 import city.cs.engine.UserView;
 import city.cs.engine.World;
 import game.Game;
@@ -10,8 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu extends UserView {
-    public MainMenu(Game game, int width, int height, SoundControlButton musicButton) {
-        super(new World(), width, height);
+    public MainMenu(Game game, SoundControlButton musicButton) {
+        super(new World(), 1000, 562);
         this.setLayout(null);
 
         RectangularButton start = new RectangularButton(350, 250, 262, 95, "data/GUI/Main Menu/StartButton.png", "data/GUI/Main Menu/StartHoverButton.png");
