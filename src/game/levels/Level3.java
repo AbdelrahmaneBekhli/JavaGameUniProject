@@ -1,6 +1,5 @@
 package game.levels;
 
-import GUI.SoundControlButton;
 import city.cs.engine.*;
 import city.cs.engine.Shape;
 import game.Game;
@@ -118,9 +117,6 @@ public class Level3 extends GameLevel implements StepListener{
         Coin coin10 = new Coin(this, "down", 430, 11);
         Coin coin11 = new Coin(this, "up", 450, 3);
         Coin coin12 = new Coin(this, "down", 470, -3);
-
-
-
 
     }
 
