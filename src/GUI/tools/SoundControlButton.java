@@ -1,4 +1,4 @@
-package GUI;
+package GUI.tools;
 
 import city.cs.engine.SoundClip;
 

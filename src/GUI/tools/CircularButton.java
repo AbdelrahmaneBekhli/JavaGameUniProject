@@ -1,4 +1,4 @@
-package GUI;
+package GUI.tools;
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
