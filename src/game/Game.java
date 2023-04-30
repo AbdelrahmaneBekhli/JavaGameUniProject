@@ -1,17 +1,16 @@
 package game;
 
+import GUI.DeathMenu;
 import GUI.MainMenu;
-import GUI.SoundControlButton;
+import GUI.tools.SoundControlButton;
 import character.CharacterController;
 import character.Tracker;
 import city.cs.engine.SoundClip;
-import com.sun.tools.javac.Main;
 import game.levels.*;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 
@@ -28,8 +27,8 @@ public class Game{
 
     public Game(){
         try{
-            gameMusic = new SoundClip("data/audio/level3MusicTrack.wav");
-            gameMusic.setVolume(0.1);
+            gameMusic = new SoundClip("data/audio/menuMusic.wav");
+            gameMusic.setVolume(0.3);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
             System.out.println(e);
         }
@@ -44,7 +43,7 @@ public class Game{
         frame.setResizable((false));
 
 
-        MainMenu mainMenu = new MainMenu(this, 1000, 562, musicButton);
+        MainMenu mainMenu = new MainMenu(this, musicButton);
         frame.add(mainMenu);
 
         frame.pack();
@@ -58,7 +57,7 @@ public class Game{
         level = new Level1(this);
         musicButton.updateMusic(level.getMusic());
         //creating the world view
-        view = new GameView(level, 1000, 562, musicButton, fxButton);
+        view = new GameView(level, 1000, 562, this);
         view.setBackground(level);
         //controlling the character
         controller = new CharacterController(level.getCharacter());
@@ -108,8 +107,17 @@ public class Game{
         }
     }
 
+    public void deathMenu(){
+        DeathMenu deathMenu = new DeathMenu(level.getCharacter());
+        frame.add(deathMenu);
+    }
+
     public SoundControlButton getfxButton(){
         return fxButton;
+    }
+
+    public SoundControlButton getMusicButton(){
+        return musicButton;
     }
 
     public static void main(String[] args){
