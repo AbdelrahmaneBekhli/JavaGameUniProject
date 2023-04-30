@@ -1,33 +1,42 @@
 package game;
 
-import GUI.SoundControlButton;
+import GUI.tools.SoundControlButton;
 import city.cs.engine.*;
 import character.Character;
 import game.levels.GameLevel;
 import game.levels.Level3;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class GameView extends UserView{
+public class GameView extends UserView implements ActionListener {
 
     private Image background;
     private Character character;
 
     private final SoundControlButton musicButton;
+    private Timer deathScreenTimer;
+
+    boolean startTimer = false;
+    private SoundClip playerDeath;
 
     private final SoundControlButton fxButton;
-
     private GameLevel world;
-    public GameView(GameLevel world, int width, int height, SoundControlButton musicButton, SoundControlButton fxButton) {
+    private final Game game;
+    public GameView(GameLevel world, int width, int height, Game game) {
         super(world, width, height);
         this.character = world.getCharacter();
         this.world = world;
-        this.musicButton = musicButton;
+        this.game = game;
+        this.musicButton = game.getMusicButton();
         this.musicButton.setPosition(940, 10);
-        this.fxButton = fxButton;
+        this.fxButton = game.getfxButton();
         this.fxButton.setPosition(895, 10);
 
     }
@@ -48,8 +57,15 @@ public class GameView extends UserView{
         g.setFont(coinsFont);
         if(world instanceof Level3){
             g.setColor(Color.WHITE);
-        }else {
+        } else {
             g.setColor(Color.BLACK);
+        }
+
+        try{
+            playerDeath = new SoundClip("data/audio/playerDeath.wav");
+            playerDeath.setVolume(0.05);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e){
+            System.out.println(e);
         }
 
         //images
@@ -86,6 +102,13 @@ public class GameView extends UserView{
         String gameOver = "Game Over!";
         if (!(character.isAlive())) {
             g.drawString(gameOver, 200, 290);
+            if(!startTimer) {
+                deathScreenTimer = new Timer(2200, this);
+                deathScreenTimer.start();
+                world.stopMusic();
+                playerDeath.play();
+                startTimer = true;
+            }
         }
     }
     public void updateCharacter(Character character){
@@ -94,5 +117,12 @@ public class GameView extends UserView{
 
     public void updateLevel(GameLevel level){
         this.world = level;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        deathScreenTimer.stop();
+        this.setVisible(false);
+        game.deathMenu();
     }
 }
