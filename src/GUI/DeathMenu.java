@@ -1,7 +1,9 @@
 package GUI;
 
 import GUI.tools.LeaderboardTextField;
+import GUI.tools.RectangularButton;
 import character.Character;
+import game.Game;
 import city.cs.engine.SoundClip;
 import city.cs.engine.UserView;
 import city.cs.engine.World;
@@ -9,6 +11,8 @@ import city.cs.engine.World;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -26,13 +30,17 @@ public class DeathMenu extends UserView {
             System.out.println(e);
         }
     }
-    public DeathMenu(Character character){
+    public DeathMenu(Game game, Character character){
         super(new World(), 1000, 562);
         this.setLayout(null);
         this.setBackground(Color.BLACK);
         this.setVisible(true);
         this.points = character.getCredits();
-        backgroundMusic.loop();
+        if(game.getMusicButton().isSound()) {
+            backgroundMusic.loop();
+        }
+        game.getMusicButton().updateMusic(backgroundMusic);
+        this.add(game.getMusicButton());
 
         try {
             bubblegum = Font.createFont(Font.TRUETYPE_FONT, new File("data/fonts/Bubblegum.ttf")).deriveFont(100f);
@@ -40,9 +48,21 @@ public class DeathMenu extends UserView {
             e.printStackTrace();
         }
 
-        // Create and add the name field to the view
+        //main menu button
+        RectangularButton mainMenuButton = new RectangularButton(395, 430, 200, 65, "data/GUI/mainMenuButton.png", "data/GUI/mainMenuHoverButton.png");
+        this.add(mainMenuButton);
+
+        // Create and add the text field to the view
         LeaderboardTextField textField = new LeaderboardTextField(350, 330, points, bubblegum);
         this.add(textField);
+
+        mainMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.mainMenu();
+                DeathMenu.super.setVisible(false);
+            }
+        });
     }
 
     @Override
