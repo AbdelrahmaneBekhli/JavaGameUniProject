@@ -24,10 +24,9 @@ public class Game{
     private final SoundControlButton fxButton = new SoundControlButton();
     private GameLevel level;
     private GameView view;
-    private MainMenu mainMenu;
+    private final MainMenu mainMenu;
     private CharacterController controller;
-
-    private Tracker tracker;
+    boolean completed = false;
 
     private final JFrame frame;
 
@@ -68,7 +67,9 @@ public class Game{
         //controlling the character
         controller = new CharacterController(level.getCharacter());
         view.addKeyListener(controller);
-        level.getCharacter().setCredits(coins);
+        if(completed) {
+            level.getCharacter().setCredits(coins);
+        }
 
         level.start();
 
@@ -81,6 +82,7 @@ public class Game{
     }
 
     public void goToNextLevel(){
+        Tracker tracker;
         if (level instanceof Level1 && level.isComplete()){
             level.stop();
             int credits = level.getCharacter().getCredits();
@@ -117,6 +119,7 @@ public class Game{
             view.setVisible(false);
             level.stop();
             this.winMenu();
+            completed = true;
         }
     }
 
