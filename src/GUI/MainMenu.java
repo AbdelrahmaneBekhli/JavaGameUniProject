@@ -19,8 +19,8 @@ public class MainMenu extends UserView {
         super(new World(), 1000, 562);
         this.setLayout(null);
 
-        RectangularButton start = new RectangularButton(350, 250, 262, 95, "data/GUI/Main Menu/StartButton.png", "data/GUI/Main Menu/StartHoverButton.png");
-        RectangularButton exit = new RectangularButton(380, 350, 205, 68, "data/GUI/Main Menu/ExitButton.png", "data/GUI/Main Menu/ExitHoverButton.png");
+        RectangularButton start = new RectangularButton(365, 250, 262, 95, "data/GUI/Main Menu/StartButton.png", "data/GUI/Main Menu/StartHoverButton.png");
+        RectangularButton exit = new RectangularButton(395, 350, 205, 68, "data/GUI/Main Menu/ExitButton.png", "data/GUI/Main Menu/ExitHoverButton.png");
 
         CircularButton leaderboard = new CircularButton(10, 20, 50, "data/GUI/Main Menu/LeaderBoardButton.png", "data/GUI/Main Menu/LeaderBoardHoverButton.png");
         CircularButton help = new CircularButton(70, 20, 50, "data/GUI/Main Menu/HelpButton.png", "data/GUI/Main Menu/HelpHoverButton.png");
@@ -65,5 +65,10 @@ public class MainMenu extends UserView {
     @Override
     protected void paintBackground(Graphics2D image){
         image.drawImage(new ImageIcon("data/GUI/Main Menu/Main Menu.jpg").getImage(), 0, -50, this);
+    }
+    @Override
+    protected void paintForeground(Graphics2D g){
+        Image logo = new ImageIcon("data/GUI/Main Menu/logo.gif").getImage();
+        g.drawImage(logo,303,40,null, this);
     }
 }
