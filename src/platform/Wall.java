@@ -10,7 +10,7 @@ public class Wall extends StaticBody {
 
     public Wall(GameLevel level, Shape s, float positionX, float positionY) {
         super(level, s);
-        BodyImage transparant = new BodyImage("data/tiles/transparant.png");
+        BodyImage transparant = new BodyImage("data/tiles/transparent.png");
         this.setPosition(new Vec2(positionX, positionY));
         this.addImage(transparant);
     }
