@@ -1,1 +1,8 @@
-dark_light,0
+dark_light,100
+mohammed,50
+daniel,1
+liebe,180
+moustafa,80
+james,145
+max,90
+saeed,40
