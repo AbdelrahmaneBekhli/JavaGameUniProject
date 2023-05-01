@@ -59,7 +59,7 @@ public class DeathMenu extends UserView {
         mainMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.mainMenu();
+                game.mainMenu(true);
                 DeathMenu.super.setVisible(false);
             }
         });
