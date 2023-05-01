@@ -5,6 +5,7 @@ import GUI.Leaderboard;
 import GUI.MainMenu;
 import GUI.WinMenu;
 import GUI.tools.SoundControlButton;
+import character.Character;
 import character.CharacterController;
 import character.Tracker;
 import city.cs.engine.SoundClip;
@@ -58,7 +59,7 @@ public class Game{
 
     }
 
-    public void startLevel(){
+    public void startLevel(int coins){
         level = new Level1(this);
         musicButton.updateMusic(level.getMusic());
         //creating the world view
@@ -67,6 +68,7 @@ public class Game{
         //controlling the character
         controller = new CharacterController(level.getCharacter());
         view.addKeyListener(controller);
+        level.getCharacter().setCredits(coins);
 
         level.start();
 
@@ -151,6 +153,14 @@ public class Game{
 
     public SoundControlButton getMusicButton(){
         return musicButton;
+    }
+
+    public Character getPlayer(){
+        if(this.level == null){
+            return null;
+        } else {
+            return level.getCharacter();
+        }
     }
 
     public static void main(String[] args){

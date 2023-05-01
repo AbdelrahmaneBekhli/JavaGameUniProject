@@ -27,7 +27,6 @@ public class MainMenu extends UserView {
 
         musicButton.setPosition(940, 10);
 
-
         this.add(start);
         this.add(leaderboard);
         this.add(help);
@@ -37,7 +36,11 @@ public class MainMenu extends UserView {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                game.startLevel();
+                if(game.getPlayer() == null){
+                    game.startLevel(0);
+                } else{
+                    game.startLevel(game.getPlayer().getCredits());
+                }
                 MainMenu.super.setVisible(false);
             }
         });
