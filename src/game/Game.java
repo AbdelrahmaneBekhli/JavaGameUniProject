@@ -2,6 +2,7 @@ package game;
 
 import GUI.DeathMenu;
 import GUI.MainMenu;
+import GUI.WinMenu;
 import GUI.tools.SoundControlButton;
 import character.CharacterController;
 import character.Tracker;
@@ -14,14 +15,17 @@ import javax.swing.*;
 import java.io.IOException;
 
 
+
 public class Game{
     private SoundClip gameMusic;
     private final SoundControlButton musicButton;
-
     private final SoundControlButton fxButton = new SoundControlButton();
     private GameLevel level;
     private GameView view;
+    private MainMenu mainMenu;
     private CharacterController controller;
+
+    private Tracker tracker;
 
     private final JFrame frame;
 
@@ -43,7 +47,7 @@ public class Game{
         frame.setResizable((false));
 
 
-        MainMenu mainMenu = new MainMenu(this, musicButton);
+        mainMenu = new MainMenu(this, musicButton);
         frame.add(mainMenu);
 
         frame.pack();
@@ -80,8 +84,8 @@ public class Game{
             level = new Level2(this);
             musicButton.updateMusic(level.getMusic());
             view.setBackground(level);
-            Tracker tr = new Tracker(view, level);
-            level.addStepListener(tr);
+            tracker = new Tracker(view, level);
+            level.addStepListener(tracker);
             //level now refer to the new level
             view.setWorld(level);
             view.updateLevel(level);
@@ -95,8 +99,8 @@ public class Game{
             int credits = level.getCharacter().getCredits();
             level = new Level3(this);
             musicButton.updateMusic(level.getMusic());
-            Tracker tr2 = new Tracker(view, level);
-            level.addStepListener(tr2);
+            tracker = new Tracker(view, level);
+            level.addStepListener(tracker);
             view.setBackground(level);
             view.setWorld(level);
             view.updateLevel(level);
@@ -105,11 +109,33 @@ public class Game{
             level.getCharacter().setCredits(credits);
             level.start();
         }
+        if (level instanceof Level3 && level.isComplete()){
+            //WinMenu winMenu = new WinMenu(this, level.getCharacter());
+            view.setVisible(false);
+            level.stop();
+            this.winMenu();
+        }
     }
 
     public void deathMenu(){
-        DeathMenu deathMenu = new DeathMenu(level.getCharacter());
+        DeathMenu deathMenu = new DeathMenu(this, level.getCharacter());
         frame.add(deathMenu);
+    }
+
+    private void winMenu(){
+        gameMusic.stop();
+        WinMenu WinMenu = new WinMenu(this, level.getCharacter());
+        frame.add(WinMenu);
+    }
+
+    public void mainMenu(){
+        mainMenu.setVisible(true);
+        if(musicButton.isSound()) {
+            gameMusic.loop();
+        }
+        mainMenu.add(musicButton);
+        musicButton.updateMusic(gameMusic);
+        frame.add(mainMenu);
     }
 
     public SoundControlButton getfxButton(){
