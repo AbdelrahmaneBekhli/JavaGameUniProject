@@ -40,7 +40,7 @@ public class Game{
 
         musicButton = new SoundControlButton(gameMusic);
         //naming the game
-        frame = new JFrame("2D platformer");
+        frame = new JFrame("Blitz Adventures");
 
         //set the X button to terminate the program
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
