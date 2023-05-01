@@ -37,7 +37,7 @@ public class GameView extends UserView implements ActionListener {
         this.musicButton = game.getMusicButton();
         this.musicButton.setPosition(940, 10);
         this.fxButton = game.getfxButton();
-        this.fxButton.setPosition(895, 10);
+
 
     }
     public void setBackground(GameLevel level){
@@ -52,6 +52,7 @@ public class GameView extends UserView implements ActionListener {
     @Override
     protected void paintForeground(Graphics2D g){
         this.add(musicButton);
+        this.fxButton.setPosition(895, 10);
         this.add(fxButton);
         Font coinsFont = new Font("Arial", Font.BOLD, 25);
         g.setFont(coinsFont);
@@ -106,7 +107,9 @@ public class GameView extends UserView implements ActionListener {
                 deathScreenTimer = new Timer(2200, this);
                 deathScreenTimer.start();
                 world.stopMusic();
-                playerDeath.play();
+                if(game.getfxButton().isSound()) {
+                    playerDeath.play();
+                }
                 startTimer = true;
             }
         }
