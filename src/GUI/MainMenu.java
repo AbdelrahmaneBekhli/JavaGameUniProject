@@ -5,12 +5,14 @@ import GUI.tools.RectangularButton;
 import GUI.tools.SoundControlButton;
 import city.cs.engine.UserView;
 import city.cs.engine.World;
+import com.sun.tools.javac.Main;
 import game.Game;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MainMenu extends UserView {
     public MainMenu(Game game, SoundControlButton musicButton) {
@@ -44,6 +46,18 @@ public class MainMenu extends UserView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+            }
+        });
+
+        leaderboard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainMenu.super.setVisible(false);
+                try {
+                    game.leaderboardMenu();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
