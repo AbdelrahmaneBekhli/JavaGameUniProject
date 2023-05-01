@@ -1,6 +1,7 @@
 package game;
 
 import GUI.DeathMenu;
+import GUI.Leaderboard;
 import GUI.MainMenu;
 import GUI.WinMenu;
 import GUI.tools.SoundControlButton;
@@ -128,13 +129,19 @@ public class Game{
         frame.add(WinMenu);
     }
 
-    public void mainMenu(){
+    public void leaderboardMenu() throws IOException {
+        mainMenu.setVisible(false);
+        Leaderboard leaderboardMenu = new Leaderboard(this);
+        leaderboardMenu.add(musicButton);
+        frame.add(leaderboardMenu);
+    }
+
+    public void mainMenu(boolean changemusic){
         mainMenu.setVisible(true);
-        if(musicButton.isSound()) {
-            gameMusic.loop();
-        }
         mainMenu.add(musicButton);
-        musicButton.updateMusic(gameMusic);
+        if(changemusic) {
+            musicButton.updateMusic(gameMusic);
+        }
         frame.add(mainMenu);
     }
 
