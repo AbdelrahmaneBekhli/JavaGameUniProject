@@ -1,7 +1,5 @@
 package GUI.tools;
 
-import GUI.txtFileHandler;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
