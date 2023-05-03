@@ -1,9 +1,6 @@
 package game;
 
-import GUI.DeathMenu;
-import GUI.Leaderboard;
-import GUI.MainMenu;
-import GUI.WinMenu;
+import GUI.*;
 import GUI.tools.SoundControlButton;
 import character.Character;
 import character.CharacterController;
@@ -139,6 +136,13 @@ public class Game{
         Leaderboard leaderboardMenu = new Leaderboard(this);
         leaderboardMenu.add(musicButton);
         frame.add(leaderboardMenu);
+    }
+
+    public void HowToPlayMenu(){
+        mainMenu.setVisible(false);
+        HowToPlay howToPlayMenu = new HowToPlay(this);
+        howToPlayMenu.add(musicButton);
+        frame.add(howToPlayMenu);
     }
 
     public void mainMenu(boolean changemusic){
