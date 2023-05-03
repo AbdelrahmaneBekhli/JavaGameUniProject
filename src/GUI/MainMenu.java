@@ -63,6 +63,14 @@ public class MainMenu extends UserView {
                 }
             }
         });
+
+        help.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainMenu.super.setVisible(false);
+                game.HowToPlayMenu();
+            }
+        });
     }
 
     @Override
