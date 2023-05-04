@@ -1,0 +1,15 @@
+character
+collectables.coin
+collectables.speed
+enemies
+enemies.sensor
+game
+game.levels
+game.portal
+GUI
+GUI.tools
+platform
+weapon
+weapon.laser
+weapon.snowball
+weapon.stone
