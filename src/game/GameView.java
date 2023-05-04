@@ -14,7 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class GameView extends UserView implements ActionListener {
 
     private Image background;
@@ -40,6 +42,9 @@ public class GameView extends UserView implements ActionListener {
 
 
     }
+    /**
+     * set level background.
+     */
     public void setBackground(GameLevel level){
         background = new ImageIcon(level.getBackground()).getImage();
     }
@@ -114,10 +119,15 @@ public class GameView extends UserView implements ActionListener {
             }
         }
     }
+    /**
+     * update player.
+     */
     public void updateCharacter(Character character){
         this.character = character;
     }
-
+    /**
+     * update level.
+     */
     public void updateLevel(GameLevel level){
         this.world = level;
     }

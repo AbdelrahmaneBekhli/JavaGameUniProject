@@ -1,7 +1,6 @@
 package enemies;
 
 import city.cs.engine.*;
-import game.Game;
 import enemies.sensor.EnemySensor;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
@@ -11,6 +10,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 
 public class Golem extends Enemy {
     private final BodyImage armor_run_right = new BodyImage("data/enemy/Golem/armorRun_right.gif", 2);
@@ -23,7 +26,6 @@ public class Golem extends Enemy {
     private final BodyImage noArmorRun_left = new BodyImage("data/enemy/Golem/noArmorRun_left.gif", 2);
     private final BodyImage noArmorDeath_right = new BodyImage("data/enemy/Golem/noArmorDeath_right.gif", 2);
     private final BodyImage noArmorDeath_left = new BodyImage("data/enemy/Golem/noArmorDeath_left.gif", 2);
-
     private final float range;
     private float right;
     private float left;
@@ -34,9 +36,7 @@ public class Golem extends Enemy {
     private Boolean attacking = false;
     private Boolean armor = true;
     private Boolean animation = false;
-
     private final GameLevel world;
-
     private static SoundClip golemDeathSound;
     static {
         try {
@@ -84,33 +84,23 @@ public class Golem extends Enemy {
         this.setRange();
     }
 
-    public BodyImage getArmor_Attack_right() {
-        return armor_Attack_right;
-    }
-
-    public BodyImage getArmor_Attack_left() {
-        return armor_Attack_left;
-    }
-
-    public BodyImage getNoArmorDeath_right() {
-        return noArmorDeath_right;
-    }
-
-    public BodyImage getNoArmorDeath_left() {
-        return noArmorDeath_left;
-    }
-
+    /**
+     * @return if the golem has armor.
+     */
     public Boolean getArmor() {
         return armor;
     }
-    public void setArmor(Boolean armor) {
-        this.armor = armor;
-    }
 
+    /**
+     * sets the golem state to attacking or not attacking.
+     */
     public void setAttacking(Boolean attacking){
         this.attacking = attacking;
     }
 
+    /**
+     * destroys the armor.
+     */
     public void destroyArmor(){
         if(this.world.getGame().getfxButton().isSound()) {
             golemArmorBreakSound.play();
@@ -127,12 +117,17 @@ public class Golem extends Enemy {
         animationTimer = new Timer(800, this::animationTimer);
         animationTimer.start();
     }
-
+    /**
+     * timer for the armor breaking animation to take place.
+     */
     private void animationTimer (ActionEvent e){
         this.animation = false;
         animationTimer.stop();
     }
 
+    /**
+     * @return if golem is attacking.
+     */
     public Boolean getAttacking() {
         return attacking;
     }

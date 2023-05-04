@@ -1,7 +1,6 @@
 package enemies;
 
 import city.cs.engine.*;
-import game.Game;
 import enemies.sensor.EnemySensor;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
@@ -11,6 +10,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 
 public class Wolf  extends Enemy {
     private static final Shape wolfShape = new BoxShape(1.5f,0.9f);

@@ -8,7 +8,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Laser extends Weapon implements ActionListener {
     Timer timer;
     public Laser(GameLevel world) {

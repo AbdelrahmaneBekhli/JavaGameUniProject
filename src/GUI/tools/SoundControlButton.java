@@ -7,12 +7,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class SoundControlButton extends JCheckBox {
     private SoundClip music;
     private final Image[] images;
-
     private boolean sound = true;
+
+    /**
+     * constructor for the fx button.
+     */
     public SoundControlButton(){ //fx button
         this.images = new Image[]{new ImageIcon("data/GUI/fxMuteButton.png").getImage(), new ImageIcon("data/GUI/fxUnmuteButton.png").getImage()};
         this.setIcon(new ImageIcon(images[1]));
@@ -34,7 +39,9 @@ public class SoundControlButton extends JCheckBox {
         });
 
     }
-
+    /**
+     * constructor for the music button
+     */
     public SoundControlButton(SoundClip levelMusic){ //music button
         this.music = levelMusic;
         this.music.loop();
@@ -60,7 +67,9 @@ public class SoundControlButton extends JCheckBox {
         });
 
     }
-
+    /**
+     * updates music track.
+     */
     public void updateMusic(SoundClip newLevelMusic){
         this.music.stop();
         this.music = newLevelMusic;
@@ -68,15 +77,21 @@ public class SoundControlButton extends JCheckBox {
             music.loop();
         }
     }
-
+    /**
+     * set position of button.
+     */
     public void setPosition(int xPos, int yPos){
         this.setBounds(xPos, yPos, 55, 50);
     }
-
+    /**
+     * @return can sound be played
+     */
     public boolean isSound(){
         return sound;
     }
-
+    /**
+     * make the button a circle
+     */
     protected void paintBorder(Graphics g) {
         Graphics2D g2 = (Graphics2D)g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

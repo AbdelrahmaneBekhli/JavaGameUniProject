@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class LeaderboardTextField extends JTextField {
     private final int points;
     public LeaderboardTextField(int xPos, int yPos, int points, Font font){

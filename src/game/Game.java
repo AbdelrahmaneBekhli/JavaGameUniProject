@@ -13,8 +13,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.IOException;
 
-
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Game{
     private SoundClip gameMusic;
     private final SoundControlButton musicButton;
@@ -24,6 +25,8 @@ public class Game{
     private final MainMenu mainMenu;
     private CharacterController controller;
     boolean completed = false;
+
+    private int score;
 
     private final JFrame frame;
 
@@ -54,7 +57,9 @@ public class Game{
         frame.setVisible(true);
 
     }
-
+    /**
+     * start level 1.
+     */
     public void startLevel(int coins){
         level = new Level1(this);
         musicButton.updateMusic(level.getMusic());
@@ -77,9 +82,12 @@ public class Game{
         view.requestFocus();
         frame.add(view);
     }
-
+    /**
+     * go to next level.
+     */
     public void goToNextLevel(){
         Tracker tracker;
+        this.score = this.score + 200;
         if (level instanceof Level1 && level.isComplete()){
             level.stop();
             int credits = level.getCharacter().getCredits();
@@ -119,32 +127,42 @@ public class Game{
             completed = true;
         }
     }
-
+    /**
+     * go to death menu.
+     */
     public void deathMenu(){
         DeathMenu deathMenu = new DeathMenu(this, level.getCharacter());
         frame.add(deathMenu);
     }
-
+    /**
+     * go to win menu.
+     */
     private void winMenu(){
         gameMusic.stop();
         WinMenu WinMenu = new WinMenu(this, level.getCharacter());
         frame.add(WinMenu);
     }
-
+    /**
+     * go to leaderboard menu.
+     */
     public void leaderboardMenu() throws IOException {
         mainMenu.setVisible(false);
         Leaderboard leaderboardMenu = new Leaderboard(this);
         leaderboardMenu.add(musicButton);
         frame.add(leaderboardMenu);
     }
-
+    /**
+     * go to how to play menu.
+     */
     public void HowToPlayMenu(){
         mainMenu.setVisible(false);
         HowToPlay howToPlayMenu = new HowToPlay(this);
         howToPlayMenu.add(musicButton);
         frame.add(howToPlayMenu);
     }
-
+    /**
+     * go to main menu.
+     */
     public void mainMenu(boolean changemusic){
         mainMenu.setVisible(true);
         mainMenu.add(musicButton);
@@ -153,15 +171,27 @@ public class Game{
         }
         frame.add(mainMenu);
     }
-
+    /**
+     * @return sound effect control button.
+     */
     public SoundControlButton getfxButton(){
         return fxButton;
     }
-
+    /**
+     * @return music control button.
+     */
     public SoundControlButton getMusicButton(){
         return musicButton;
     }
-
+    /**
+     * @return player score.
+     */
+    public int getScore(){
+        return this.score;
+    }
+    /**
+     * @return player
+     */
     public Character getPlayer(){
         if(this.level == null){
             return null;

@@ -8,6 +8,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class JumpPad extends StaticBody {
     private static SoundClip jumpPadSound;
     static {
@@ -25,7 +28,9 @@ public class JumpPad extends StaticBody {
         this.addImage(new BodyImage("data/jumpPad/jumpPad.png"));
         this.setPosition(new Vec2(xPos, yPos));
     }
-
+    /**
+     * play jump pad sound
+     */
     public void playSound(){
         if(level.getGame().getfxButton().isSound()) {
             jumpPadSound.play();

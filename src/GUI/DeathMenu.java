@@ -16,6 +16,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
+
 public class DeathMenu extends UserView {
     Font bubblegum;
     private final int points;
@@ -35,7 +39,7 @@ public class DeathMenu extends UserView {
         this.setLayout(null);
         this.setBackground(Color.BLACK);
         this.setVisible(true);
-        this.points = character.getCredits();
+        this.points = character.getCredits() + game.getScore();
         if(game.getMusicButton().isSound()) {
             backgroundMusic.loop();
         }

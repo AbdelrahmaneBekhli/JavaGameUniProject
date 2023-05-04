@@ -5,11 +5,10 @@ import city.cs.engine.StepEvent;
 import city.cs.engine.StepListener;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class MovingPlatform extends Platform implements StepListener {
-    private float minX;
-    private float maxX;
-    float speed = 0.3f;
     public MovingPlatform(GameLevel level, Shape shape, float x, float y, String type) {
         super(level, shape, x, y, type);
         level.addStepListener(this);

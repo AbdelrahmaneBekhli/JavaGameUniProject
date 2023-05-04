@@ -3,6 +3,9 @@ package enemies.sensor;
 import city.cs.engine.*;
 import character.Character;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class SpikeSensor extends Sensor implements SensorListener {
     private boolean damagePlayer = true; //state which damaging player is possible
     public SpikeSensor(Body body, Shape shape) {

@@ -13,6 +13,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
+
 public class Character extends Walker implements ActionListener{
     private static final Shape CharaterShape = new BoxShape(0.8f,1.2f);
     private final BodyImage idle_right = new BodyImage("data/player/idle_right.gif", 2.35f);
@@ -52,6 +56,9 @@ public class Character extends Walker implements ActionListener{
         fixture.setFriction(0); //disable climbing
     }
 
+    /**
+     * make the player shoot towards the direction he is facing
+     */
     public void shoot(){
         //getting the weapon
         DynamicBody weapon = this.world.getWeapon();
@@ -75,6 +82,9 @@ public class Character extends Walker implements ActionListener{
         }
 
     }
+    /**
+     * decrease the player's health by 1.
+     */
     public void decreaseHealth(){
         if(this.world.getGame().getfxButton().isSound()) {
             damageSound.play();
@@ -85,6 +95,9 @@ public class Character extends Walker implements ActionListener{
         }
     }
 
+    /**
+     * destroy the player with displaying the death animation.
+     */
     private void die(){
         this.alive = false;
         if(facing.equals("right")) {
@@ -99,63 +112,113 @@ public class Character extends Walker implements ActionListener{
         Timer timer = new Timer(1000, this);
         timer.start();
     }
+    /**
+     * @return if player is still alive.
+     */
     public boolean isAlive() {
         return alive;
     }
+
+    /**
+     * @return player's credits.
+     */
     public int getCredits(){
         return credits;
     }
+
+    /**
+     * increases the credits by 1.
+     */
     public void incrementCredits(){
         this.credits = this.credits + 1;
     }
 
+    /**
+     * sets the credits of the player to a certain integer.
+     */
     public void setCredits(int credits){
         this.credits = credits;
     }
 
+
+    /**
+     * @return player's kills.
+     */
     public int getKills(){
         return kills;
     }
+
+    /**
+     * increments the kills of the player by 1.
+     */
     public void incrementKills(){
         this.kills = this.kills + 1;
     }
 
+    /**
+     * sets the direction of where the player is facing.
+     * @param facing String indicating the direction (right or left)
+     */
     public void setFacing(String facing) {
         this.facing = facing;
     }
 
+    /**
+     * @return speed of the player.
+     */
     public int getSpeed() {
         return speed;
     }
 
+    /**
+     * sets the speed of the player.
+     * @param speed integer speed
+     */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
 
+    /**
+     * @return number of speed boosts collected by the player.
+     */
     public int getSpeedBoostCollected() {
         return speedBoostCollected;
     }
 
+    /**
+     * sets the number of speed collected by the player.
+     * @param speedBoostCollected integer of how many speed boosts are collected
+     */
     public void setSpeedBoostCollected(int speedBoostCollected) {
         this.speedBoostCollected = speedBoostCollected;
     }
-
+    /**
+     * @return player's Idle gif facing right.
+     */
     public BodyImage getIdle_right() {
         return idle_right;
     }
-
+    /**
+     * @return player's Idle gif facing left.
+     */
     public BodyImage getIdle_left() {
         return idle_left;
     }
-
+    /**
+     * @return player's running gif facing left.
+     */
     public BodyImage getRun_left() {
         return run_left;
     }
-
+    /**
+     * @return player's running gif facing right.
+     */
     public BodyImage getRun_right() {
         return run_right;
     }
-
+    /**
+     * @return player's health.
+     */
     public int getHealth(){
         return health;
     }

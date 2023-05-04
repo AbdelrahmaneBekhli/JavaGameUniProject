@@ -5,6 +5,9 @@ import city.cs.engine.CollisionListener;
 import platform.Platform;
 import platform.Wall;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class SnowCollisionListener implements CollisionListener {
     @Override
     public void collide(CollisionEvent collisionEvent) {

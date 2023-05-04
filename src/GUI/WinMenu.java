@@ -16,6 +16,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class WinMenu extends UserView {
 
     private Font bubblegum;
@@ -36,7 +39,7 @@ public class WinMenu extends UserView {
         this.setLayout(null);
         this.setBackground(new Color(22,36,37));
         this.setVisible(true);
-        this.points = character.getCredits();
+        this.points = character.getCredits() + 100 + game.getScore();
         if(game.getMusicButton().isSound()) {
             backgroundMusic.loop();
         }

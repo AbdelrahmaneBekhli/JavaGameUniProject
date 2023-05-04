@@ -1,16 +1,16 @@
 package game.portal;
 
 import city.cs.engine.*;
-import game.Game;
-import character.Character;
 import game.levels.GameLevel;
-import game.portal.sensor.PortalSensor;
 import org.jbox2d.common.Vec2;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Portal extends StaticBody{
     private static final Shape portalShape = new CircleShape(1.5f);
     private static final BodyImage PortalImage = new BodyImage("data/Portal.gif", 3.2f);
@@ -29,7 +29,7 @@ public class Portal extends StaticBody{
         this.setPosition(new Vec2(x,y));
 
         Fixture fixture = new GhostlyFixture(this, portalShape);
-        Sensor sensor = new PortalSensor(this, portalShape, world.getCharacter(), world.getGame());
+        Sensor sensor = new PortalSensor(this, portalShape, world.getGame());
         if(world.getGame().getfxButton().isSound()) {
             portalSound.play();
         }

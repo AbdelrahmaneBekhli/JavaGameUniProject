@@ -1,7 +1,6 @@
 package enemies;
 
 import city.cs.engine.*;
-import game.Game;
 import game.levels.GameLevel;
 import enemies.sensor.EnemySensor;
 import org.jbox2d.common.Vec2;
@@ -16,9 +15,8 @@ public class Slime extends Enemy {
     private static final Shape SlimeShape = new BoxShape(0.7f,0.75f);
     private static final BodyImage rightImage = new BodyImage("data/enemy/slime/slime_right.gif", 1.5f);
     private static final BodyImage leftImage = new BodyImage("data/enemy/slime/slime_left.gif", 1.5f);
-
-    private float left;
-    private float right;
+    private float leftRange;
+    private float rightRange;
     private final float range;
     private boolean alive = true;
     private String facing;
@@ -34,7 +32,9 @@ public class Slime extends Enemy {
             System.out.println(e);
         }
     }
-
+    /**
+     * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+     */
     public Slime(GameLevel world, float range, String initial_facing, float posX, float posY) {
         super(world);
         world.addStepListener(this);
@@ -60,21 +60,21 @@ public class Slime extends Enemy {
     @Override
     public void setRange(){
         //setting up the range for each direction
-        this.left = this.getPosition().x - range;
-        this.right = this.getPosition().x + range;
+        this.leftRange = this.getPosition().x - range;
+        this.rightRange = this.getPosition().x + range;
     }
 
     @Override
     public void preStep(StepEvent stepEvent) {
         if(this.alive) {
             //changing speed and gif when the range is reached
-            if (getPosition().x > right) {
+            if (getPosition().x > rightRange) {
                 this.removeAllImages();
                 this.addImage(leftImage);
                 this.startWalking(-3);
                 this.facing = "left";
             }
-            if (getPosition().x < left) {
+            if (getPosition().x < leftRange) {
                 this.removeAllImages();
                 this.addImage(rightImage);
                 this.startWalking(3);
@@ -114,12 +114,10 @@ public class Slime extends Enemy {
     public boolean isBounce() {
         return bounce;
     }
-
     @Override
     public void postStep(StepEvent stepEvent) {
 
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         this.destroy();

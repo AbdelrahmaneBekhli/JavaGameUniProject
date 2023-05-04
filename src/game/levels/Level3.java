@@ -17,12 +17,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Level3 extends GameLevel implements StepListener{
     private SoundClip gameMusic;
     private final Game game;
 
     public Level3(Game game) {
-        super(game);
+        super();
         this.game = game;
         this.addStepListener(this);
         float blockX = 60;

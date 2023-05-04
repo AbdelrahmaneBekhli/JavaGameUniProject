@@ -5,7 +5,6 @@ import GUI.tools.RectangularButton;
 import GUI.tools.SoundControlButton;
 import city.cs.engine.UserView;
 import city.cs.engine.World;
-import com.sun.tools.javac.Main;
 import game.Game;
 
 import javax.swing.*;
@@ -13,7 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class MainMenu extends UserView {
     public MainMenu(Game game, SoundControlButton musicButton) {
         super(new World(), 1000, 562);

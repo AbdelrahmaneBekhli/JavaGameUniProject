@@ -3,6 +3,9 @@ package character;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class CharacterController implements KeyListener {
 
     private Character character;
@@ -12,6 +15,9 @@ public class CharacterController implements KeyListener {
         this.character = sprite1;
     }
 
+    /**
+     * updates the character.
+     */
     public void updateCharacter(Character c){
         character = c;
     }

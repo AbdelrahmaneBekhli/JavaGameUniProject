@@ -8,6 +8,9 @@ import game.levels.Level3;
 import org.jbox2d.common.Vec2;
 import game.GameView;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Tracker implements StepListener {
     private final GameView view;
     private final Character character;

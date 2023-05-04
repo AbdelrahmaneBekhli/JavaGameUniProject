@@ -4,7 +4,9 @@ import city.cs.engine.UserView;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class GiveFocus implements MouseListener {
 
     private final UserView view;
