@@ -3,7 +3,9 @@ package platform;
 import city.cs.engine.*;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Platform extends StaticBody {
     public Platform(GameLevel level, Shape shape, float x, float y, String type) {
         super(level, shape);

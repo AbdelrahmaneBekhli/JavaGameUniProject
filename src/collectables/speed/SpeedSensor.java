@@ -1,7 +1,9 @@
-package collectables.speed.sensor;
+package collectables.speed;
 
+import city.cs.engine.Sensor;
 import city.cs.engine.SensorEvent;
 import city.cs.engine.SensorListener;
+import city.cs.engine.Shape;
 import character.Character;
 import collectables.speed.SpeedBoost;
 
@@ -9,15 +11,18 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SpeedBoostSensorListener implements SensorListener, ActionListener {
-
-    Character character;
-    SpeedBoost speedBoost;
-    Timer timer;
-
-    SpeedBoostSensorListener(Character character, SpeedBoost speedBoost){
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
+public class SpeedSensor extends Sensor implements SensorListener, ActionListener {
+    private final SpeedBoost speedBoost;
+    private final Character character;
+    private Timer timer;
+    public SpeedSensor(SpeedBoost speedBoost, Shape shape, Character character) {
+        super(speedBoost, shape);
         this.character = character;
         this.speedBoost = speedBoost;
+        this.addSensorListener(this);
     }
     @Override
     public void beginContact(SensorEvent sensorEvent) {

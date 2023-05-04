@@ -4,7 +4,9 @@ import city.cs.engine.*;
 import enemies.sensor.SpikeSensor;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Spike extends StaticBody {
     public Spike(GameLevel world, Vec2 position) {
         super(world);

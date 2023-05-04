@@ -1,7 +1,6 @@
 package collectables.speed;
 
 import city.cs.engine.*;
-import collectables.speed.sensor.SpeedSensor;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
 
@@ -9,6 +8,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class SpeedBoost extends DynamicBody {
     private static SoundClip speedBoostSound;
 

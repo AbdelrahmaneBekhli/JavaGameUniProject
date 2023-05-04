@@ -2,8 +2,6 @@ package collectables.coin;
 
 import city.cs.engine.*;
 import city.cs.engine.Sensor;
-import collectables.coin.sensor.CoinSensor;
-import game.Game;
 import game.levels.GameLevel;
 import org.jbox2d.common.Vec2;
 
@@ -11,6 +9,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Coin extends DynamicBody implements StepListener{
     private static final Shape CoinShape = new BoxShape(0.5f,0.5f);
     private static final BodyImage CoinImage = new BodyImage("data/collectables/coin/coinAnimation.gif", 1);
@@ -43,7 +44,9 @@ public class Coin extends DynamicBody implements StepListener{
             this.speed = this.speed * -1;
         }
     }
-
+    /**
+     * sets the range for the coin
+     */
     private void setRange(){
         this.maxHeight = this.getPosition().y + 0.5f;
         this.minHeight = this.getPosition().y - 0.5f;

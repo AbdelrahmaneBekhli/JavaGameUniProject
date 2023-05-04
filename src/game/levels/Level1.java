@@ -16,12 +16,14 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Level1  extends GameLevel {
     private SoundClip gameMusic;
-    private Game game;
+    private final Game game;
     public Level1(Game game) {
-        super(game);
+        super();
         this.game = game;
 
         //adding the music background

@@ -11,10 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class HowToPlay extends UserView {
     private Font bubblegum;
 
+    /**
+     * array of gif gameplay of how to kill a certain enemies.
+     */
     String[] helpGif = new String[]{"data/GUI/How to play/slimeHelp.gif", "data/GUI/How to play/wolfHelp.gif", "data/GUI/How to play/golemHelp.gif"};
 
     private int helpIndex = 0;

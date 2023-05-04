@@ -2,7 +2,9 @@ package GUI.tools;
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class CircularButton extends JButton {
 
     public CircularButton(int xPos, int yPos, int radius, String image, String hoverImage) {
@@ -15,8 +17,9 @@ public class CircularButton extends JButton {
         this.setIcon(new ImageIcon(originalImage));
         this.setRolloverIcon(new ImageIcon(hoverOverImage));
     }
-
-    //change border shape to circle
+    /**
+     * make the button have a circular shape
+     */
     protected void paintBorder(Graphics g) {
         Graphics2D g2 = (Graphics2D)g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

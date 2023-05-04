@@ -1,23 +1,20 @@
-package game.portal.sensor;
+package game.portal;
 
-import city.cs.engine.SensorEvent;
-import city.cs.engine.SensorListener;
-import city.cs.engine.SoundClip;
+import city.cs.engine.*;
 import game.Game;
 import character.Character;
-import game.portal.Portal;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
-public class PortalSensorListener implements SensorListener {
-    private final Character character;
-    private Game game;
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
+public class PortalSensor extends Sensor implements SensorListener {
+    private final Game game;
 
-    private Portal portal;
-
-    private boolean contact = false;
+    private final Portal portal;
 
     private static SoundClip teleportSound;
     static {
@@ -28,12 +25,15 @@ public class PortalSensorListener implements SensorListener {
         }
     }
 
-    public PortalSensorListener(Character character, Portal portal, Game game) {
-        this.character = character;
+    public PortalSensor(Portal portal, Shape shape, Game game) {
+        super(portal, shape);
         this.game = game;
         this.portal = portal;
+        this.addSensorListener(this);
     }
-
+    /**
+     * if contact go to next level.
+     */
     @Override
     public void beginContact(SensorEvent sensorEvent) {
         if(sensorEvent.getContactBody() instanceof Character){
@@ -50,4 +50,3 @@ public class PortalSensorListener implements SensorListener {
 
     }
 }
-

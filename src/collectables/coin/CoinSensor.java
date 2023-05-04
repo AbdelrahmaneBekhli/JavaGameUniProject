@@ -1,17 +1,23 @@
-package collectables.coin.sensor;
+package collectables.coin;
 
 import city.cs.engine.SensorEvent;
+import city.cs.engine.SensorListener;
+import city.cs.engine.Shape;
+import city.cs.engine.Sensor;
 import character.Character;
 import collectables.coin.Coin;
-import city.cs.engine.SensorListener;
 
-public class CoinSensorListener implements SensorListener {
-
-    private final Coin coin;
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
+public class CoinSensor extends Sensor implements SensorListener {
     private final Character character;
-    public CoinSensorListener(Character character, Coin coin) {
-        this.coin = coin;
+    private final Coin coin;
+    public CoinSensor(Coin coin, Shape shape, Character character) {
+        super(coin, shape);
         this.character = character;
+        this.coin = coin;
+        this.addSensorListener(this);
     }
 
     @Override

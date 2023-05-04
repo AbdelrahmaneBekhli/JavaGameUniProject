@@ -16,7 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class Leaderboard extends UserView {
 
     private Font bubblegum;
@@ -33,7 +35,6 @@ public class Leaderboard extends UserView {
 
         //main menu button
         RectangularButton mainMenuButton = new RectangularButton(390, 480, 200, 65, "data/GUI/mainMenuButton.png", "data/GUI/mainMenuHoverButton.png");
-
 
         txtFileHandler writer = new txtFileHandler("data/leaderboard.txt");
         ArrayList<Object[]> leaderboardList = writer.readScores();

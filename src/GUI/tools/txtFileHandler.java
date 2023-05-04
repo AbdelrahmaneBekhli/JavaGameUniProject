@@ -6,13 +6,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * @author      abdelrahmane, bekhli, abdelrahmane.bekhli@city.ac.uk
+ */
 public class txtFileHandler {
     private final String fileName;
 
     public txtFileHandler(String fileName) {
         this.fileName = fileName;
     }
-
+    /**
+     * adds the name and score to the leaderboard.
+     */
     public void writeHighScore(String name, int score)
             throws IOException {
         boolean append = true;
@@ -26,7 +31,9 @@ public class txtFileHandler {
             }
         }
     }
-
+    /**
+     * @return arraylist of the leaderboard.
+     */
     public ArrayList<Object[]> readScores() throws IOException {
         FileReader fr = null;
         BufferedReader reader = null;
