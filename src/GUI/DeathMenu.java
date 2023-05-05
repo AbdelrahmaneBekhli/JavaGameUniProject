@@ -43,6 +43,8 @@ public class DeathMenu extends UserView {
         if(game.getMusicButton().isSound()) {
             backgroundMusic.loop();
         }
+        game.setCompleted(false);
+        game.setScore(0);
         game.getMusicButton().updateMusic(backgroundMusic);
         this.add(game.getMusicButton());
 
