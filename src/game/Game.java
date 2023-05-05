@@ -184,6 +184,12 @@ public class Game{
         return musicButton;
     }
     /**
+     * set score
+     */
+    public void setScore(int score){
+        this.score = score;
+    }
+    /**
      * @return player score.
      */
     public int getScore(){
@@ -198,6 +204,12 @@ public class Game{
         } else {
             return level.getCharacter();
         }
+    }
+    /**
+     * set game completion
+     */
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public static void main(String[] args){
